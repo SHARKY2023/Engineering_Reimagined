@@ -1,0 +1,34 @@
+
+modLoader="javafml" #mandatory
+
+loaderVersion="[31,)"
+issueTrackerURL="http://my.issue.tracker/"
+
+[[mods]]
+
+modId="er2023"
+version="1.15.2-0.0.1"
+displayName="Engineering Reimagined"
+updateJSONURL="http://myurl.me/"
+displayURL="http://example.com/"
+logoFile="examplemod.png"
+credits=""
+authors="SHARKY2023"
+description='''
+IDK what to write
+'''
+
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.er2023]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[31,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.er2023]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.2]"
+    ordering="NONE"
+    side="BOTH"
