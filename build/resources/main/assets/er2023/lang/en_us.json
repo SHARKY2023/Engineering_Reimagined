@@ -1,0 +1,37 @@
+{
+
+
+  "item.er2023.ruby": "Ruby",
+  "item.er2023.sapphire":"Sapphire",
+  "item.er2023.steel_ingot":"Steel Ingot",
+  "item.er2023.copper_ingot":"Copper Ingot",
+  "item.er2023.tin_ingot":"Tin Ingot",
+  "item.er2023.bronze_ingot":"Bronze Ingot",
+  "item.er2023.brass_ingot":"Brass Ingot",
+  "item.er2023.platinum_ingot":"Platinum Ingot",
+  "item.er2023.zinc_ingot":"Zinc Ingot",
+  "item.er2023.lead_ingot":"Lead Ingot",
+  "item.er2023.silver_ingot":"Silver Ingot",
+  "item.er2023.electrum_ingot":"Electrum Ingot",
+  "item.er2023.nickel_ingot":"Nickel Ingot",
+  "item.er2023.aluminium_ingot":"Aluminium Ingot",
+
+  "block.er2023.steel_block":"Steel Block",
+  "block.er2023.copper_block":"Copper Block",
+  "block.er2023.tin_block":"Tin Block",
+  "block.er2023.bronze_block":"Bronze Block",
+  "block.er2023.brass_block":"Brass Block",
+  "block.er2023.platinum_block":"Platinum Block",
+  "block.er2023.zinc_block":"Zinc Block",
+  "block.er2023.lead_block":"Lead Block",
+  "block.er2023.silver_block":"Silver Block",
+  "block.er2023.electrum_block":"Electrum Block",
+  "block.er2023.nickel_block":"Nickel Block",
+  "block.er2023.aluminum_block":"Aluminum Block",
+  "block.er2023.ruby_block":"Ruby Block",
+  "block.er2023.sapphire_block":"Sapphire Block",
+
+  "_comment": "Creative Tabs",
+  "itemGroup.er2023Blocks":"Engineering Reimagined Blocks",
+  "itemGroup.er2023Items":"Engineering Reimagined Items"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "er2023:item/tin_ingot"
+  }
+}
