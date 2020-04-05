@@ -1,4 +1,4 @@
-package com.SHARKY2023.engineeringreimagined.util;
+package com.SHARKY2023.EngineeringReimagined.util;
 
 public interface IInitializer {
 

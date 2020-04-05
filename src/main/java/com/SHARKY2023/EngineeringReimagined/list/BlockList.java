@@ -1,16 +1,14 @@
-package com.SHARKY2023.engineeringreimagined.list;
+package com.SHARKY2023.EngineeringReimagined.list;
 
-import com.SHARKY2023.engineeringreimagined.Main;
-import com.SHARKY2023.engineeringreimagined.blocks.BlockBase;
-import com.SHARKY2023.engineeringreimagined.blocks.MachineBase;
-import com.SHARKY2023.engineeringreimagined.blocks.OreBase;
+import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
+import com.SHARKY2023.EngineeringReimagined.blocks.BlockBase;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class BlockList {
-    public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Main.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, EngineeringReimagined.MOD_ID);
 /*
     public static void initblock() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -30,10 +28,10 @@ public class BlockList {
     public static final RegistryObject<Block> ALUMINUM_BLOCK = BLOCKS.register("aluminum_block", BlockBase::new);
     public static final RegistryObject<Block> SAPPHIRE_BLOCK = BLOCKS.register("sapphire_block", BlockBase::new);
     public static final RegistryObject<Block> RUBY_BLOCK = BLOCKS.register("ruby_block", BlockBase::new);
-    public static final RegistryObject<Block> RUBY_ORE = BLOCKS.register("ore_ruby", OreBase::new);
 
 
-    public static final RegistryObject<Block> MACHINE_BLOCK = BLOCKS.register("machine_block" , MachineBase::new);
+
+
 
 }
 

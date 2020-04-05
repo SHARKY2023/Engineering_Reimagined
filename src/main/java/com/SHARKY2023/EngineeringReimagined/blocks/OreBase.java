@@ -1,4 +1,4 @@
-package com.SHARKY2023.engineeringreimagined.blocks;
+package com.SHARKY2023.EngineeringReimagined.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.OreBlock;

@@ -4,7 +4,7 @@ Large Portions of this class are written by BluSunrize for Immersive Engineering
 
 
 
-package com.SHARKY2023.engineeringreimagined.blocks;
+package com.SHARKY2023.EngineeringReimagined.blocks;
 
 public enum EnumMetals {
 

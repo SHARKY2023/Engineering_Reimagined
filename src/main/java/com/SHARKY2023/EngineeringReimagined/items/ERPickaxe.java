@@ -1,4 +1,4 @@
-package com.SHARKY2023.engineeringreimagined.items;
+package com.SHARKY2023.EngineeringReimagined.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.IItemTier;

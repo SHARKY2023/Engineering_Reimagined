@@ -1,7 +1,7 @@
-package com.SHARKY2023.engineeringreimagined.list;
+package com.SHARKY2023.EngineeringReimagined.list;
 
-import com.SHARKY2023.engineeringreimagined.Main;
-import com.SHARKY2023.engineeringreimagined.items.ItemBase;
+import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
+import com.SHARKY2023.EngineeringReimagined.items.ItemBase;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -9,7 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ItemList {
 
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Main.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, EngineeringReimagined.MOD_ID);
 
 /*
     public static void inititem() {
