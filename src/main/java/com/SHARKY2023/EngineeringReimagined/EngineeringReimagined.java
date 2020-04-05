@@ -44,7 +44,7 @@ public class EngineeringReimagined {
 
     public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
 
-    public static EngineeringReimagined INSTANCE;
+
     private static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "er2023";
 
@@ -53,9 +53,9 @@ public class EngineeringReimagined {
     public EngineeringReimagined() {
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
-        MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
-        MinecraftForge.EVENT_BUS.addListener(this::serverStarted);
+      //  FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
+      //  MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
+      //  MinecraftForge.EVENT_BUS.addListener(this::serverStarted);
 
 
      //   modEventBus.addListener(this::doClientStuff);

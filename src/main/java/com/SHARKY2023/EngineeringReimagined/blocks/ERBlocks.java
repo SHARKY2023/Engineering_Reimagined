@@ -8,9 +8,7 @@ import java.util.Map;
 public final class ERBlocks {
 
 
-    private ERBlocks(){
-
-    }
+    private ERBlocks(){ }
 
     public static final class Metals
     {
