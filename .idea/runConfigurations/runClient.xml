@@ -8,7 +8,7 @@
     <module name="Engineering_Reimagined.main"/>
     <envs>
       <env name="MOD_CLASSES" value="examplemod%%$PROJECT_DIR$\build\resources\main;examplemod%%$PROJECT_DIR$\build\classes\java\main"/>
-      <env name="MCP_MAPPINGS" value="snapshot_20200330-1.15.1"/>
+      <env name="MCP_MAPPINGS" value="snapshot_20200404-1.15.1"/>
       <env name="MCP_VERSION" value="20200307.202953"/>
       <env name="FORGE_VERSION" value="31.1.30"/>
       <env name="assetIndex" value="1.15"/>

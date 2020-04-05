@@ -32,3 +32,10 @@ IDK what to write
     versionRange="[1.15.2]"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.er2023]] #optional
+    modId="sharklib" #mandatory
+    mandatory=true #mandatory
+    versionRange="[1]" #mandatory
+    ordering="NONE"
+    side="BOTH"
