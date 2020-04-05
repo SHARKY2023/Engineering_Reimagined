@@ -53,16 +53,17 @@ public class EngineeringReimagined {
     public EngineeringReimagined() {
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-      //  FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
       //  MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
       //  MinecraftForge.EVENT_BUS.addListener(this::serverStarted);
 
 
-     //   modEventBus.addListener(this::doClientStuff);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
 
 
     }
+
 
 
 
@@ -80,6 +81,7 @@ public class EngineeringReimagined {
     }
 
     private void setup(final FMLCommonSetupEvent event) { }
+    private void loadComplete(final FMLCommonSetupEvent event) { }
 
     private void doClientStuff(final FMLClientSetupEvent event) { }
 
