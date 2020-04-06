@@ -33,9 +33,9 @@ IDK what to write
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.er2023]] #optional
-    modId="sharklib" #mandatory
-    mandatory=true #mandatory
-    versionRange="[1]" #mandatory
-    ordering="NONE"
-    side="BOTH"
+#[[dependencies.er2023]] #optional
+#    modId="sharklib" #mandatory
+ #   mandatory=true #mandatory
+ #   versionRange="[1]" #mandatory
+ #   ordering="NONE"
+  #  side="BOTH"
