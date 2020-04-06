@@ -65,9 +65,7 @@ public class EngineeringReimagined {
     }
 
 
-
-
-
+    /*
     @SubscribeEvent
     public static void createBlockItems(final RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> registry = event.getRegistry();
@@ -79,7 +77,7 @@ public class EngineeringReimagined {
             registry.register(blockItem);
         });
     }
-
+*/
     private void setup(final FMLCommonSetupEvent event) { }
     private void loadComplete(final FMLCommonSetupEvent event) { }
 
