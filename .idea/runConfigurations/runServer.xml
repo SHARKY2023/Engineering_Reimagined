@@ -5,7 +5,7 @@
     <option name="VM_PARAMETERS" value="-Dforge.logging.console.level=debug -Dforge.logging.markers=SCAN,REGISTRIES,REGISTRYDUMP"/>
     <option name="PROGRAM_PARAMETERS" value=""/>
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$\run"/>
-    <module name="Engineering Reimagined.main"/>
+    <module name="Engineering_Reimagined.main"/>
     <envs>
       <env name="MOD_CLASSES" value="examplemod%%$PROJECT_DIR$\build\resources\main;examplemod%%$PROJECT_DIR$\build\classes\java\main"/>
       <env name="MCP_MAPPINGS" value="snapshot_20200404-1.15.1"/>

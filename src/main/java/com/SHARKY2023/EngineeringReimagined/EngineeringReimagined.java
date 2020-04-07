@@ -6,6 +6,7 @@ import com.SHARKY2023.EngineeringReimagined.list.ItemList;
 import com.SHARKY2023.EngineeringReimagined.proxy.ClientProxy;
 import com.SHARKY2023.EngineeringReimagined.proxy.IProxy;
 import com.SHARKY2023.EngineeringReimagined.proxy.ServerProxy;
+import com.SHARKY2023.EngineeringReimagined.registries.ERBlocks;
 import javafx.beans.binding.ObjectBinding;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -14,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.RegistryObject;
@@ -29,17 +31,12 @@ import org.apache.logging.log4j.Logger;
 @Mod.EventBusSubscriber(modid = EngineeringReimagined.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EngineeringReimagined {
 
-    public static ItemGroup TabCBlock = new ItemGroup(EngineeringReimagined.MOD_ID +"Blocks") {
+
+    public static ItemGroup TabEnginneringReimagined = new ItemGroup(EngineeringReimagined.MOD_ID +"Tab") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(BlockList.COPPER_BLOCK.get());
-        }
-    };
-    public static ItemGroup TabCItems = new ItemGroup(EngineeringReimagined.MOD_ID +"Items") {
-        @Override
-        public ItemStack createIcon() {
-            return new ItemStack(ItemList.RUBY.get());
-        }
+            return new ItemStack(ERBlocks.SILVER_BLOCK);
+       }
     };
 
     public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
@@ -47,10 +44,14 @@ public class EngineeringReimagined {
 
     private static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "er2023";
+    public static EngineeringReimagined instance;
 
 
 
     public EngineeringReimagined() {
+        instance = this;
+
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
@@ -61,6 +62,7 @@ public class EngineeringReimagined {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
 
+        ERBlocks.BLOCKS.register(modEventBus);
 
     }
 

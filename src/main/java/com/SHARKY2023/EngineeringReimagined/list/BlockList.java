@@ -1,7 +1,6 @@
 package com.SHARKY2023.EngineeringReimagined.list;
 
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
-import com.SHARKY2023.EngineeringReimagined.blocks.BlockBase;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -13,7 +12,7 @@ public class BlockList {
     public static void initblock() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
-*/
+
     public static final RegistryObject<Block> COPPER_BLOCK = BLOCKS.register("copper_block", BlockBase::new);
     public static final RegistryObject<Block> TIN_BLOCK = BLOCKS.register("tin_block", BlockBase::new);
     public static final RegistryObject<Block> SILVER_BLOCK = BLOCKS.register("silver_block", BlockBase::new);
@@ -31,7 +30,7 @@ public class BlockList {
 
 
 
-
+*/
 
 }
 
