@@ -1,10 +1,11 @@
 package com.SHARKY2023.EngineeringReimagined.blocks.generator.combustion;
 
+import com.SHARKY2023.EngineeringReimagined.blocks.generator.TileGeneratorBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-public class TileCombustion  {
+public class TileCombustion extends TileGeneratorBase {
 
 
 /*

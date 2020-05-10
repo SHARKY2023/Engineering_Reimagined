@@ -12,7 +12,7 @@ public class ERBlocks {
 
     public static final BlockDeferredRegister BLOCKS = new BlockDeferredRegister(EngineeringReimagined.MOD_ID);
 
-    public static final BlockRegistryObject<BlockResource, ItemBlockResource> SILVER_BLOCK = registerResourceBlock(BlockResourceInfo.SILVER);
+   public static final BlockRegistryObject<BlockResource, ItemBlockResource> SILVER_BLOCK = registerResourceBlock(BlockResourceInfo.SILVER);
     public static final BlockRegistryObject<BlockResource, ItemBlockResource> BRONZE_BLOCK = registerResourceBlock(BlockResourceInfo.BRONZE);
     public static final BlockRegistryObject<BlockResource, ItemBlockResource> INVAR_BLOCK = registerResourceBlock(BlockResourceInfo.INVAR);
     public static final BlockRegistryObject<BlockResource, ItemBlockResource> CHARCOAL_BLOCK = registerResourceBlock(BlockResourceInfo.CHARCOAL);

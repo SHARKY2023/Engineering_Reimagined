@@ -7,6 +7,7 @@ import com.SHARKY2023.EngineeringReimagined.proxy.ClientProxy;
 import com.SHARKY2023.EngineeringReimagined.proxy.IProxy;
 import com.SHARKY2023.EngineeringReimagined.proxy.ServerProxy;
 import com.SHARKY2023.EngineeringReimagined.registries.ERBlocks;
+import com.SHARKY2023.EngineeringReimagined.registries.ERItems;
 import javafx.beans.binding.ObjectBinding;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -63,6 +64,7 @@ public class EngineeringReimagined {
 
 
         ERBlocks.BLOCKS.register(modEventBus);
+        ERItems.ITEMS.register(modEventBus);
 
     }
 
