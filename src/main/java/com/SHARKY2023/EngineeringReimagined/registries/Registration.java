@@ -61,6 +61,8 @@ public class Registration {
     public static final RegistryObject<BlockResource> PLATINUM_BLOCK = BLOCKS.register(BlockResourceInfo.PLATINUM)
 
 
+
+
     public static final RegistryObject<TileEntityType<SterlingTile>> STERLING_TILE = TILES.register("sterlinggenerator", () -> TileEntityType.Builder.create(SterlingTile::new, STERLING_GENERATOR.get()).build(null));
 
 
