@@ -38,7 +38,7 @@ public class Registration {
         TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
         CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        DIMENSIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        DIMENSIONS.register(FMLJavaModLoadingContext.get().getModEventBus());;
     }
 
 //Blocks
