@@ -1,7 +1,7 @@
 package com.SHARKY2023.EngineeringReimagined.resources;
 
 public enum BlockResourceInfo implements INamedResource {
-    COPPER("copper", 5.0f, 10.0f,1),
+    COPPER("copper", 5.0f, 10.0f, 1),
     TIN("tin", 5.0f, 10.0f, 1),
     BRONZE("bronze", 5.0f, 15.0f, 1),
     SILVER("silver", 5.0f, 15.0f, 1),
@@ -9,15 +9,13 @@ public enum BlockResourceInfo implements INamedResource {
     ELECTRUM("electrum", 7.5f, 15.0f, 1),
     STEEL("steel", 10.0f, 15.0f, 1),
     PLATINUM("platinum", 10.0f, 15f, 1),
-    URANIUM("uranium", 10.0f, 15.0f,1),
-    BRASS("brass", 5.0f, 10.0f,1),
-    ZINC("zinc", 5.0f, 10.0f,1),
-    NICKEL("nickel", 7.5f, 15.0f,1),
-    INVAR("invar",10.0f,15.0f,1),
-    ALUMINIUM("aluminum", 5.0f,10.0f,1),
+    URANIUM("uranium", 10.0f, 15.0f, 1),
+    BRASS("brass", 5.0f, 10.0f, 1),
+    ZINC("zinc", 5.0f, 10.0f, 1),
+    NICKEL("nickel", 7.5f, 15.0f, 1),
+    INVAR("invar", 10.0f, 15.0f, 1),
+    ALUMINIUM("aluminum", 5.0f, 10.0f, 1),
     CHARCOAL("charcoal", 5.0F, 10.0F, 0, 0);
-
-
 
 
     private final String registrySuffix;
@@ -37,7 +35,6 @@ public enum BlockResourceInfo implements INamedResource {
         this.harvestLevel = harvestLevel;
         this.lightValue = lightValue;
     }
-
 
 
     @Override
@@ -60,9 +57,10 @@ public enum BlockResourceInfo implements INamedResource {
     public int getHarvestLevel() {
         return harvestLevel;
     }
-
-
 }
+
+
+
 
 
 

@@ -1,15 +1,15 @@
-Args: "--clean", "C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.15.2-20200307.202953\joined-1.15.2-20200307.202953-srg.jar", "--output", "C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.15.2-31.1.30\forge-1.15.2-31.1.30-binpatched.jar", "--apply", "C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.15.2-31.1.30\forge-1.15.2-31.1.30-binpatches.lzma"
-Classpath: C:\Users\zacro\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
-WorkDir: C:\Users\zacro\Documents\Engineering Reimagined\build\_applyBinpatches_2
+Args: "--clean", "C:\Users\Zac\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.15.2-20200515.085601\joined-1.15.2-20200515.085601-srg.jar", "--output", "C:\Users\Zac\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.15.2-31.2.30\forge-1.15.2-31.2.30-binpatched.jar", "--apply", "C:\Users\Zac\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.15.2-31.2.30\forge-1.15.2-31.2.30-binpatches.lzma"
+Classpath: C:\Users\Zac\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
+WorkDir: D:\Minecraft Modding\Engineering_Reimagined\build\_applyBinpatches_2
 Main: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
-  Clean:     C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.15.2-20200307.202953\joined-1.15.2-20200307.202953-srg.jar
-  Output:    C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.15.2-31.1.30\forge-1.15.2-31.1.30-binpatched.jar
+  Clean:     C:\Users\Zac\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.15.2-20200515.085601\joined-1.15.2-20200515.085601-srg.jar
+  Output:    C:\Users\Zac\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.15.2-31.2.30\forge-1.15.2-31.2.30-binpatched.jar
   KeepData:  false
   Unpatched: false
-  Patches:   C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.15.2-31.1.30\forge-1.15.2-31.1.30-binpatches.lzma
-Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.15.2-31.1.30\forge-1.15.2-31.1.30-binpatches.lzma
+  Patches:   C:\Users\Zac\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.15.2-31.2.30\forge-1.15.2-31.2.30-binpatches.lzma
+Loading patches file: C:\Users\Zac\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.15.2-31.2.30\forge-1.15.2-31.2.30-binpatches.lzma
   Reading patch com.mojang.blaze3d.platform.GlStateManager$1.binpatch
     Checksum: 6f605fcc Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$AlphaState.binpatch
@@ -64,6 +64,14 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: c0583704 Exists: true
   Reading patch com.mojang.blaze3d.vertex.IVertexBuilder.binpatch
     Checksum: 62da1ff6 Exists: true
+  Reading patch com.mojang.realmsclient.gui.screens.RealmsGenericErrorScreen$1.binpatch
+    Checksum: 45da543f Exists: true
+  Reading patch com.mojang.realmsclient.gui.screens.RealmsGenericErrorScreen.binpatch
+    Checksum: cc214e00 Exists: true
+  Reading patch net.minecraft.advancements.AdvancementList$IListener.binpatch
+    Checksum: 1bee91e4 Exists: true
+  Reading patch net.minecraft.advancements.AdvancementList.binpatch
+    Checksum: 936bfad5 Exists: true
   Reading patch net.minecraft.advancements.AdvancementManager.binpatch
     Checksum: 53f0e206 Exists: true
   Reading patch net.minecraft.advancements.AdvancementRewards$Builder.binpatch
@@ -86,6 +94,8 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: c4af5108 Exists: true
   Reading patch net.minecraft.block.AttachedStemBlock.binpatch
     Checksum: c4bb4479 Exists: true
+  Reading patch net.minecraft.block.BambooBlock.binpatch
+    Checksum: 75d4107f Exists: true
   Reading patch net.minecraft.block.BambooSaplingBlock.binpatch
     Checksum: 89a16d64 Exists: true
   Reading patch net.minecraft.block.BedBlock$1.binpatch
@@ -266,6 +276,8 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 3b7d16f0 Exists: true
   Reading patch net.minecraft.block.WebBlock.binpatch
     Checksum: b80216a0 Exists: true
+  Reading patch net.minecraft.block.WoodType.binpatch
+    Checksum: d5b17418 Exists: true
   Reading patch net.minecraft.block.trees.JungleTree.binpatch
     Checksum: 5c96aaf6 Exists: true
   Reading patch net.minecraft.client.ClientBrandRetriever.binpatch
@@ -280,6 +292,12 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: aaade584 Exists: true
   Reading patch net.minecraft.client.KeyboardListener.binpatch
     Checksum: eaff5586 Exists: true
+  Reading patch net.minecraft.client.MainWindow$1.binpatch
+    Checksum: 83536083 Exists: true
+  Reading patch net.minecraft.client.MainWindow$GlException.binpatch
+    Checksum: e34cda2f Exists: true
+  Reading patch net.minecraft.client.MainWindow.binpatch
+    Checksum: 9c8bc4f Exists: true
   Reading patch net.minecraft.client.Minecraft$1.binpatch
     Checksum: f3d4fb4e Exists: true
   Reading patch net.minecraft.client.Minecraft$2.binpatch
@@ -378,6 +396,10 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 3fc77979 Exists: true
   Reading patch net.minecraft.client.gui.screen.MainMenuScreen.binpatch
     Checksum: 6af9fe22 Exists: true
+  Reading patch net.minecraft.client.gui.screen.MultiplayerScreen.binpatch
+    Checksum: 4e039b8d Exists: true
+  Reading patch net.minecraft.client.gui.screen.OptionsScreen.binpatch
+    Checksum: 3ae21f12 Exists: true
   Reading patch net.minecraft.client.gui.screen.ResourcePacksScreen.binpatch
     Checksum: ad2f70d6 Exists: true
   Reading patch net.minecraft.client.gui.screen.Screen.binpatch
@@ -682,6 +704,10 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 818ab7c Exists: true
   Reading patch net.minecraft.client.renderer.model.SimpleBakedModel.binpatch
     Checksum: ccf7b10e Exists: true
+  Reading patch net.minecraft.client.renderer.model.VariantList$Deserializer.binpatch
+    Checksum: b01fc34a Exists: true
+  Reading patch net.minecraft.client.renderer.model.VariantList.binpatch
+    Checksum: 22822a7 Exists: true
   Reading patch net.minecraft.client.renderer.model.WeightedBakedModel$Builder.binpatch
     Checksum: 1b8de76a Exists: true
   Reading patch net.minecraft.client.renderer.model.WeightedBakedModel$WeightedModel.binpatch
@@ -750,6 +776,8 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 4f26f1e8 Exists: true
   Reading patch net.minecraft.client.settings.KeyBinding.binpatch
     Checksum: 46bd039b Exists: true
+  Reading patch net.minecraft.client.shader.Framebuffer.binpatch
+    Checksum: 36a2fbc6 Exists: true
   Reading patch net.minecraft.client.shader.ShaderGroup.binpatch
     Checksum: 7cd07d3c Exists: true
   Reading patch net.minecraft.client.shader.ShaderInstance.binpatch
@@ -972,6 +1000,8 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 86e314f1 Exists: true
   Reading patch net.minecraft.entity.item.FallingBlockEntity.binpatch
     Checksum: 2ad93075 Exists: true
+  Reading patch net.minecraft.entity.item.FireworkRocketEntity.binpatch
+    Checksum: 3b4b0ef5 Exists: true
   Reading patch net.minecraft.entity.item.HangingEntity$1.binpatch
     Checksum: 863da319 Exists: true
   Reading patch net.minecraft.entity.item.HangingEntity.binpatch
@@ -1108,6 +1138,34 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 59cef2d0 Exists: true
   Reading patch net.minecraft.entity.monster.ZombieEntity.binpatch
     Checksum: a32976ae Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$1.binpatch
+    Checksum: 93b9f07e Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$AngerGoal.binpatch
+    Checksum: 76a94a79 Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$AttackPlayerGoal.binpatch
+    Checksum: 40097030 Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$BeeLookController.binpatch
+    Checksum: 8759499b Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$EnterBeehiveGoal.binpatch
+    Checksum: 189162ce Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$FindBeehiveGoal.binpatch
+    Checksum: fcca2df6 Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$FindFlowerGoal.binpatch
+    Checksum: 9ea635ff Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$FindPollinationTargetGoal.binpatch
+    Checksum: 2a3c0e4e Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$PassiveGoal.binpatch
+    Checksum: 8ea90497 Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$PollinateGoal.binpatch
+    Checksum: ca74c590 Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$StingGoal.binpatch
+    Checksum: 6313f536 Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$UpdateBeehiveGoal.binpatch
+    Checksum: f4faed6e Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity$WanderGoal.binpatch
+    Checksum: 64f456a4 Exists: true
+  Reading patch net.minecraft.entity.passive.BeeEntity.binpatch
+    Checksum: db4cddaa Exists: true
   Reading patch net.minecraft.entity.passive.FoxEntity$1.binpatch
     Checksum: 922f37b5 Exists: true
   Reading patch net.minecraft.entity.passive.FoxEntity$AlertablePredicate.binpatch
@@ -1392,6 +1450,8 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 37d8b501 Exists: true
   Reading patch net.minecraft.item.MinecartItem.binpatch
     Checksum: 98994836 Exists: true
+  Reading patch net.minecraft.item.MusicDiscItem.binpatch
+    Checksum: 50db19cd Exists: true
   Reading patch net.minecraft.item.PickaxeItem.binpatch
     Checksum: 862224d1 Exists: true
   Reading patch net.minecraft.item.Rarity.binpatch
@@ -1620,6 +1680,8 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: e1d9f33a Exists: true
   Reading patch net.minecraft.pathfinding.PathNavigator.binpatch
     Checksum: 40553097 Exists: true
+  Reading patch net.minecraft.pathfinding.PathNodeType.binpatch
+    Checksum: da0cdc99 Exists: true
   Reading patch net.minecraft.pathfinding.SwimmerPathNavigator.binpatch
     Checksum: 65becb1b Exists: true
   Reading patch net.minecraft.pathfinding.WalkNodeProcessor.binpatch
@@ -1656,6 +1718,8 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: c27676b8 Exists: true
   Reading patch net.minecraft.resources.ResourcePackInfo.binpatch
     Checksum: 5ab2d07e Exists: true
+  Reading patch net.minecraft.resources.ResourcePackList.binpatch
+    Checksum: a9f36d08 Exists: true
   Reading patch net.minecraft.resources.SimpleReloadableResourceManager$FailedPackException.binpatch
     Checksum: 6b3d30b2 Exists: true
   Reading patch net.minecraft.resources.SimpleReloadableResourceManager$FailedPackReloader.binpatch
@@ -1746,6 +1810,8 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 34fc6d22 Exists: true
   Reading patch net.minecraft.tileentity.BannerPattern.binpatch
     Checksum: f36f7ac3 Exists: true
+  Reading patch net.minecraft.tileentity.BannerTileEntity.binpatch
+    Checksum: cd7b57b4 Exists: true
   Reading patch net.minecraft.tileentity.BeaconTileEntity$1.binpatch
     Checksum: 4dbd0c8d Exists: true
   Reading patch net.minecraft.tileentity.BeaconTileEntity$BeamSegment.binpatch
@@ -1810,6 +1876,14 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 80e4a55a Exists: true
   Reading patch net.minecraft.util.SoundEvents.binpatch
     Checksum: 28c19e0b Exists: true
+  Reading patch net.minecraft.util.math.RayTraceContext$BlockMode.binpatch
+    Checksum: 297822cd Exists: true
+  Reading patch net.minecraft.util.math.RayTraceContext$FluidMode.binpatch
+    Checksum: 4a7d8fb2 Exists: true
+  Reading patch net.minecraft.util.math.RayTraceContext$IVoxelProvider.binpatch
+    Checksum: ce0f8883 Exists: true
+  Reading patch net.minecraft.util.math.RayTraceContext.binpatch
+    Checksum: 64c73af4 Exists: true
   Reading patch net.minecraft.util.math.RayTraceResult$Type.binpatch
     Checksum: 9c110d6d Exists: true
   Reading patch net.minecraft.util.math.RayTraceResult.binpatch
@@ -1942,6 +2016,10 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 10a3f4f2 Exists: true
   Reading patch net.minecraft.world.gen.WorldGenRegion.binpatch
     Checksum: e8812fe6 Exists: true
+  Reading patch net.minecraft.world.gen.blockplacer.BlockPlacerType.binpatch
+    Checksum: 6d3d40a0 Exists: true
+  Reading patch net.minecraft.world.gen.blockstateprovider.BlockStateProviderType.binpatch
+    Checksum: 18c1649a Exists: true
   Reading patch net.minecraft.world.gen.carver.WorldCarver.binpatch
     Checksum: 6d524b0d Exists: true
   Reading patch net.minecraft.world.gen.feature.AbstractBigMushroomFeature.binpatch
@@ -2042,8 +2120,12 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 4b9dd2d5 Exists: true
   Reading patch net.minecraft.world.gen.feature.template.Template.binpatch
     Checksum: 4b57a0ba Exists: true
+  Reading patch net.minecraft.world.gen.foliageplacer.FoliagePlacerType.binpatch
+    Checksum: 90e8da7d Exists: true
   Reading patch net.minecraft.world.gen.layer.BiomeLayer.binpatch
     Checksum: 1b79efe1 Exists: true
+  Reading patch net.minecraft.world.gen.layer.HillsLayer.binpatch
+    Checksum: c11b061c Exists: true
   Reading patch net.minecraft.world.gen.layer.LayerUtil.binpatch
     Checksum: a04afe69 Exists: true
   Reading patch net.minecraft.world.gen.layer.MixRiverLayer.binpatch
@@ -2052,6 +2134,8 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 44b6b46 Exists: true
   Reading patch net.minecraft.world.gen.surfacebuilders.SurfaceBuilder.binpatch
     Checksum: 6528c4ad Exists: true
+  Reading patch net.minecraft.world.gen.treedecorator.TreeDecoratorType.binpatch
+    Checksum: 2c91601b Exists: true
   Reading patch net.minecraft.world.lighting.BlockLightEngine.binpatch
     Checksum: d70e53cd Exists: true
   Reading patch net.minecraft.world.lighting.LevelBasedGraph$1.binpatch
@@ -2170,7 +2254,7 @@ Loading patches file: C:\Users\zacro\.gradle\caches\forge_gradle\minecraft_user_
     Checksum: 87450659 Exists: true
   Reading patch net.minecraft.world.storage.loot.functions.Smelt.binpatch
     Checksum: e638c82 Exists: true
-Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.15.2-20200307.202953\joined-1.15.2-20200307.202953-srg.jar
+Processing: C:\Users\Zac\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.15.2-20200515.085601\joined-1.15.2-20200515.085601-srg.jar
   Patching net/minecraft/advancements/criterion/ItemPredicate$Builder 1/1
   Patching net/minecraft/world/dimension/EndDimension 1/1
   Patching net/minecraft/world/end/DragonFightManager 1/1
@@ -2199,6 +2283,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/client/renderer/texture/TextureAtlasSprite$InterpolationData 1/1
   Patching net/minecraft/world/border/WorldBorder 1/1
   Patching net/minecraft/client/renderer/texture/TextureAtlasSprite$Info 1/1
+  Patching net/minecraft/block/WoodType 1/1
   Patching net/minecraft/block/BlockState 1/1
   Patching net/minecraft/block/PistonBlockStructureHelper 1/1
   Patching net/minecraft/tileentity/PistonTileEntity 1/1
@@ -2220,6 +2305,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/tileentity/BeaconTileEntity 1/1
   Patching net/minecraft/tileentity/LockableTileEntity 1/1
   Patching net/minecraft/tileentity/BannerPattern 1/1
+  Patching net/minecraft/tileentity/BannerTileEntity 1/1
   Patching net/minecraft/tileentity/AbstractFurnaceTileEntity 1/1
   Patching net/minecraft/client/renderer/model/ItemModelGenerator$1 1/1
   Patching net/minecraft/block/WebBlock 1/1
@@ -2294,6 +2380,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/resources/SimpleReloadableResourceManager$FailedPackReloader 1/1
   Patching net/minecraft/block/AbstractRailBlock 1/1
   Patching net/minecraft/block/BambooSaplingBlock 1/1
+  Patching net/minecraft/block/BambooBlock 1/1
   Patching net/minecraft/block/AttachedStemBlock 1/1
   Patching net/minecraft/block/AbstractBannerBlock 1/1
   Patching net/minecraft/entity/item/minecart/MinecartCommandBlockEntity$MinecartCommandLogic 1/1
@@ -2314,6 +2401,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/entity/monster/SlimeEntity$FloatGoal 1/1
   Patching net/minecraft/entity/monster/SlimeEntity$AttackGoal 1/1
   Patching net/minecraft/world/Explosion 1/1
+  Patching net/minecraft/util/math/RayTraceContext 1/1
   Patching net/minecraft/world/IBlockReader 1/1
   Patching net/minecraft/world/spawner/AbstractSpawner 1/1
   Patching net/minecraft/enchantment/FrostWalkerEnchantment 1/1
@@ -2354,9 +2442,22 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/util/Direction$Axis$3 1/1
   Patching net/minecraft/util/Direction$Axis$2 1/1
   Patching net/minecraft/util/Direction$Axis$1 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$WanderGoal 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$PollinateGoal 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$BeeLookController 1/1
   Patching net/minecraft/item/WallOrFloorItem 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$UpdateBeehiveGoal 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$AngerGoal 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$FindPollinationTargetGoal 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$FindFlowerGoal 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$FindBeehiveGoal 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$EnterBeehiveGoal 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$AttackPlayerGoal 1/1
   Patching net/minecraft/item/ShovelItem 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$StingGoal 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$PassiveGoal 1/1
   Patching net/minecraft/item/ShearsItem 1/1
+  Patching net/minecraft/item/MusicDiscItem 1/1
   Patching net/minecraft/item/Rarity 1/1
   Patching net/minecraft/item/PickaxeItem 1/1
   Patching net/minecraft/item/MinecartItem 1/1
@@ -2369,6 +2470,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/item/HoeItem 1/1
   Patching net/minecraft/item/FlintAndSteelItem 1/1
   Patching net/minecraft/item/FishBucketItem 1/1
+  Patching net/minecraft/entity/passive/BeeEntity$1 1/1
   Patching net/minecraft/item/DyeableHorseArmorItem 1/1
   Patching net/minecraft/item/DyeColor 1/1
   Patching net/minecraft/item/ToolItem 1/1
@@ -2418,6 +2520,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/entity/projectile/ProjectileHelper 1/1
   Patching net/minecraft/entity/projectile/LlamaSpitEntity 1/1
   Patching net/minecraft/entity/projectile/FireballEntity 1/1
+  Patching net/minecraft/entity/item/FireworkRocketEntity 1/1
   Patching net/minecraft/entity/projectile/DamagingProjectileEntity 1/1
   Patching net/minecraft/entity/projectile/AbstractArrowEntity 1/1
   Patching net/minecraft/entity/player/PlayerEntity 1/1
@@ -2461,6 +2564,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/entity/passive/MooshroomEntity 1/1
   Patching net/minecraft/entity/passive/IronGolemEntity 1/1
   Patching net/minecraft/entity/passive/FoxEntity 1/1
+  Patching net/minecraft/entity/passive/BeeEntity 1/1
   Patching net/minecraft/village/PointOfInterestType 1/1
   Patching net/minecraft/village/VillageSiege 1/1
   Patching net/minecraft/entity/ai/brain/sensor/SensorType 1/1
@@ -2546,6 +2650,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/inventory/container/GrindstoneContainer$3 1/1
   Patching net/minecraft/inventory/container/GrindstoneContainer$2 1/1
   Patching net/minecraft/inventory/container/GrindstoneContainer$1 1/1
+  Patching net/minecraft/client/renderer/model/VariantList$Deserializer 1/1
   Patching net/minecraft/server/dedicated/PropertyManager$1 1/1
   Patching net/minecraft/client/renderer/texture/Stitcher$ISpriteLoader 1/1
   Patching net/minecraft/client/renderer/texture/Stitcher$Slot 1/1
@@ -2687,6 +2792,8 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/entity/player/PlayerEntity$SleepResult 1/1
   Patching net/minecraft/world/biome/Biome$1 1/1
   Patching net/minecraft/entity/player/PlayerEntity$1 1/1
+  Patching net/minecraft/client/MainWindow$GlException 1/1
+  Patching net/minecraft/client/MainWindow$1 1/1
   Patching net/minecraft/server/MinecraftServer 1/1
   Patching net/minecraft/util/math/shapes/EntitySelectionContext$1 1/1
   Patching net/minecraft/client/audio/SoundHandler$Loader 1/1
@@ -2814,9 +2921,13 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/client/renderer/RenderState$BooleanState 1/1
   Patching net/minecraft/client/renderer/RenderState$AlphaState 1/1
   Patching net/minecraft/client/gui/screen/LanguageScreen$List 1/1
+  Patching net/minecraft/advancements/AdvancementList$IListener 1/1
   Patching net/minecraft/dispenser/IDispenseItemBehavior$8$1 1/1
   Patching net/minecraft/client/settings/KeyBinding$1 1/1
   Patching net/minecraft/server/management/PlayerList 1/1
+  Patching net/minecraft/util/math/RayTraceContext$IVoxelProvider 1/1
+  Patching net/minecraft/util/math/RayTraceContext$FluidMode 1/1
+  Patching net/minecraft/util/math/RayTraceContext$BlockMode 1/1
   Patching net/minecraft/resources/SimpleReloadableResourceManager 1/1
   Patching net/minecraft/entity/EntitySpawnPlacementRegistry$PlacementType 1/1
   Patching net/minecraft/client/resources/JsonReloadListener 1/1
@@ -2826,6 +2937,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/resources/IResourceManager 1/1
   Patching net/minecraft/resources/FallbackResourceManager 1/1
   Patching net/minecraft/resources/ResourcePackInfo 1/1
+  Patching net/minecraft/resources/ResourcePackList 1/1
   Patching net/minecraft/resources/VanillaPack 1/1
   Patching net/minecraft/resources/IResourcePack 1/1
   Patching net/minecraft/network/login/ServerLoginNetHandler 1/1
@@ -2890,6 +3002,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/network/play/server/SRespawnPacket 1/1
   Patching net/minecraft/network/play/server/SJoinGamePacket 1/1
   Patching net/minecraft/client/renderer/model/ItemCameraTransforms$1 1/1
+  Patching com/mojang/realmsclient/gui/screens/RealmsGenericErrorScreen$1 1/1
   Patching net/minecraft/network/play/server/SCustomPayloadPlayPacket 1/1
   Patching net/minecraft/network/play/server/SCommandListPacket 1/1
   Patching net/minecraft/util/text/TranslationTextComponent 1/1
@@ -3055,6 +3168,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/client/renderer/tileentity/PistonTileEntityRenderer 1/1
   Patching net/minecraft/client/renderer/tileentity/ChestTileEntityRenderer 1/1
   Patching net/minecraft/client/renderer/tileentity/TileEntityRendererDispatcher 1/1
+  Patching net/minecraft/client/renderer/model/VariantList 1/1
   Patching net/minecraft/client/renderer/model/ItemCameraTransforms 1/1
   Patching net/minecraft/client/renderer/model/ItemTransformVec3f 1/1
   Patching net/minecraft/client/renderer/model/ItemOverrideList 1/1
@@ -3106,6 +3220,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/client/gui/screen/ResourcePacksScreen 1/1
   Patching net/minecraft/client/gui/recipebook/RecipeBookGui 1/1
   Patching net/minecraft/client/gui/screen/ServerSelectionList 1/1
+  Patching net/minecraft/client/gui/screen/MultiplayerScreen 1/1
   Patching net/minecraft/client/gui/screen/EnchantmentScreen 1/1
   Patching net/minecraft/client/gui/DisplayEffectsScreen 1/1
   Patching net/minecraft/client/gui/screen/inventory/CreativeScreen 1/1
@@ -3117,6 +3232,7 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/client/gui/advancements/AdvancementTabGui 1/1
   Patching net/minecraft/client/gui/screen/MainMenuScreen 1/1
   Patching net/minecraft/client/gui/screen/Screen 1/1
+  Patching net/minecraft/client/gui/screen/OptionsScreen 1/1
   Patching net/minecraft/client/gui/ScreenManager 1/1
   Patching net/minecraft/client/gui/ResourceLoadProgressGui 1/1
   Patching net/minecraft/client/gui/screen/LanguageScreen 1/1
@@ -3157,12 +3273,15 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/client/renderer/chunk/ChunkRenderDispatcher$ChunkRender$SortTransparencyTask 1/1
   Patching net/minecraft/client/renderer/chunk/ChunkRenderDispatcher$ChunkRender$RebuildTask 1/1
   Patching net/minecraft/client/renderer/chunk/ChunkRenderDispatcher$ChunkRender$ChunkRenderTask 1/1
+  Patching com/mojang/realmsclient/gui/screens/RealmsGenericErrorScreen 1/1
   Patching net/minecraft/client/renderer/vertex/VertexFormat 1/1
   Patching com/mojang/blaze3d/vertex/IVertexBuilder 1/1
   Patching net/minecraft/client/renderer/BufferBuilder 1/1
+  Patching net/minecraft/client/MainWindow 1/1
   Patching net/minecraft/block/LadderBlock$1 1/1
   Patching net/minecraft/client/renderer/texture/NativeImage 1/1
   Patching com/mojang/blaze3d/platform/GlStateManager 1/1
+  Patching net/minecraft/client/shader/Framebuffer 1/1
   Patching net/minecraft/util/math/shapes/EntitySelectionContext 1/1
   Patching net/minecraft/util/math/shapes/ISelectionContext 1/1
   Patching net/minecraft/command/Commands$IParser 1/1
@@ -3193,7 +3312,9 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/inventory/container/BeaconContainer$1 1/1
   Patching net/minecraft/entity/item/minecart/AbstractMinecartEntity$1 1/1
   Patching net/minecraft/pathfinding/WalkNodeProcessor 1/1
+  Patching net/minecraft/pathfinding/PathNodeType 1/1
   Patching net/minecraft/world/gen/layer/MixRiverLayer 1/1
+  Patching net/minecraft/world/gen/layer/HillsLayer 1/1
   Patching net/minecraft/world/gen/layer/LayerUtil 1/1
   Patching net/minecraft/world/gen/layer/BiomeLayer 1/1
   Patching net/minecraft/fluid/LavaFluid 1/1
@@ -3213,14 +3334,19 @@ Processing: C:\Users\zacro\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\jo
   Patching net/minecraft/world/gen/feature/structure/MineshaftPieces 1/1
   Patching net/minecraft/tileentity/ShulkerBoxTileEntity$1 1/1
   Patching net/minecraft/world/gen/placement/Placement 1/1
+  Patching net/minecraft/world/gen/treedecorator/TreeDecoratorType 1/1
   Patching net/minecraft/world/gen/feature/jigsaw/JigsawPattern 1/1
   Patching net/minecraft/world/gen/feature/jigsaw/SingleJigsawPiece 1/1
+  Patching net/minecraft/world/gen/blockstateprovider/BlockStateProviderType 1/1
+  Patching net/minecraft/world/gen/foliageplacer/FoliagePlacerType 1/1
   Patching net/minecraft/world/gen/feature/BaseTreeFeatureConfig 1/1
   Patching net/minecraft/world/gen/feature/TreeFeatureConfig 1/1
   Patching net/minecraft/world/gen/feature/OreFeatureConfig 1/1
   Patching net/minecraft/world/gen/feature/HugeTreeFeatureConfig 1/1
+  Patching net/minecraft/world/gen/blockplacer/BlockPlacerType 1/1
   Patching net/minecraft/advancements/AdvancementRewards 1/1
   Patching net/minecraft/world/gen/feature/VinesFeature 1/1
+  Patching net/minecraft/advancements/AdvancementList 1/1
   Patching net/minecraft/world/gen/feature/TreeFeature 1/1
   Patching net/minecraft/util/SharedConstants 1/1
   Patching net/minecraft/world/gen/feature/SpringFeature 1/1

@@ -1,5 +1,5 @@
 package com.SHARKY2023.EngineeringReimagined.list;
-
+/*
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
 import com.SHARKY2023.EngineeringReimagined.items.ItemBase;
 import net.minecraft.item.Item;
@@ -13,10 +13,10 @@ public class ItemList {
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, EngineeringReimagined.MOD_ID);
 
 
- /*   public static void inititem() {
+ /   public static void inititem() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
-  */
+  *
 
     //Items
     public static final RegistryObject<Item> RUBY = ITEMS.register("ruby", ItemBase::new);
@@ -69,3 +69,4 @@ public class ItemList {
     public static final RegistryObject<Item> CONDUIT_CASING = ITEMS.register("conduit_casing", ItemBase::new);
     public static final RegistryObject<Item> HAMMER = ITEMS.register("hammer", ItemBase::new);
 }
+*/

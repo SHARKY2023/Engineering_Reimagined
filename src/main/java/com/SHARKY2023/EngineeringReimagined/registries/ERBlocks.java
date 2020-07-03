@@ -1,18 +1,23 @@
 package com.SHARKY2023.EngineeringReimagined.registries;
 
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
+
 import com.SHARKY2023.EngineeringReimagined.blocks.basic.BlockResource;
 import com.SHARKY2023.EngineeringReimagined.items.ItemBlockResource;
-import com.SHARKY2023.EngineeringReimagined.registration.impl.BlockDeferredRegister;
-import com.SHARKY2023.EngineeringReimagined.registration.impl.BlockRegistryObject;
+
 import com.SHARKY2023.EngineeringReimagined.resources.BlockResourceInfo;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 
 
 public class ERBlocks {
 
     public static final BlockDeferredRegister BLOCKS = new BlockDeferredRegister(EngineeringReimagined.MOD_ID);
 
-   public static final BlockRegistryObject<BlockResource, ItemBlockResource> SILVER_BLOCK = registerResourceBlock(BlockResourceInfo.SILVER);
+    public static final BlockRegistryObject<BlockResource, ItemBlockResource> SILVER_BLOCK = registerResourceBlock("silver_block",BlockResourceInfo.SILVER);
     public static final BlockRegistryObject<BlockResource, ItemBlockResource> BRONZE_BLOCK = registerResourceBlock(BlockResourceInfo.BRONZE);
     public static final BlockRegistryObject<BlockResource, ItemBlockResource> INVAR_BLOCK = registerResourceBlock(BlockResourceInfo.INVAR);
     public static final BlockRegistryObject<BlockResource, ItemBlockResource> CHARCOAL_BLOCK = registerResourceBlock(BlockResourceInfo.CHARCOAL);
@@ -27,6 +32,7 @@ public class ERBlocks {
     public static final BlockRegistryObject<BlockResource, ItemBlockResource> URANIUM_BLOCK = registerResourceBlock(BlockResourceInfo.URANIUM);
     public static final BlockRegistryObject<BlockResource, ItemBlockResource> ELECTRUM_BLOCK = registerResourceBlock(BlockResourceInfo.ELECTRUM);
     public static final BlockRegistryObject<BlockResource, ItemBlockResource> PLATINUM_BLOCK = registerResourceBlock(BlockResourceInfo.PLATINUM);
+
 
 
 

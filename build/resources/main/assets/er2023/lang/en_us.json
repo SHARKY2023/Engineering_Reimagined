@@ -33,6 +33,6 @@
   "block.er2023.block_invar": "Invar Block",
 
   "_comment": "Creative Tabs",
-  "itemGroup.er2023Blocks":"Engineering Reimagined Blocks",
+  "itemGroup.er2023Tab":"Engineering Reimagined Blocks",
   "itemGroup.er2023Items":"Engineering Reimagined Items"
 }
