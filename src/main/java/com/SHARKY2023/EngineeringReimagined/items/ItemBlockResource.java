@@ -1,5 +1,5 @@
 package com.SHARKY2023.EngineeringReimagined.items;
-
+/*
 import com.SHARKY2023.EngineeringReimagined.blocks.basic.BlockResource;
 import com.SHARKY2023.EngineeringReimagined.items.block.ItemBlockER;
 import com.SHARKY2023.EngineeringReimagined.resources.BlockResourceInfo;
@@ -20,4 +20,4 @@ public class ItemBlockResource extends ItemBlockER<BlockResource> {
         }
         return super.getBurnTime(itemStack);
     }
-}
+}*/

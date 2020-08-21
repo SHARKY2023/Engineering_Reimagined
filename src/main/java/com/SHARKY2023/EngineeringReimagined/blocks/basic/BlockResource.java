@@ -9,18 +9,10 @@ import javax.annotation.Nonnull;
 
 public class BlockResource extends Block {
 
-    @Nonnull
-    private final BlockResourceInfo resource;
+    public BlockResource() {
+        super(Block.Properties.create(Material.IRON).hardnessAndResistance(5.0f,10.0f).lightValue(0)
+                .harvestTool(ToolType.PICKAXE).harvestLevel(2));
 
-    //TODO: Isn't as "generic"? So make it be from one BlockType thing?
-    public BlockResource(@Nonnull BlockResourceInfo resource) {
-        super(Block.Properties.create(Material.IRON).hardnessAndResistance(resource.getHardness(), resource.getResistance()).lightValue(resource.getLightValue())
-                .harvestTool(ToolType.PICKAXE).harvestLevel(resource.getHarvestLevel()));
-        this.resource = resource;
-    }
-
-    @Nonnull
-    public BlockResourceInfo getResourceInfo() {
-        return resource;
     }
 }
+

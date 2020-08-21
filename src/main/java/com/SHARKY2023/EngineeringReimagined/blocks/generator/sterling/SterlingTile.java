@@ -1,6 +1,5 @@
 package com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling;
 
-import com.SHARKY2023.EngineeringReimagined.blocks.generator.TileGeneratorBase;
 import com.SHARKY2023.EngineeringReimagined.config.Config;
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
 import net.minecraft.block.BlockState;
@@ -10,7 +9,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
@@ -25,8 +23,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.SHARKY2023.EngineeringReimagined.registries.ERTiles.STERLING_TILE;
-
+import static com.SHARKY2023.EngineeringReimagined.registries.Registration.STERLING_TILE;
 
 public class SterlingTile extends TileEntity implements ITickableTileEntity {
 
@@ -49,14 +46,14 @@ public class SterlingTile extends TileEntity implements ITickableTileEntity {
         }
             if (counter > 0) {
                 counter--;
-                if (counter <= 0) {
-                    energyStorage.addEnergy(Config.STERLING_GENERATE.get());
+                if (counter > 0) {
+                    energyStorage.generatePower(Config.STERLING_GENERATE.get());
                 }
                 markDirty();
             }
             if (counter <= 0) {
                 ItemStack stack = itemHandler.getStackInSlot(0);
-                if (((ItemStack) stack).getItem() == Items.DIAMOND) {
+                if (((ItemStack) stack).getItem() == Items.COAL) {
                     itemHandler.extractItem(0, 1, false);
                     counter = Config.STERLING_TICKS.get();
                     markDirty();
@@ -80,7 +77,7 @@ public class SterlingTile extends TileEntity implements ITickableTileEntity {
                                     if (handler.canReceive()) {
                                         int received = handler.receiveEnergy(Math.min(capacity.get(), Config.STERLING_SEND.get()), false);
                                         capacity.addAndGet(-received);
-                                        energyStorage.consumeEnergy(received);
+                                        energyStorage.consumePower(received);
                                         markDirty();
                                         return capacity.get() > 0;
                                     } else {
@@ -132,7 +129,7 @@ public class SterlingTile extends TileEntity implements ITickableTileEntity {
                 @Nonnull
                 @Override
                 public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-                    if (stack.getItem() != Items.DIAMOND) {
+                    if (stack.getItem() != Items.COAL) {
                         return stack;
                     }
                     return super.insertItem(slot, stack, simulate);

@@ -1,8 +1,7 @@
 package com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling;
 
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
-import com.SHARKY2023.EngineeringReimagined.registries.ERBlocks;
-import com.SHARKY2023.EngineeringReimagined.registries.ERTiles;
+import com.SHARKY2023.EngineeringReimagined.registries.Registration;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -23,12 +22,13 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class SterlingContainer extends Container {
 
+
     private TileEntity tileEntity;
     private PlayerEntity playerEntity;
     private IItemHandler playerInventory;
 
     public SterlingContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
-        super(ERContaners.STERLING_CONTAINER.get(), windowId);
+        super(Registration.STERLING_CONTAINER.get(), windowId);
         tileEntity = world.getTileEntity(pos);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
@@ -82,7 +82,7 @@ public class SterlingContainer extends Container {
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()), playerEntity, ERBlocks.STERLING_GENERATOR.get());
+        return isWithinUsableDistance(IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()), playerEntity, Registration.STERLING_GENERATOR.get());
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.SHARKY2023.EngineeringReimagined.config;
 
-import com.SHARKY2023.EngineeringReimagined.registration.WrappedRegistryObject;
+
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -50,10 +50,10 @@ public class Config {
                 .defineInRange("maxPower", 50000, 0, Integer.MAX_VALUE);
         STERLING_GENERATE = SERVER_BUILDER.comment("Power generation per tick")
                 .defineInRange("generate", 60, 0, Integer.MAX_VALUE);
-        STERLING_SEND = SERVER_BUILDER.comment("Power generation to send per tick")
+        STERLING_SEND = SERVER_BUILDER.comment("Power to send per tick")
                 .defineInRange("send", 1000, 0, Integer.MAX_VALUE);
         STERLING_TICKS = SERVER_BUILDER.comment("Ticks per coal")
-                .defineInRange("ticks", 20, 0, Integer.MAX_VALUE);
+                .defineInRange("ticks", 334, 0, Integer.MAX_VALUE);
 
         SERVER_BUILDER.pop();
     }

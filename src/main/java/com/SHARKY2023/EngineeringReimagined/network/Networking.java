@@ -19,7 +19,7 @@ public class Networking {
     }
 
     public static void registerMessages() {
-        INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(MOD_ID, "mytutorial"),
+        INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(MOD_ID, "engineeringreimagined"),
                 () -> "1.0",
                 s -> true,
                 s -> true);

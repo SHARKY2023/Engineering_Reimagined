@@ -8,9 +8,9 @@
     <module name="Engineering_Reimagined.main"/>
     <envs>
       <env name="MOD_CLASSES" value="examplemod%%$PROJECT_DIR$\build\resources\main;examplemod%%$PROJECT_DIR$\build\classes\java\main"/>
-      <env name="MCP_MAPPINGS" value="snapshot_20200404-1.15.1"/>
-      <env name="MCP_VERSION" value="20200307.202953"/>
-      <env name="FORGE_VERSION" value="31.1.30"/>
+      <env name="MCP_MAPPINGS" value="snapshot_20200819-1.15.1"/>
+      <env name="MCP_VERSION" value="20200515.085601"/>
+      <env name="FORGE_VERSION" value="31.2.30"/>
       <env name="FORGE_GROUP" value="net.minecraftforge"/>
       <env name="target" value="fmluserdevserver"/>
       <env name="MC_VERSION" value="1.15.2"/>

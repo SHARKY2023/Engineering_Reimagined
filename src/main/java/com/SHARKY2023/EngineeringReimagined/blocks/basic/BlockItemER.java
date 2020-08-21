@@ -10,14 +10,12 @@ import net.minecraft.item.ItemStack;
 
 public class BlockItemER extends BlockItem {
 
-
     private int burnTime;
 
     public BlockItemER(Block block, Item.Properties props) {
 
         super(block, props);
     }
-
 
     public BlockItemER(Block block) {
         this(block, new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined));

@@ -1,5 +1,7 @@
 package com.SHARKY2023.EngineeringReimagined.resources;
 
+import net.minecraftforge.eventbus.api.IEventBus;
+
 public enum BlockResourceInfo implements INamedResource {
     COPPER("copper", 5.0f, 10.0f, 1),
     TIN("tin", 5.0f, 10.0f, 1),
@@ -57,6 +59,8 @@ public enum BlockResourceInfo implements INamedResource {
     public int getHarvestLevel() {
         return harvestLevel;
     }
+
+
 }
 
 

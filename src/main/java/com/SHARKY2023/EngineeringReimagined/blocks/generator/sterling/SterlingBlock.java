@@ -3,6 +3,8 @@ package com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling;
 import com.SHARKY2023.EngineeringReimagined.blocks.basic.BlockMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -24,7 +26,23 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class SterlingBlock extends BlockMachine {
+public class SterlingBlock extends Block {
+
+    public SterlingBlock() {
+        super(Properties.create(Material.IRON)
+                .sound(SoundType.METAL)
+                .hardnessAndResistance(5.0f)
+                .lightValue(14)
+        );
+    }
+
+    @Override
+    public int getLightValue(BlockState state) {
+        return state.get(BlockStateProperties.POWERED) ? super.getLightValue(state) : 0;
+    }
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {return true;}
 
     @Nullable
     @Override
@@ -47,7 +65,7 @@ public class SterlingBlock extends BlockMachine {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
                     public ITextComponent getDisplayName() {
-                        return new TranslationTextComponent("screen.mytutorial.firstblock");
+                        return new TranslationTextComponent("screen.er2023.sterling");
                     }
 
                     @Override
@@ -68,4 +86,4 @@ public class SterlingBlock extends BlockMachine {
         builder.add(BlockStateProperties.FACING, BlockStateProperties.POWERED);
     }
 }
-}
+

@@ -8,7 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import static com.SHARKY2023.EngineeringReimagined.EngineeringReimagined.MOD_ID;
-import static com.SHARKY2023.EngineeringReimagined.registries.ERBlocks.STERLING_GENERATOR;
+//import static com.SHARKY2023.EngineeringReimagined.registries.ERBlocks.STERLING_GENERATOR;
 
 public class ERTiles {
 

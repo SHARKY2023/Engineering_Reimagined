@@ -36,26 +36,10 @@ public class BlockMachine extends Block {
 
         super(Properties.create(Material.IRON)
                 .sound(SoundType.METAL)
-                .hardnessAndResistance(2.0f)
+                .hardnessAndResistance(5.0f)
                 .lightValue(14)
         );
     }
-
-
-
-    @Override
-    public void addInformation(ItemStack stack, @Nullable IBlockReader reader, List<ITextComponent> list, ITooltipFlag flags) {
-        list.add(new TranslationTextComponent("message.sterling", Integer.toString(Config.STERLING_GENERATE.get())));
-    }
-
-    @Override
-    public int getLightValue(BlockState state) {
-        return state.get(BlockStateProperties.POWERED) ? super.getLightValue(state) : 0;
-    }
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
+}
 
 
