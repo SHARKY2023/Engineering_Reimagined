@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "er2023:block/machine_casing_advanced",
+    "down": "er2023:block/machine_casing_advanced",
+    "up": "er2023:block/solar_top",
+    "east": "er2023:block/machine_casing_advanced",
+    "west": "er2023:block/machine_casing_advanced",
+    "north": "er2023:block/machine_casing_advanced",
+    "south": "er2023:block/machine_casing_advanced"
+
+  }
+}

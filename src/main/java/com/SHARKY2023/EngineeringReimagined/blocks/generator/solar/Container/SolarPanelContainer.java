@@ -64,9 +64,9 @@ public class SolarPanelContainer extends Container {
         });
     }
 */
-    public int getEnergy() {
-        return tile.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
-    }
+   // public int getEnergy() {
+   //     return tile.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
+   // }
 
 
 }

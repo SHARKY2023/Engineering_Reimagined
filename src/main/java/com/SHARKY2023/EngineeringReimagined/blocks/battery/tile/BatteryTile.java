@@ -1,12 +1,13 @@
-package com.SHARKY2023.EngineeringReimagined.blocks.generator.solar;
+package com.SHARKY2023.EngineeringReimagined.blocks.battery.tile;
 
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryTier;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.Container.AdvancedBatteryContainer;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.Container.BasicBatteryContainer;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.Container.UltimateBatteryContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.AdvancedSolarPanelContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.BasicSolarPanelContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.UltimateSolarPanelContainer;
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
-import com.SHARKY2023.EngineeringReimagined.network.solar.PacketHandler;
-import com.SHARKY2023.EngineeringReimagined.network.solar.UpdateSolarPanel;
-import com.SHARKY2023.EngineeringReimagined.util.SolarPanelTier;
 import com.SHARKY2023.EngineeringReimagined.util.SolarProduction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -24,73 +25,61 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class SolarPanelTile extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class BatteryTile extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    // Energy
     private LazyOptional<IEnergyStorage> energy = LazyOptional.of(this::createEnergy);
-    private int energyGeneration, maxEnergyOutput;
-    public int maxEnergy, capacity;
 
-    private SolarPanelTier tierSolarPanel;
-    public int energyClient, energyProductionClient;
 
-    public SolarPanelTile(SolarPanelTier tierSolarPanel, TileEntityType<?> SolarPanelTile) {
-        super(SolarPanelTile);
-        this.tierSolarPanel = tierSolarPanel;
-        energyGeneration = (int) Math.pow(8, tierSolarPanel.ordinal());
-        maxEnergyOutput = energyGeneration * 2;
-        maxEnergy = energyGeneration * 1000;
-        energyClient = energyProductionClient = -1;
+    private IEnergyStorage createEnergy()
+    {
+        return new CustomEnergyStorage(maxEnergyOut, maxEnergyIn, maxEnergy);
     }
 
-    private IEnergyStorage createEnergy() {
-        return new CustomEnergyStorage(maxEnergyOutput, maxEnergy);
+    private int maxEnergyIn;
+    private int maxEnergyOut;
+    public int maxEnergy;
+    public int energyStored, energyProductionClient;
+    public int energyReceived;
+
+    private BatteryTier tierBattery;
+
+    public BatteryTile(BatteryTier tierBattery, TileEntityType<?> BatteryTile) {
+        super(BatteryTile);
+        this.tierBattery = tierBattery;
+        maxEnergy = (int) Math.pow(8, tierBattery.ordinal());
+        maxEnergyOut = (int) Math.pow(16, tierBattery.ordinal()) + 1;
+        maxEnergyIn = maxEnergyOut;
+
+    }
+
+
+
+
+    private int maxEnergy() {
+        return maxEnergy;
+    }
+
+    private int getMaxEnergy() {
+        return getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getMaxEnergyStored).orElse(0);
+    }
+
+    private int getEnergy() {
+        return getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
     }
 
     @Override
     public void tick() {
-        if (!world.isRemote) {
 
-        energy.ifPresent(e -> ((CustomEnergyStorage) e).generatePower(currentAmountEnergyProduced()));
+        energyStored = energyStored + energyReceived;
         sendEnergy();
-        if (energyClient != getEnergy() || energyProductionClient != currentAmountEnergyProduced()) {
-            int energyProduced = (getEnergy() != getMaxEnergy()) ? currentAmountEnergyProduced() : 0;
-            PacketHandler.INSTANCE.send(PacketDistributor.ALL.noArg(), new UpdateSolarPanel(getPos(), getEnergy(), energyProduced)); }
-       // if ( energyClient >= maxEnergy );{
-       //     cullEnergyStored();}
-             }}
-
-
-    private int getMaxEnergy()
-    {
-        return getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getMaxEnergyStored).orElse(0);
+       // if( getEnergy() != getMaxEnergy()? canRecieve()
     }
 
-    private int getEnergy()
-    {
-        return getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
-    }
-
-    private int currentAmountEnergyProduced()
-    {
-        return (int) (energyGeneration * SolarProduction.computeSunIntensity(world, getPos(), tierSolarPanel));
-    }
-
-   // public void setEnergyStored(int energy) {
-   //      energyClient = Math.max(0, energy);
-   // }
-
-   // public void cullEnergyStored() {
-   //     if (energyClient > maxEnergy) {
-    //        setEnergyStored(maxEnergy);
-    //    }
-    //}
 
     private void sendEnergy() {
         energy.ifPresent(energy ->
@@ -103,22 +92,28 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
                     if (tileEntity != null) {
                         tileEntity.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).ifPresent(handler -> {
                             if (handler.canReceive()) {
-                                int received = handler.receiveEnergy(Math.min(capacity.get(), maxEnergyOutput), false);
+                                int received = handler.receiveEnergy(Math.min(capacity.get(), maxEnergyOut), false);
                                 capacity.addAndGet(-received);
-                                ((CustomEnergyStorage) energy).consumePower(received); }});}}}});
+                                ((CustomEnergyStorage) energy).consumePower(received);
+                            }
+                        });
+                    }
+                }
+            }
+        });
     }
 
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, Direction facing) {
         if (capability == CapabilityEnergy.ENERGY && facing != Direction.UP) {
-            return energy.cast(); }
+            return energy.cast();
+        }
         return super.getCapability(capability, facing);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public void read(CompoundNBT compound)
-    {
+    public void read(CompoundNBT compound) {
         CompoundNBT energyTag = compound.getCompound("energy");
         energy.ifPresent(h -> ((INBTSerializable<CompoundNBT>) h).deserializeNBT(energyTag));
         super.read(compound);
@@ -126,8 +121,7 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
 
     @SuppressWarnings("unchecked")
     @Override
-    public CompoundNBT write(CompoundNBT compound)
-    {
+    public CompoundNBT write(CompoundNBT compound) {
         energy.ifPresent(h ->
         {
             CompoundNBT tag = ((INBTSerializable<CompoundNBT>) h).serializeNBT();
@@ -135,30 +129,24 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
         });
         return super.write(compound);
     }
+
     @Nullable
-    public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity)
-    {
-        switch (tierSolarPanel)
-        {
+    public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        switch (tierBattery) {
             case Basic:
-                return new BasicSolarPanelContainer(id, world, pos, playerEntity);
+                return new BasicBatteryContainer(id, world, pos, playerEntity);
             case Advanced:
-                return new AdvancedSolarPanelContainer(id, world, pos, playerEntity);
+                return new AdvancedBatteryContainer(id, world, pos, playerEntity);
             case Ultimate:
-                return new UltimateSolarPanelContainer(id, world, pos, playerEntity);
+                return new UltimateBatteryContainer(id, world, pos, playerEntity);
             default:
                 return null;
         }
     }
+
     @Override
-    public ITextComponent getDisplayName()
-    {
+    public ITextComponent getDisplayName() {
         return new TranslationTextComponent(this.getBlockState().getBlock().getTranslationKey());
     }
+
 }
-
-
-
-
-
-

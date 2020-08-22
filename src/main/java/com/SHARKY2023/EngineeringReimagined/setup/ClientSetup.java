@@ -2,6 +2,7 @@ package com.SHARKY2023.EngineeringReimagined.setup;
 
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling.SterlingScreen;
+import com.SHARKY2023.EngineeringReimagined.gui.BatteryScreen;
 import com.SHARKY2023.EngineeringReimagined.gui.SolarPanelScreen;
 import com.SHARKY2023.EngineeringReimagined.registries.Registration;
 import net.minecraft.client.gui.ScreenManager;
@@ -17,6 +18,9 @@ public class ClientSetup {
      ScreenManager.registerFactory(Registration.BASIC_SOLAR_CONTAINER.get(), SolarPanelScreen::new);
      ScreenManager.registerFactory(Registration.ADVANCED_SOLAR_CONTAINER.get(), SolarPanelScreen::new);
      ScreenManager.registerFactory(Registration.ULTIMATE_SOLAR_CONTAINER.get(), SolarPanelScreen::new);
+     ScreenManager.registerFactory(Registration.BASIC_BATTERY_CONTAINER.get(), BatteryScreen::new);
+     ScreenManager.registerFactory(Registration.ADVANCED_BATTERY_CONTAINER.get(), BatteryScreen::new);
+     ScreenManager.registerFactory(Registration.ULTIMATE_BATTERY_CONTAINER.get(), BatteryScreen::new);
 /*
         MinecraftForge.EVENT_BUS.addListener(InWorldRenderer::render);
         MinecraftForge.EVENT_BUS.addListener(AfterLivingRenderer::render);

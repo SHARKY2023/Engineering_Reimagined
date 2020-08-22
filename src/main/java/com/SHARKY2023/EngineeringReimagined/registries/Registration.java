@@ -4,6 +4,15 @@ package com.SHARKY2023.EngineeringReimagined.registries;
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
 import com.SHARKY2023.EngineeringReimagined.blocks.basic.BlockMachine;
 import com.SHARKY2023.EngineeringReimagined.blocks.basic.BlockResource;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.Battery;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryTier;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.Container.AdvancedBatteryContainer;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.Container.BasicBatteryContainer;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.Container.BatteryContainer;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.Container.UltimateBatteryContainer;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.tile.AdvancedBatteryTile;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.tile.BasicBatteryTile;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.tile.UltimateBatteryTile;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.AdvancedSolarPanelContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.BasicSolarPanelContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.UltimateSolarPanelContainer;
@@ -82,6 +91,9 @@ public class Registration {
     public static final RegistryObject<SolarPanel> SOLAR_PANEL_BASIC = BLOCKS.register("solar_panel_basic", () -> new SolarPanel(SolarPanelTier.Basic));
     public static final RegistryObject<SolarPanel> SOLAR_PANEL_ADVANCED = BLOCKS.register("solar_panel_advanced", () -> new SolarPanel(SolarPanelTier.Advanced));
     public static final RegistryObject<SolarPanel> SOLAR_PANEL_ULTIMATE = BLOCKS.register("solar_panel_ultimate", () -> new SolarPanel(SolarPanelTier.Ultimate));
+    public static final RegistryObject<Battery> BASIC_BATTERY = BLOCKS.register("basic_battery", () -> new Battery(BatteryTier.Basic));
+    public static final RegistryObject<Battery> ADVANCED_BATTERY = BLOCKS.register("advanced_battery", () -> new Battery(BatteryTier.Advanced));
+    public static final RegistryObject<Battery> ULTIMATE_BATTERY = BLOCKS.register("ultimate_battery", () -> new Battery(BatteryTier.Ultimate));
 
     public static final RegistryObject<Block> METAL_FORMER = BLOCKS.register("metal_former", BlockMachine::new);
     public static final RegistryObject<Block> GRINDER = BLOCKS.register("grinder", BlockMachine::new);
@@ -112,15 +124,18 @@ public class Registration {
     public static final RegistryObject<Item> SOLAR_PANEL_BASIC_ITEM = ITEMS.register("solar_panel_basic", () -> new BlockItem(SOLAR_PANEL_BASIC.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> SOLAR_PANEL_ADVANCED_ITEM = ITEMS.register("solar_panel_advanced", () -> new BlockItem(SOLAR_PANEL_ADVANCED.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> SOLAR_PANEL_ULTIMATE_ITEM = ITEMS.register("solar_panel_ultimate", () -> new BlockItem(SOLAR_PANEL_ULTIMATE.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-
+    public static final RegistryObject<Item> BASIC_BATTERY_ITEM = ITEMS.register("basic_battery", () -> new BlockItem(BASIC_BATTERY.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> ADVANCED_BATTERY_ITEM = ITEMS.register("advanced_battery", () -> new BlockItem(ADVANCED_BATTERY.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> ULTIMATE_BATTERY_ITEM = ITEMS.register("ultimate_battery", () -> new BlockItem(ULTIMATE_BATTERY.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
 
     //Tiles
     public static final RegistryObject<TileEntityType<SterlingTile>> STERLING_TILE = TILES.register("sterling_generator", () -> TileEntityType.Builder.create(SterlingTile::new, STERLING_GENERATOR.get()).build(null));
     public static final RegistryObject<TileEntityType<BasicSolarPanelTile>> SOLAR_TILE_BASIC = TILES.register("solar_panel_basic", () -> TileEntityType.Builder.create(BasicSolarPanelTile::new, SOLAR_PANEL_BASIC.get()).build(null));
     public static final RegistryObject<TileEntityType<AdvancedSolarPanelTile>> SOLAR_TILE_ADVANCED = TILES.register("solar_panel_advanced", () -> TileEntityType.Builder.create(AdvancedSolarPanelTile::new, SOLAR_PANEL_ADVANCED.get()).build(null));
     public static final RegistryObject<TileEntityType<UltimateSolarPanelTile>> SOLAR_TILE_ULTIMATE = TILES.register("solar_panel_ultimate", () -> TileEntityType.Builder.create(UltimateSolarPanelTile::new, SOLAR_PANEL_ULTIMATE.get()).build(null));
-
-
+    public static final RegistryObject<TileEntityType<BasicBatteryTile>> BASIC_BATTERY_TILE = TILES.register("basic_battery", () -> TileEntityType.Builder.create(BasicBatteryTile::new, BASIC_BATTERY.get()).build(null));
+    public static final RegistryObject<TileEntityType<AdvancedBatteryTile>> ADVANCED_BATTERY_TILE = TILES.register("advanced_battery", () -> TileEntityType.Builder.create(AdvancedBatteryTile::new, BASIC_BATTERY.get()).build(null));
+    public static final RegistryObject<TileEntityType<UltimateBatteryTile>> ULTIMATE_BATTERY_TILE = TILES.register("ultimate_battery", () -> TileEntityType.Builder.create(UltimateBatteryTile::new, BASIC_BATTERY.get()).build(null));
     //Containers
     public static final RegistryObject<ContainerType<SterlingContainer>> STERLING_CONTAINER = CONTAINERS.register("sterling_generator", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
@@ -130,17 +145,32 @@ public class Registration {
     public static final RegistryObject<ContainerType<SolarPanelContainer>> BASIC_SOLAR_CONTAINER = CONTAINERS.register("solar_panel_basic", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
         World world = inv.player.getEntityWorld();
-        return new BasicSolarPanelContainer(windowId, world, pos, inv, inv.player);
+        return new BasicSolarPanelContainer(windowId, world, pos,  inv.player);
     }));
     public static final RegistryObject<ContainerType<SolarPanelContainer>> ADVANCED_SOLAR_CONTAINER = CONTAINERS.register("solar_panel_advanced", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
         World world = inv.player.getEntityWorld();
-        return new AdvancedSolarPanelContainer(windowId, world, pos, inv, inv.player);
+        return new AdvancedSolarPanelContainer(windowId, world, pos,  inv.player);
     }));
     public static final RegistryObject<ContainerType<SolarPanelContainer>> ULTIMATE_SOLAR_CONTAINER = CONTAINERS.register("solar_panel_ultimate", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
         World world = inv.player.getEntityWorld();
-        return new UltimateSolarPanelContainer(windowId, world, pos, inv, inv.player);
+        return new UltimateSolarPanelContainer(windowId, world, pos, inv.player);
+    }));
+    public static final RegistryObject<ContainerType<BatteryContainer>> BASIC_BATTERY_CONTAINER = CONTAINERS.register("basic_battery", () -> IForgeContainerType.create((windowId, inv, data) -> {
+        BlockPos pos = data.readBlockPos();
+        World world = inv.player.getEntityWorld();
+        return new BasicBatteryContainer(windowId, world, pos, inv.player);
+    }));
+    public static final RegistryObject<ContainerType<BatteryContainer>> ADVANCED_BATTERY_CONTAINER = CONTAINERS.register("advanced_battery", () -> IForgeContainerType.create((windowId, inv, data) -> {
+        BlockPos pos = data.readBlockPos();
+        World world = inv.player.getEntityWorld();
+        return new AdvancedBatteryContainer(windowId, world, pos, inv.player);
+    }));
+    public static final RegistryObject<ContainerType<BatteryContainer>> ULTIMATE_BATTERY_CONTAINER = CONTAINERS.register("ultimate_battery", () -> IForgeContainerType.create((windowId, inv, data) -> {
+        BlockPos pos = data.readBlockPos();
+        World world = inv.player.getEntityWorld();
+        return new UltimateBatteryContainer(windowId, world, pos, inv.player);
     }));
 
 

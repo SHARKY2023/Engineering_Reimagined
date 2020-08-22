@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "engineeringreimagined:block/machine_casing_basic",
+    "down": "engineeringreimagined:block/machine_casing_basic",
+    "up": "engineeringreimagined:block/machine_casing_basic",
+    "east": "engineeringreimagined:block/machine_casing_basic",
+    "west": "engineeringreimagined:block/machine_casing_basic",
+    "north": "engineeringreimagined:block/machine_casing_basic",
+    "south": "engineeringreimagined:block/machine_casing_basic"
+
+  }
+}

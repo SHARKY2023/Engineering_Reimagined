@@ -72,35 +72,23 @@ public class SolarPanel extends Block {
         public BlockState getStateForPlacement(BlockItemUseContext context) {
             return getDefaultState().with(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
         }
-
-        @SuppressWarnings("deprecation")
-        @Override
-        public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
-            if (!world.isRemote) {
-                TileEntity tileEntity = world.getTileEntity(pos);
-                if (tileEntity instanceof SolarPanelTile) {
-                    INamedContainerProvider containerProvider = new INamedContainerProvider() {
-                        @Override
-                        public ITextComponent getDisplayName() {
-                            return new TranslationTextComponent("screen.er2023.solar");
-                        }
-
-                        @Override
-                        public BasicSolarPanelContainer createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-                            return new BasicSolarPanelContainer(i, world, pos, playerInventory, playerEntity);
-                        }
-                    };
-                    NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getPos());
-                } else {
-                    throw new IllegalStateException("Our named container provider is missing!");
-                }
+    @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    {
+        if(!worldIn.isRemote)
+        {
+            TileEntity tileEntity = worldIn.getTileEntity(pos);
+            if(tileEntity instanceof INamedContainerProvider)
+            {
+                NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, tileEntity.getPos());
             }
-            return ActionResultType.SUCCESS;
+            else
+            {
+                throw new IllegalStateException("Our named container provider is missing!");
+            }
         }
-
-
-
-
+        return ActionResultType.SUCCESS;
+    }
 
         @Override
         protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "er2023:block/basic_battery"
+    }
+  }
+}
