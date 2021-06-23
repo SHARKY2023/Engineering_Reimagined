@@ -51,8 +51,8 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
     public BatteryTile(BatteryTier tierBattery, TileEntityType<?> BatteryTile) {
         super(BatteryTile);
         this.tierBattery = tierBattery;
-        maxEnergy = (int) Math.pow(8, tierBattery.ordinal());
-        maxEnergyOut = (int) Math.pow(16, tierBattery.ordinal()) + 1;
+        maxEnergy = (int) Math.pow(tierBattery.ordinal()+2, tierBattery.ordinal()+2)*64000;
+        maxEnergyOut = (int) Math.pow(8, tierBattery.ordinal()) + 1;
         maxEnergyIn = maxEnergyOut;
 
     }
@@ -60,17 +60,6 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
 
 
 
-    private int maxEnergy() {
-        return maxEnergy;
-    }
-
-    private int getMaxEnergy() {
-        return getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getMaxEnergyStored).orElse(0);
-    }
-
-    private int getEnergy() {
-        return getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
-    }
 
     @Override
     public void tick() {

@@ -1,6 +1,6 @@
 package com.SHARKY2023.EngineeringReimagined;
 
-import com.SHARKY2023.EngineeringReimagined.network.solar.PacketHandler;
+import com.SHARKY2023.EngineeringReimagined.network.PacketHandler;
 import com.SHARKY2023.EngineeringReimagined.registries.Registration;
 import com.SHARKY2023.EngineeringReimagined.setup.ClientSetup;
 import com.SHARKY2023.EngineeringReimagined.setup.ModSetup;

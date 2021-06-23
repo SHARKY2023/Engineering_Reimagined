@@ -1,4 +1,4 @@
-package com.SHARKY2023.EngineeringReimagined.network.solar;
+package com.SHARKY2023.EngineeringReimagined.network.packet;
 
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelTile;

@@ -4,8 +4,8 @@ import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.Adv
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.BasicSolarPanelContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.UltimateSolarPanelContainer;
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
-import com.SHARKY2023.EngineeringReimagined.network.solar.PacketHandler;
-import com.SHARKY2023.EngineeringReimagined.network.solar.UpdateSolarPanel;
+import com.SHARKY2023.EngineeringReimagined.network.PacketHandler;
+import com.SHARKY2023.EngineeringReimagined.network.packet.UpdateSolarPanel;
 import com.SHARKY2023.EngineeringReimagined.util.SolarPanelTier;
 import com.SHARKY2023.EngineeringReimagined.util.SolarProduction;
 import net.minecraft.entity.player.PlayerEntity;
@@ -62,9 +62,9 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
         if (energyClient != getEnergy() || energyProductionClient != currentAmountEnergyProduced()) {
             int energyProduced = (getEnergy() != getMaxEnergy()) ? currentAmountEnergyProduced() : 0;
             PacketHandler.INSTANCE.send(PacketDistributor.ALL.noArg(), new UpdateSolarPanel(getPos(), getEnergy(), energyProduced)); }
-       // if ( energyClient >= maxEnergy );{
-       //     cullEnergyStored();}
-             }}
+            if ( energyClient >= maxEnergy ){
+                cullEnergyStored();}
+                }}
 
 
     private int getMaxEnergy()
@@ -82,15 +82,15 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
         return (int) (energyGeneration * SolarProduction.computeSunIntensity(world, getPos(), tierSolarPanel));
     }
 
-   // public void setEnergyStored(int energy) {
-   //      energyClient = Math.max(0, energy);
-   // }
+   public void setEnergyStored(int energy) {
+         energyClient = Math.max(0, energy);
+    }
 
-   // public void cullEnergyStored() {
-   //     if (energyClient > maxEnergy) {
-    //        setEnergyStored(maxEnergy);
-    //    }
-    //}
+    public void cullEnergyStored() {
+       if (energyClient > maxEnergy) {
+           setEnergyStored(maxEnergy);
+       }}
+
 
     private void sendEnergy() {
         energy.ifPresent(energy ->
@@ -121,15 +121,14 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
     {
         CompoundNBT energyTag = compound.getCompound("energy");
         energy.ifPresent(h -> ((INBTSerializable<CompoundNBT>) h).deserializeNBT(energyTag));
-        super.read(compound);
+        super.read( compound);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public CompoundNBT write(CompoundNBT compound)
     {
-        energy.ifPresent(h ->
-        {
+        energy.ifPresent(h -> {
             CompoundNBT tag = ((INBTSerializable<CompoundNBT>) h).serializeNBT();
             compound.put("energy", tag);
         });

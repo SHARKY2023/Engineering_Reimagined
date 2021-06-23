@@ -1,7 +1,8 @@
-package com.SHARKY2023.EngineeringReimagined.network.solar;
+package com.SHARKY2023.EngineeringReimagined.network;
 
 
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
+import com.SHARKY2023.EngineeringReimagined.network.packet.UpdateSolarPanel;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;

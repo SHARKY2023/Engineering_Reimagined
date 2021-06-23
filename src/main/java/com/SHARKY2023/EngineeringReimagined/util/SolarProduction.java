@@ -31,10 +31,10 @@ public class SolarProduction {
                     sunIntensity = 1;
 
                 if(world.isRaining())
-                    sunIntensity *= 0.4;
+                    sunIntensity *= 0.5;
 
                 if(world.isThundering())
-                    sunIntensity *= 0.2;
+                    sunIntensity *= 0.3;
             }
         }
 
