@@ -8,7 +8,7 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import static com.SHARKY2023.EngineeringReimagined.EngineeringReimagined.MOD_ID;
-
+/*
 public class Networking {
 
     private static SimpleChannel INSTANCE;
@@ -34,13 +34,18 @@ public class Networking {
                 .decoder(PacketSpawn::new)
                 .consumer(PacketSpawn::handle)
                 .add();
+
+
     }
 
-    public static void sendToClient(Object packet, ServerPlayerEntity player) {
-        INSTANCE.sendTo(packet, player.connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
-    }
+   // public static void sendToClient(Object packet, ServerPlayerEntity player) {
+    //    INSTANCE.sendTo(packet, player.connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
+   // }
 
     public static void sendToServer(Object packet) {
         INSTANCE.sendToServer(packet);
     }
 }
+
+
+ */

@@ -14,13 +14,13 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ClientSetup {
 
     public static void init(final FMLClientSetupEvent event) {
-     ScreenManager.registerFactory(Registration.STERLING_CONTAINER.get(), SterlingScreen::new);
-     ScreenManager.registerFactory(Registration.BASIC_SOLAR_CONTAINER.get(), SolarPanelScreen::new);
-     ScreenManager.registerFactory(Registration.ADVANCED_SOLAR_CONTAINER.get(), SolarPanelScreen::new);
-     ScreenManager.registerFactory(Registration.ULTIMATE_SOLAR_CONTAINER.get(), SolarPanelScreen::new);
-     ScreenManager.registerFactory(Registration.BASIC_BATTERY_CONTAINER.get(), BatteryScreen::new);
-     ScreenManager.registerFactory(Registration.ADVANCED_BATTERY_CONTAINER.get(), BatteryScreen::new);
-     ScreenManager.registerFactory(Registration.ULTIMATE_BATTERY_CONTAINER.get(), BatteryScreen::new);
+     ScreenManager.register(Registration.STERLING_CONTAINER.get(), SterlingScreen::new);
+     ScreenManager.register(Registration.BASIC_SOLAR_CONTAINER.get(), SolarPanelScreen::new);
+     ScreenManager.register(Registration.ADVANCED_SOLAR_CONTAINER.get(), SolarPanelScreen::new);
+     ScreenManager.register(Registration.ULTIMATE_SOLAR_CONTAINER.get(), SolarPanelScreen::new);
+     ScreenManager.register(Registration.BASIC_BATTERY_CONTAINER.get(), BatteryScreen::new);
+     ScreenManager.register(Registration.ADVANCED_BATTERY_CONTAINER.get(), BatteryScreen::new);
+     ScreenManager.register(Registration.ULTIMATE_BATTERY_CONTAINER.get(), BatteryScreen::new);
 /*
         MinecraftForge.EVENT_BUS.addListener(InWorldRenderer::render);
         MinecraftForge.EVENT_BUS.addListener(AfterLivingRenderer::render);

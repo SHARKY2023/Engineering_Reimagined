@@ -9,6 +9,7 @@ import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.Bas
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.UltimateSolarPanelContainer;
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
 import com.SHARKY2023.EngineeringReimagined.util.SolarProduction;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -77,7 +78,7 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
             for (int i = 0; (i < Direction.values().length) && (capacity.get() > 0); i++) {
                 Direction facing = Direction.values()[i];
                 if (facing != Direction.UP) {
-                    TileEntity tileEntity = world.getTileEntity(pos.offset(facing));
+                    TileEntity tileEntity = level.getBlockEntity(worldPosition.relative(facing));
                     if (tileEntity != null) {
                         tileEntity.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).ifPresent(handler -> {
                             if (handler.canReceive()) {
@@ -102,32 +103,32 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
 
     @SuppressWarnings("unchecked")
     @Override
-    public void read(CompoundNBT compound) {
+    public void load(BlockState state, CompoundNBT compound) {
         CompoundNBT energyTag = compound.getCompound("energy");
         energy.ifPresent(h -> ((INBTSerializable<CompoundNBT>) h).deserializeNBT(energyTag));
-        super.read(compound);
+        super.load(state, compound);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT save(CompoundNBT compound) {
         energy.ifPresent(h ->
         {
             CompoundNBT tag = ((INBTSerializable<CompoundNBT>) h).serializeNBT();
             compound.put("energy", tag);
         });
-        return super.write(compound);
+        return super.save(compound);
     }
 
     @Nullable
     public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity) {
         switch (tierBattery) {
             case Basic:
-                return new BasicBatteryContainer(id, world, pos, playerEntity);
+                return new BasicBatteryContainer(id, level, getBlockPos(), playerEntity);
             case Advanced:
-                return new AdvancedBatteryContainer(id, world, pos, playerEntity);
+                return new AdvancedBatteryContainer(id, level, getBlockPos(), playerEntity);
             case Ultimate:
-                return new UltimateBatteryContainer(id, world, pos, playerEntity);
+                return new UltimateBatteryContainer(id, level, getBlockPos(), playerEntity);
             default:
                 return null;
         }
@@ -135,7 +136,7 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
 
     @Override
     public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(this.getBlockState().getBlock().getTranslationKey());
+        return new TranslationTextComponent(this.getBlockState().getBlock().getDescriptionId());
     }
 
 }

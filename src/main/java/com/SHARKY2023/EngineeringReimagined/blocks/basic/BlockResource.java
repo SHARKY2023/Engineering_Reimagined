@@ -10,7 +10,7 @@ import javax.annotation.Nonnull;
 public class BlockResource extends Block {
 
     public BlockResource() {
-        super(Block.Properties.create(Material.IRON).hardnessAndResistance(5.0f,10.0f).lightValue(0)
+        super(Properties.of(Material.METAL).strength(5.0f,10.0f)
                 .harvestTool(ToolType.PICKAXE).harvestLevel(2));
 
     }

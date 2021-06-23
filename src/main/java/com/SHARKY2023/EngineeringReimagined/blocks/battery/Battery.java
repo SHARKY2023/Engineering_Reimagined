@@ -29,10 +29,10 @@ public class Battery extends Block {
     private BatteryTier  tierBattery;
 
     public Battery(BatteryTier tierBattery) {
-            super(Properties.create(Material.IRON)
+            super(Properties.of(Material.METAL)
             .sound(SoundType.METAL)
-                .hardnessAndResistance(5.0f)
-                .lightValue(14));
+                .strength(5.0f))
+                ;
             this.tierBattery = tierBattery;
     }
 
@@ -57,17 +57,17 @@ public class Battery extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return getDefaultState().with(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
+        return defaultBlockState().setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
     }
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
-        if(!worldIn.isRemote)
+        if(!worldIn.isClientSide)
         {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
+            TileEntity tileEntity = worldIn.getBlockEntity(pos);
             if(tileEntity instanceof INamedContainerProvider)
             {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, tileEntity.getPos());
+                NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, tileEntity.getBlockPos());
             }
             else
             {
@@ -79,7 +79,7 @@ public class Battery extends Block {
 
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void  createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(BlockStateProperties.FACING, BlockStateProperties.POWERED);
     }
 }

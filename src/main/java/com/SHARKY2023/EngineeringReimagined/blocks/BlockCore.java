@@ -4,7 +4,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
+/*
 public abstract class BlockCore extends Block {
 
     protected String modName;
@@ -21,3 +21,5 @@ public abstract class BlockCore extends Block {
         return getRegistryName();
     }
 }
+
+ */

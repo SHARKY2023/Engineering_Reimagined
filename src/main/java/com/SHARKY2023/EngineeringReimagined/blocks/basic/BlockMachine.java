@@ -34,10 +34,10 @@ public class BlockMachine extends Block {
 
     public BlockMachine() {
 
-        super(Properties.create(Material.IRON)
+        super(Properties.of(Material.METAL)
                 .sound(SoundType.METAL)
-                .hardnessAndResistance(5.0f)
-                .lightValue(14)
+                .strength(5.0f)
+
         );
     }
 }

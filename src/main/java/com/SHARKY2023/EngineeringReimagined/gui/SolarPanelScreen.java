@@ -5,11 +5,14 @@ import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.Sol
 import java.util.Collections;
 
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelTile;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class SolarPanelScreen extends ContainerScreen<SolarPanelContainer> {
 
@@ -23,38 +26,38 @@ public class SolarPanelScreen extends ContainerScreen<SolarPanelContainer> {
     }
 
     @Override
-    public void render(int mouseX, int mouseY, float partialTicks)
+    public void render(MatrixStack mStack, int mouseX, int mouseY, float partialTicks)
     {
-        this.renderBackground();
-        super.render(mouseX, mouseY, partialTicks);
-        this.renderHoveredToolTip(mouseX, mouseY);
-        if(mouseX > guiLeft + 7 && mouseX < guiLeft + 29 && mouseY > guiTop + 10 && mouseY < guiTop + 77)
-            this.renderTooltip(Collections.singletonList("Energy: " + getPercent() + "%"), mouseX, mouseY, font);
+        this.renderBackground(mStack);
+        super.render(mStack,mouseX, mouseY, partialTicks);
+        this.renderTooltip(mStack, mouseX, mouseY);
+        if(mouseX > leftPos + 7 && mouseX < leftPos + 29 && mouseY > topPos + 10 && mouseY < topPos + 77)
+            this.renderTooltip(mStack, new StringTextComponent("Energy: " + getPercent() + "%"), mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
+    protected void renderLabels(MatrixStack mStack, int mouseX, int mouseY)
     {
-        String energy = "Stored energy: " + getEnergyFormatted(tile.energyClient);
-        this.font.drawString(energy, (xSize / 2 - font.getStringWidth(energy) / 2) + 14, 20, 4210752);
+        String energy = new TranslationTextComponent("gui." + EngineeringReimagined.MOD_ID + ".stored_energy").append(" " + getEnergyFormatted(tile.energyClient)).getString();
+        this.font.draw(mStack, energy, (imageWidth / 2 - font.width(energy) / 2) + 14, 20, 4210752);
 
-        String maxEnergy = "Max capacity: " + getEnergyFormatted(tile.maxEnergy);
-        this.font.drawString(maxEnergy, (xSize / 2 - font.getStringWidth(maxEnergy) / 2) + 14, 30, 4210752);
+        String maxEnergy = new TranslationTextComponent("gui." + EngineeringReimagined.MOD_ID + ".max_capacity").append(" " + getEnergyFormatted(tile.maxEnergy)).getString();
+        this.font.draw(mStack, maxEnergy, (imageWidth / 2 - font.width(maxEnergy) / 2) + 14, 30, 4210752);
 
-        String generation = "Generation: " + tile.energyProductionClient + " FE/t";
-        this.font.drawString(generation, (xSize / 2 - font.getStringWidth(generation) / 2) + 14, 40, 4210752);
+        String generation = new TranslationTextComponent("gui." + EngineeringReimagined.MOD_ID + ".generation").append(" " + tile.energyProductionClient + " FE/t").getString();
+        this.font.draw(mStack, generation, (imageWidth / 2 - font.width(generation) / 2) + 14, 40, 4210752);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+    protected void renderBg(MatrixStack mStack, float partialTicks, int mouseX, int mouseY)
     {
         RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
-        this.minecraft.getTextureManager().bindTexture(TEXTURES);
-        this.blit(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
+        this.minecraft.getTextureManager().bind(TEXTURES);
+        this.blit(mStack, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
 
         // Energy
         int y = this.getEnergyScaled(60);
-        this.blit(this.guiLeft + 10, this.guiTop + 12 + y, 176, 0, 16, 60 - y);
+        this.blit(mStack ,this.leftPos + 10, this.topPos + 12 + y, 176, 0, 16, 60 - y);
 
     }
 

@@ -34,7 +34,6 @@ import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -52,16 +51,14 @@ public class Registration {
     private static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, MOD_ID);
     private static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MOD_ID);
     private static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MOD_ID);
-    private static final DeferredRegister<ModDimension> DIMENSIONS = DeferredRegister.create(ForgeRegistries.MOD_DIMENSIONS, MOD_ID);
-
-
+   
     public static void init() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
         CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        DIMENSIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
+       
         ;
 
     }
@@ -100,76 +97,78 @@ public class Registration {
     public static final RegistryObject<Block> SMELTER= BLOCKS.register("smelter", BlockMachine::new);
 
     //ItemBlocks
-    public static final RegistryObject<Item> SILVER_BLOCK_ITEM = ITEMS.register("block_silver",  () -> new BlockItem(SILVER_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> BRONZE_BLOCK_ITEM = ITEMS.register("block_bronze",() -> new BlockItem(BRONZE_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> INVAR_BLOCK_ITEM = ITEMS.register("block_invar", () -> new BlockItem(INVAR_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> CHARCOAL_BLOCK_ITEM = ITEMS.register("block_charcoal", () -> new BlockItem(CHARCOAL_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> ALUMINUM_BLOCK_ITEM = ITEMS.register("block_aluminum",() -> new BlockItem(ALUMINUM_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> STEEL_BLOCK_ITEM = ITEMS.register("block_steel", () -> new BlockItem(STEEL_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> COPPER_BLOCK_ITEM = ITEMS.register("block_copper", () -> new BlockItem(COPPER_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> TIN_BLOCK_ITEM = ITEMS.register("block_tin", () -> new BlockItem(TIN_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> NICKEL_BLOCK_ITEM = ITEMS.register("block_nickel", () -> new BlockItem(NICKEL_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> LEAD_BLOCK_ITEM = ITEMS.register("block_lead", () -> new BlockItem(LEAD_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> ZINC_BLOCK_ITEM = ITEMS.register("block_zinc", () -> new BlockItem(ZINC_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> BRASS_BLOCK_ITEM = ITEMS.register("block_brass", () -> new BlockItem(BRASS_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> URANIUM_BLOCK_ITEM = ITEMS.register("block_uranium",() -> new BlockItem(URANIUM_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> ELECTRUM_BLOCK_ITEM = ITEMS.register("block_electrum", () -> new BlockItem(ELECTRUM_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> PLATINUM_BLOCK_ITEM = ITEMS.register("block_platinum", () -> new BlockItem(PLATINUM_BLOCK.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> MACHINE_CASING_ITEM = ITEMS.register("machine_casing", () -> new BlockItem(MACHINE_CASING.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> ADV_MACHINE_CASING_ITEM = ITEMS.register("advanced_machine_casing", () -> new BlockItem(ADV_MACHINE_CASING.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> METAL_FORMER_ITEM = ITEMS.register("metal_former", () -> new BlockItem(METAL_FORMER.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> GRINDER_ITEM = ITEMS.register("grinder", () -> new BlockItem(GRINDER.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> SMELTER_ITEM = ITEMS.register("smelter", () -> new BlockItem(SMELTER.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> STERLING_GENERATOR_ITEM = ITEMS.register("sterling_generator", () -> new BlockItem(STERLING_GENERATOR.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> SOLAR_PANEL_BASIC_ITEM = ITEMS.register("solar_panel_basic", () -> new BlockItem(SOLAR_PANEL_BASIC.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> SOLAR_PANEL_ADVANCED_ITEM = ITEMS.register("solar_panel_advanced", () -> new BlockItem(SOLAR_PANEL_ADVANCED.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> SOLAR_PANEL_ULTIMATE_ITEM = ITEMS.register("solar_panel_ultimate", () -> new BlockItem(SOLAR_PANEL_ULTIMATE.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> BASIC_BATTERY_ITEM = ITEMS.register("basic_battery", () -> new BlockItem(BASIC_BATTERY.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> ADVANCED_BATTERY_ITEM = ITEMS.register("advanced_battery", () -> new BlockItem(ADVANCED_BATTERY.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> ULTIMATE_BATTERY_ITEM = ITEMS.register("ultimate_battery", () -> new BlockItem(ULTIMATE_BATTERY.get(), new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> SILVER_BLOCK_ITEM = ITEMS.register("block_silver",  () -> new BlockItem(SILVER_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> BRONZE_BLOCK_ITEM = ITEMS.register("block_bronze",() -> new BlockItem(BRONZE_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> INVAR_BLOCK_ITEM = ITEMS.register("block_invar", () -> new BlockItem(INVAR_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> CHARCOAL_BLOCK_ITEM = ITEMS.register("block_charcoal", () -> new BlockItem(CHARCOAL_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> ALUMINUM_BLOCK_ITEM = ITEMS.register("block_aluminum",() -> new BlockItem(ALUMINUM_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> STEEL_BLOCK_ITEM = ITEMS.register("block_steel", () -> new BlockItem(STEEL_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> COPPER_BLOCK_ITEM = ITEMS.register("block_copper", () -> new BlockItem(COPPER_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> TIN_BLOCK_ITEM = ITEMS.register("block_tin", () -> new BlockItem(TIN_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> NICKEL_BLOCK_ITEM = ITEMS.register("block_nickel", () -> new BlockItem(NICKEL_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> LEAD_BLOCK_ITEM = ITEMS.register("block_lead", () -> new BlockItem(LEAD_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> ZINC_BLOCK_ITEM = ITEMS.register("block_zinc", () -> new BlockItem(ZINC_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> BRASS_BLOCK_ITEM = ITEMS.register("block_brass", () -> new BlockItem(BRASS_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> URANIUM_BLOCK_ITEM = ITEMS.register("block_uranium",() -> new BlockItem(URANIUM_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> ELECTRUM_BLOCK_ITEM = ITEMS.register("block_electrum", () -> new BlockItem(ELECTRUM_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> PLATINUM_BLOCK_ITEM = ITEMS.register("block_platinum", () -> new BlockItem(PLATINUM_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> MACHINE_CASING_ITEM = ITEMS.register("machine_casing", () -> new BlockItem(MACHINE_CASING.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> ADV_MACHINE_CASING_ITEM = ITEMS.register("advanced_machine_casing", () -> new BlockItem(ADV_MACHINE_CASING.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> METAL_FORMER_ITEM = ITEMS.register("metal_former", () -> new BlockItem(METAL_FORMER.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> GRINDER_ITEM = ITEMS.register("grinder", () -> new BlockItem(GRINDER.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> SMELTER_ITEM = ITEMS.register("smelter", () -> new BlockItem(SMELTER.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> STERLING_GENERATOR_ITEM = ITEMS.register("sterling_generator", () -> new BlockItem(STERLING_GENERATOR.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> SOLAR_PANEL_BASIC_ITEM = ITEMS.register("solar_panel_basic", () -> new BlockItem(SOLAR_PANEL_BASIC.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> SOLAR_PANEL_ADVANCED_ITEM = ITEMS.register("solar_panel_advanced", () -> new BlockItem(SOLAR_PANEL_ADVANCED.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> SOLAR_PANEL_ULTIMATE_ITEM = ITEMS.register("solar_panel_ultimate", () -> new BlockItem(SOLAR_PANEL_ULTIMATE.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> BASIC_BATTERY_ITEM = ITEMS.register("basic_battery", () -> new BlockItem(BASIC_BATTERY.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> ADVANCED_BATTERY_ITEM = ITEMS.register("advanced_battery", () -> new BlockItem(ADVANCED_BATTERY.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+
+
+    public static final RegistryObject<Item> ULTIMATE_BATTERY_ITEM = ITEMS.register("ultimate_battery", () -> new BlockItem(ULTIMATE_BATTERY.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
 
     //Tiles
-    public static final RegistryObject<TileEntityType<SterlingTile>> STERLING_TILE = TILES.register("sterling_generator", () -> TileEntityType.Builder.create(SterlingTile::new, STERLING_GENERATOR.get()).build(null));
-    public static final RegistryObject<TileEntityType<BasicSolarPanelTile>> SOLAR_TILE_BASIC = TILES.register("solar_panel_basic", () -> TileEntityType.Builder.create(BasicSolarPanelTile::new, SOLAR_PANEL_BASIC.get()).build(null));
-    public static final RegistryObject<TileEntityType<AdvancedSolarPanelTile>> SOLAR_TILE_ADVANCED = TILES.register("solar_panel_advanced", () -> TileEntityType.Builder.create(AdvancedSolarPanelTile::new, SOLAR_PANEL_ADVANCED.get()).build(null));
-    public static final RegistryObject<TileEntityType<UltimateSolarPanelTile>> SOLAR_TILE_ULTIMATE = TILES.register("solar_panel_ultimate", () -> TileEntityType.Builder.create(UltimateSolarPanelTile::new, SOLAR_PANEL_ULTIMATE.get()).build(null));
-    public static final RegistryObject<TileEntityType<BasicBatteryTile>> BASIC_BATTERY_TILE = TILES.register("basic_battery", () -> TileEntityType.Builder.create(BasicBatteryTile::new, BASIC_BATTERY.get()).build(null));
-    public static final RegistryObject<TileEntityType<AdvancedBatteryTile>> ADVANCED_BATTERY_TILE = TILES.register("advanced_battery", () -> TileEntityType.Builder.create(AdvancedBatteryTile::new, BASIC_BATTERY.get()).build(null));
-    public static final RegistryObject<TileEntityType<UltimateBatteryTile>> ULTIMATE_BATTERY_TILE = TILES.register("ultimate_battery", () -> TileEntityType.Builder.create(UltimateBatteryTile::new, BASIC_BATTERY.get()).build(null));
+    public static final RegistryObject<TileEntityType<SterlingTile>> STERLING_TILE = TILES.register("sterling_generator", () -> TileEntityType.Builder.of(SterlingTile::new, STERLING_GENERATOR.get()).build(null));
+    public static final RegistryObject<TileEntityType<BasicSolarPanelTile>> SOLAR_TILE_BASIC = TILES.register("solar_panel_basic", () -> TileEntityType.Builder.of(BasicSolarPanelTile::new, SOLAR_PANEL_BASIC.get()).build(null));
+    public static final RegistryObject<TileEntityType<AdvancedSolarPanelTile>> SOLAR_TILE_ADVANCED = TILES.register("solar_panel_advanced", () -> TileEntityType.Builder.of(AdvancedSolarPanelTile::new, SOLAR_PANEL_ADVANCED.get()).build(null));
+    public static final RegistryObject<TileEntityType<UltimateSolarPanelTile>> SOLAR_TILE_ULTIMATE = TILES.register("solar_panel_ultimate", () -> TileEntityType.Builder.of(UltimateSolarPanelTile::new, SOLAR_PANEL_ULTIMATE.get()).build(null));
+    public static final RegistryObject<TileEntityType<BasicBatteryTile>> BASIC_BATTERY_TILE = TILES.register("basic_battery", () -> TileEntityType.Builder.of(BasicBatteryTile::new, BASIC_BATTERY.get()).build(null));
+    public static final RegistryObject<TileEntityType<AdvancedBatteryTile>> ADVANCED_BATTERY_TILE = TILES.register("advanced_battery", () -> TileEntityType.Builder.of(AdvancedBatteryTile::new, BASIC_BATTERY.get()).build(null));
+    public static final RegistryObject<TileEntityType<UltimateBatteryTile>> ULTIMATE_BATTERY_TILE = TILES.register("ultimate_battery", () -> TileEntityType.Builder.of(UltimateBatteryTile::new, BASIC_BATTERY.get()).build(null));
     //Containers
     public static final RegistryObject<ContainerType<SterlingContainer>> STERLING_CONTAINER = CONTAINERS.register("sterling_generator", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
-        World world = inv.player.getEntityWorld();
+        World world = inv.player.getCommandSenderWorld();
         return new SterlingContainer(windowId, world, pos, inv, inv.player);
     }));
     public static final RegistryObject<ContainerType<SolarPanelContainer>> BASIC_SOLAR_CONTAINER = CONTAINERS.register("solar_panel_basic", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
-        World world = inv.player.getEntityWorld();
+        World world = inv.player.getCommandSenderWorld();
         return new BasicSolarPanelContainer(windowId, world, pos,  inv.player);
     }));
     public static final RegistryObject<ContainerType<SolarPanelContainer>> ADVANCED_SOLAR_CONTAINER = CONTAINERS.register("solar_panel_advanced", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
-        World world = inv.player.getEntityWorld();
+        World world = inv.player.getCommandSenderWorld();
         return new AdvancedSolarPanelContainer(windowId, world, pos,  inv.player);
     }));
     public static final RegistryObject<ContainerType<SolarPanelContainer>> ULTIMATE_SOLAR_CONTAINER = CONTAINERS.register("solar_panel_ultimate", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
-        World world = inv.player.getEntityWorld();
+        World world = inv.player.getCommandSenderWorld();
         return new UltimateSolarPanelContainer(windowId, world, pos, inv.player);
     }));
     public static final RegistryObject<ContainerType<BatteryContainer>> BASIC_BATTERY_CONTAINER = CONTAINERS.register("basic_battery", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
-        World world = inv.player.getEntityWorld();
+        World world = inv.player.getCommandSenderWorld();
         return new BasicBatteryContainer(windowId, world, pos, inv.player);
     }));
     public static final RegistryObject<ContainerType<BatteryContainer>> ADVANCED_BATTERY_CONTAINER = CONTAINERS.register("advanced_battery", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
-        World world = inv.player.getEntityWorld();
+        World world = inv.player.getCommandSenderWorld();
         return new AdvancedBatteryContainer(windowId, world, pos, inv.player);
     }));
     public static final RegistryObject<ContainerType<BatteryContainer>> ULTIMATE_BATTERY_CONTAINER = CONTAINERS.register("ultimate_battery", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
-        World world = inv.player.getEntityWorld();
+        World world = inv.player.getCommandSenderWorld();
         return new UltimateBatteryContainer(windowId, world, pos, inv.player);
     }));
 

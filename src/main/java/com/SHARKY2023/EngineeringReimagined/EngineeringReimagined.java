@@ -27,7 +27,7 @@ public class EngineeringReimagined {
     public static final String MOD_ID = "er2023";
 
     public static ItemGroup TabEnginneringReimagined = new ItemGroup(EngineeringReimagined.MOD_ID +"Tab") {
-        @Override public ItemStack createIcon() {
+        @Override public ItemStack makeIcon() {
             return new ItemStack(SILVER_BLOCK.get());
         }};
 
@@ -35,7 +35,7 @@ public class EngineeringReimagined {
 
     public EngineeringReimagined() {
         Registration.init();
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
+      //  FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
         PacketHandler.init(); }
 }

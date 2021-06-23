@@ -1,7 +1,9 @@
 package com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling;
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.tile.BatteryTile;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling.SterlingBlock;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling.SterlingContainer;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -9,36 +11,39 @@ import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public class SterlingScreen extends ContainerScreen<SterlingContainer> {
 
-    private ResourceLocation GUI = new ResourceLocation(EngineeringReimagined.MOD_ID, "textures/gui/sterling_gui.png");
+    private static final ResourceLocation TEXTURES = new ResourceLocation(EngineeringReimagined.MOD_ID, "textures/gui/sterling_gui.png");
+    private final SterlingTile tile;
 
     public SterlingScreen(SterlingContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
+        this.tile = container.tile;
     }
 
     @Override
-    public void render(int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground();
-        super.render(mouseX, mouseY, partialTicks);
-        this.renderHoveredToolTip(mouseX, mouseY);
+    public void render(MatrixStack mStack, int mouseX, int mouseY, float partialTicks)
+    {
+        this.renderBackground(mStack);
+        super.render(mStack, mouseX, mouseY, partialTicks);
+        this.renderTooltip(mStack, mouseX, mouseY);
+        if(mouseX > leftPos + 7 && mouseX < leftPos + 29 && mouseY > topPos + 10 && mouseY < topPos + 77)
+            this.renderTooltip(mStack, new StringTextComponent("Energy: " + /*getPercent() + */  "%"), mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        drawString(Minecraft.getInstance().fontRenderer, "Energy: " + container.getEnergy(), 10, 10, 0xffffff);
+    protected void renderLabels(MatrixStack mStack,int mouseX, int mouseY) {
+
+        drawString(mStack,Minecraft.getInstance().font, "Energy: " + menu.getEnergy(), 10, 10, 0xffffff);
     }
 
-    @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bindTexture(GUI);
-        int relX = (this.width - this.xSize) / 2;
-        int relY = (this.height - this.ySize) / 2;
-        this.blit(relX, relY, 0, 0, this.xSize, this.ySize);
+    protected void renderBg(MatrixStack mStack, float partialTicks, int mouseX, int mouseY) {
+        this.minecraft.getTextureManager().bind(TEXTURES);
+        this.blit(mStack, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
     }
 
 
-}
+    }

@@ -18,7 +18,7 @@ public class BlockItemER extends BlockItem {
     }
 
     public BlockItemER(Block block) {
-        this(block, new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined));
+        this(block, new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined));
         setRegistryName(block.getRegistryName());
 
     }

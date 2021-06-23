@@ -23,13 +23,14 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 public class SterlingContainer extends Container {
 
 
+    public SterlingTile tile;
     private TileEntity tileEntity;
     private PlayerEntity playerEntity;
     private IItemHandler playerInventory;
 
     public SterlingContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
         super(Registration.STERLING_CONTAINER.get(), windowId);
-        tileEntity = world.getTileEntity(pos);
+        tileEntity = world.getBlockEntity(pos);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
 
@@ -46,7 +47,7 @@ public class SterlingContainer extends Container {
     private void trackPower() {
         // Unfortunatelly on a dedicated server ints are actually truncated to short so we need
         // to split our integer here (split our 32 bit integer into two 16 bit integers)
-        trackInt(new IntReferenceHolder() {
+        addDataSlot(new IntReferenceHolder() {
             @Override
             public int get() {
                 return getEnergy() & 0xffff;
@@ -60,7 +61,7 @@ public class SterlingContainer extends Container {
                 });
             }
         });
-        trackInt(new IntReferenceHolder() {
+        addDataSlot(new IntReferenceHolder() {
             @Override
             public int get() {
                 return (getEnergy() >> 16) & 0xffff;
@@ -81,40 +82,40 @@ public class SterlingContainer extends Container {
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()), playerEntity, Registration.STERLING_GENERATOR.get());
+    public boolean stillValid(PlayerEntity playerIn) {
+        return stillValid(IWorldPosCallable.create(tileEntity.getLevel(), tileEntity.getBlockPos()), playerEntity, Registration.STERLING_GENERATOR.get());
     }
 
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.getHasStack()) {
-            ItemStack stack = slot.getStack();
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack stack = slot.getItem();
             itemstack = stack.copy();
             if (index == 0) {
-                if (!this.mergeItemStack(stack, 1, 37, true)) {
+                if (!this.moveItemStackTo(stack, 1, 37, true)) {
                     return ItemStack.EMPTY;
                 }
-                slot.onSlotChange(stack, itemstack);
+                slot.onQuickCraft(stack, itemstack);
             } else {
                 if (stack.getItem() == Items.COAL) {
-                    if (!this.mergeItemStack(stack, 0, 1, false)) {
+                    if (!this.moveItemStackTo(stack, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (index < 28) {
-                    if (!this.mergeItemStack(stack, 28, 37, false)) {
+                    if (!this.moveItemStackTo(stack, 28, 37, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < 37 && !this.mergeItemStack(stack, 1, 28, false)) {
+                } else if (index < 37 && !this.moveItemStackTo(stack, 1, 28, false)) {
                     return ItemStack.EMPTY;
                 }
             }
 
             if (stack.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
             }
 
             if (stack.getCount() == itemstack.getCount()) {
@@ -154,4 +155,6 @@ public class SterlingContainer extends Container {
         topRow += 58;
         addSlotRange(playerInventory, 0, leftCol, topRow, 9, 18);
     }
+
+
 }

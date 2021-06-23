@@ -1,8 +1,8 @@
 package com.SHARKY2023.EngineeringReimagined.gui;
-
+/*
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
 import com.SHARKY2023.EngineeringReimagined.network.Networking;
-import com.SHARKY2023.EngineeringReimagined.network.PacketSpawn;
+//import com.SHARKY2023.EngineeringReimagined.network.PacketSpawn;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -60,3 +60,4 @@ public class SpawnerScreen extends Screen {
         Minecraft.getInstance().displayGuiScreen(new SpawnerScreen());
     }
 }
+*/

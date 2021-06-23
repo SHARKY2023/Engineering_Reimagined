@@ -6,6 +6,6 @@ import net.minecraft.item.Item;
 
 public class ItemBase extends Item {
     public ItemBase() {
-        super(new Item.Properties().group(EngineeringReimagined.TabEnginneringReimagined));
+        super(new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined));
     }
 }

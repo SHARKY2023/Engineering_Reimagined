@@ -41,9 +41,9 @@ public class UpdateSolarPanel {
     {
         ctx.get().enqueueWork(() -> {
             World world = EngineeringReimagined.proxy.getClientWorld();
-            if(world.isBlockPresent(pos))
+            if(world.isLoaded(pos))
             {
-                TileEntity te = world.getTileEntity(pos);
+                TileEntity te = world.getBlockEntity(pos);
                 if(te instanceof SolarPanelTile)
                 {
                     SolarPanelTile solar = (SolarPanelTile) te;

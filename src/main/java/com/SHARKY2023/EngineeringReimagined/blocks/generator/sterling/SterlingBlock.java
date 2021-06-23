@@ -29,17 +29,14 @@ import javax.annotation.Nullable;
 public class SterlingBlock extends Block {
 
     public SterlingBlock() {
-        super(Properties.create(Material.IRON)
+        super(Properties.of(Material.METAL)
                 .sound(SoundType.METAL)
-                .hardnessAndResistance(5.0f)
-                .lightValue(14)
+                .strength(5.0f)
+
         );
     }
 
-    @Override
-    public int getLightValue(BlockState state) {
-        return state.get(BlockStateProperties.POWERED) ? super.getLightValue(state) : 0;
-    }
+
 
     @Override
     public boolean hasTileEntity(BlockState state) {return true;}
@@ -53,14 +50,14 @@ public class SterlingBlock extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return getDefaultState().with(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
+        return defaultBlockState().setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
-        if (!world.isRemote) {
-            TileEntity tileEntity = world.getTileEntity(pos);
+    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
+        if (!world.isClientSide) {
+            TileEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof SterlingTile) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
@@ -73,7 +70,7 @@ public class SterlingBlock extends Block {
                         return new SterlingContainer(i, world, pos, playerInventory, playerEntity);
                     }
                 };
-                NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getPos());
+                NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getBlockPos());
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }
@@ -82,7 +79,7 @@ public class SterlingBlock extends Block {
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(BlockStateProperties.FACING, BlockStateProperties.POWERED);
     }
 }

@@ -17,13 +17,13 @@ public class BatteryContainer extends Container {
         public BatteryContainer(ContainerType<?> type, int windowId, World world, BlockPos pos, PlayerEntity player)
         {
             super(type, windowId);
-            this.tile = (BatteryTile) world.getTileEntity(pos);
+            this.tile = (BatteryTile) world.getBlockEntity(pos);
             this.player = player;
         }
 
         @Override
-        public boolean canInteractWith(PlayerEntity playerIn)
+        public boolean stillValid(PlayerEntity playerIn)
         {
-            return isWithinUsableDistance(IWorldPosCallable.of(tile.getWorld(), tile.getPos()), player, tile.getBlockState().getBlock());
+            return stillValid(IWorldPosCallable.create(tile.getLevel(), tile.getBlockPos()), player, tile.getBlockState().getBlock());
         }
 }

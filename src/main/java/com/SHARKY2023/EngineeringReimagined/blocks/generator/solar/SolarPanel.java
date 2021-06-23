@@ -36,17 +36,19 @@ public class SolarPanel extends Block {
     private SolarPanelTier tierSolarPanel;
 
     public SolarPanel(SolarPanelTier tierSolarPanel) {
-            super(Properties.create(Material.IRON)
+            super(Properties.of(Material.METAL)
                     .sound(SoundType.METAL)
-                    .hardnessAndResistance(5.0f)
-                    .lightValue(14));
+                    .strength(5.0f));
+
         this.tierSolarPanel = tierSolarPanel;
         }
-
+/*
         @Override
         public int getLightValue(BlockState state) {
             return state.get(BlockStateProperties.POWERED) ? super.getLightValue(state) : 0;
         }
+
+ */
 
         @Override
         public boolean hasTileEntity(BlockState state) {return true;}
@@ -67,20 +69,20 @@ public class SolarPanel extends Block {
             }
         }
 
-        @Nullable
-        @Override
-        public BlockState getStateForPlacement(BlockItemUseContext context) {
-            return getDefaultState().with(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
-        }
+    @Nullable
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        return defaultBlockState().setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
+    }
+    @Override
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
-        if(!worldIn.isRemote)
+        if(!worldIn.isClientSide)
         {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
+            TileEntity tileEntity = worldIn.getBlockEntity(pos);
             if(tileEntity instanceof INamedContainerProvider)
             {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, tileEntity.getPos());
+                NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, tileEntity.getBlockPos());
             }
             else
             {
@@ -91,7 +93,7 @@ public class SolarPanel extends Block {
     }
 
         @Override
-        protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
             builder.add(BlockStateProperties.FACING, BlockStateProperties.POWERED);
         }
 }
