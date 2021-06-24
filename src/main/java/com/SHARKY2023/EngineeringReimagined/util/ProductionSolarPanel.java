@@ -4,13 +4,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class SolarProduction {
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+
+public class ProductionSolarPanel {
 
     public static float computeSunIntensity(World world, BlockPos pos, SolarPanelTier solarPanelTier)
     {
         float sunIntensity = 0;
 
-        if(world.canSeeSky(pos))
+        if(world.canSeeSkyFromBelowWater(pos))
         {
             float multiplicator = 1.5f;
             float displacement = 1.2f;
@@ -31,10 +35,10 @@ public class SolarProduction {
                     sunIntensity = 1;
 
                 if(world.isRaining())
-                    sunIntensity *= 0.5;
+                    sunIntensity *= 0.4;
 
                 if(world.isThundering())
-                    sunIntensity *= 0.3;
+                    sunIntensity *= 0.2;
             }
         }
 

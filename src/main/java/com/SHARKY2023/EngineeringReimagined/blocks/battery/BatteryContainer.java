@@ -1,7 +1,9 @@
-package com.SHARKY2023.EngineeringReimagined.blocks.battery.Container;
+package com.SHARKY2023.EngineeringReimagined.blocks.battery;
 
 
-import com.SHARKY2023.EngineeringReimagined.blocks.battery.tile.BatteryTile;
+import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelTile;
+import com.SHARKY2023.EngineeringReimagined.registries.Registration;
+import com.SHARKY2023.EngineeringReimagined.util.SolarPanelTier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
@@ -14,10 +16,10 @@ public class BatteryContainer extends Container {
         public final BatteryTile tile;
         private final PlayerEntity player;
 
-        public BatteryContainer(ContainerType<?> type, int windowId, World world, BlockPos pos, PlayerEntity player)
+        public BatteryContainer(int windowId, PlayerEntity player, BatteryTile tile, BatteryTier level)
         {
-            super(type, windowId);
-            this.tile = (BatteryTile) world.getBlockEntity(pos);
+            super(Registration.BATTERY_CONTAINER.get(level).get(), windowId);
+            this.tile = tile;
             this.player = player;
         }
 

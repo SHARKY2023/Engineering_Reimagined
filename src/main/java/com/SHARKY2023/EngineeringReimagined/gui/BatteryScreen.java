@@ -1,10 +1,9 @@
 package com.SHARKY2023.EngineeringReimagined.gui;
 
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
-import com.SHARKY2023.EngineeringReimagined.blocks.battery.Container.BatteryContainer;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryContainer;
 
-import com.SHARKY2023.EngineeringReimagined.blocks.battery.tile.BatteryTile;
-import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelTile;
+import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryTile;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -12,9 +11,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-
-import java.util.Collections;
 
 public class BatteryScreen extends ContainerScreen<BatteryContainer> {
 

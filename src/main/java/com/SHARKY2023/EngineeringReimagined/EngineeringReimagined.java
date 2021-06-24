@@ -31,7 +31,7 @@ public class EngineeringReimagined {
             return new ItemStack(SILVER_BLOCK.get());
         }};
 
-    private final Logger LOGGER = LogManager.getLogger();
+    public static final Logger logger = LogManager.getLogger();
 
     public EngineeringReimagined() {
         Registration.init();

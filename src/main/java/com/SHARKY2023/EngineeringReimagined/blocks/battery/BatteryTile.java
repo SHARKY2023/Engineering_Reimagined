@@ -1,14 +1,9 @@
-package com.SHARKY2023.EngineeringReimagined.blocks.battery.tile;
+package com.SHARKY2023.EngineeringReimagined.blocks.battery;
 
 import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryTier;
-import com.SHARKY2023.EngineeringReimagined.blocks.battery.Container.AdvancedBatteryContainer;
-import com.SHARKY2023.EngineeringReimagined.blocks.battery.Container.BasicBatteryContainer;
-import com.SHARKY2023.EngineeringReimagined.blocks.battery.Container.UltimateBatteryContainer;
-import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.AdvancedSolarPanelContainer;
-import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.BasicSolarPanelContainer;
-import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.UltimateSolarPanelContainer;
+import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelContainer;
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
-import com.SHARKY2023.EngineeringReimagined.util.SolarProduction;
+import com.SHARKY2023.EngineeringReimagined.registries.Registration;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -36,30 +31,26 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
     private LazyOptional<IEnergyStorage> energy = LazyOptional.of(this::createEnergy);
 
 
-    private IEnergyStorage createEnergy()
-    {
-        return new CustomEnergyStorage(maxEnergyOut, maxEnergyIn, maxEnergy);
+    private IEnergyStorage createEnergy() {
+        return new CustomEnergyStorage(maxTransfer, maxEnergy);
     }
 
-    private int maxEnergyIn;
-    private int maxEnergyOut;
+    private int Energy;
+    private int maxTransfer;
     public int maxEnergy;
     public int energyStored, energyProductionClient;
     public int energyReceived;
 
-    private BatteryTier tierBattery;
+    private BatteryTier levelBattery;
 
-    public BatteryTile(BatteryTier tierBattery, TileEntityType<?> BatteryTile) {
-        super(BatteryTile);
-        this.tierBattery = tierBattery;
-        maxEnergy = (int) Math.pow(tierBattery.ordinal()+2, tierBattery.ordinal()+2)*64000;
-        maxEnergyOut = (int) Math.pow(8, tierBattery.ordinal()) + 1;
-        maxEnergyIn = maxEnergyOut;
+    public BatteryTile(BatteryTier levelBattery) {
+        super(Registration.BATTERY_TILE.get(levelBattery).get());
+        this.levelBattery = levelBattery;
+        maxEnergy = (int) Math.pow(levelBattery.ordinal() + 2, levelBattery.ordinal() + 2) * 64000;
+        maxTransfer = (int) Math.pow(8, levelBattery.ordinal()) + 1;
+
 
     }
-
-
-
 
 
     @Override
@@ -67,8 +58,9 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
 
         energyStored = energyStored + energyReceived;
         sendEnergy();
-       // if( getEnergy() != getMaxEnergy()? canRecieve()
+        if (getEnergy() != getMaxEnergy() ? canRecieve()) ;
     }
+
 
 
     private void sendEnergy() {
@@ -82,7 +74,7 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
                     if (tileEntity != null) {
                         tileEntity.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).ifPresent(handler -> {
                             if (handler.canReceive()) {
-                                int received = handler.receiveEnergy(Math.min(capacity.get(), maxEnergyOut), false);
+                                int received = handler.receiveEnergy(Math.min(capacity.get(), maxTransfer), false);
                                 capacity.addAndGet(-received);
                                 ((CustomEnergyStorage) energy).consumePower(received);
                             }
@@ -122,15 +114,8 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
 
     @Nullable
     public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-        switch (tierBattery) {
-            case Basic:
-                return new BasicBatteryContainer(id, level, getBlockPos(), playerEntity);
-            case Advanced:
-                return new AdvancedBatteryContainer(id, level, getBlockPos(), playerEntity);
-            case Ultimate:
-                return new UltimateBatteryContainer(id, level, getBlockPos(), playerEntity);
-            default:
-                return null;
+        {
+            return new BatteryContainer(id, playerEntity, this, levelBattery);
         }
     }
 
@@ -138,5 +123,17 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
     public ITextComponent getDisplayName() {
         return new TranslationTextComponent(this.getBlockState().getBlock().getDescriptionId());
     }
+
+    public int getEnergy() {
+        return Energy;
+    }
+
+    private int getMaxEnergy() {
+        return maxEnergy;
+    }
+
+
+
+
 
 }

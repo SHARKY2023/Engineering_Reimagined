@@ -1,8 +1,7 @@
 package com.SHARKY2023.EngineeringReimagined.gui;
 
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
-import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.SolarPanelContainer;
-import java.util.Collections;
+import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelContainer;
 
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelTile;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -12,7 +11,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 
 public class SolarPanelScreen extends ContainerScreen<SolarPanelContainer> {
 

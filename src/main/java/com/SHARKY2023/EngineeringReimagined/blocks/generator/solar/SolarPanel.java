@@ -1,11 +1,11 @@
 package com.SHARKY2023.EngineeringReimagined.blocks.generator.solar;
 
 
-import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.BasicSolarPanelContainer;
-import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.SolarPanelContainer;
-import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.tier.AdvancedSolarPanelTile;
-import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.tier.BasicSolarPanelTile;
-import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.tier.UltimateSolarPanelTile;
+//import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.BasicSolarPanelContainer;
+//import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelContainer;
+//import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.tier.AdvancedSolarPanelTile;
+//import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.tier.BasicSolarPanelTile;
+//import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.tier.UltimateSolarPanelTile;
 import com.SHARKY2023.EngineeringReimagined.util.SolarPanelTier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -33,14 +33,14 @@ import javax.annotation.Nullable;
 
 public class SolarPanel extends Block {
 
-    private SolarPanelTier tierSolarPanel;
+    private SolarPanelTier levelSolarPanel;
 
-    public SolarPanel(SolarPanelTier tierSolarPanel) {
+    public SolarPanel(SolarPanelTier levelSolarPanel) {
             super(Properties.of(Material.METAL)
                     .sound(SoundType.METAL)
                     .strength(5.0f));
 
-        this.tierSolarPanel = tierSolarPanel;
+        this.levelSolarPanel = levelSolarPanel;
         }
 /*
         @Override
@@ -56,18 +56,9 @@ public class SolarPanel extends Block {
         @Nullable
         @Override
         public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-            switch (this.tierSolarPanel)
-            {
-                case Basic:
-                    return new BasicSolarPanelTile();
-                case Advanced:
-                    return new AdvancedSolarPanelTile();
-                case Ultimate:
-                    return new UltimateSolarPanelTile();
-                default:
-                    return null;
-            }
+            return new SolarPanelTile(levelSolarPanel);
         }
+
 
     @Nullable
     @Override

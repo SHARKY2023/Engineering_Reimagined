@@ -1,8 +1,5 @@
 package com.SHARKY2023.EngineeringReimagined.blocks.battery;
 
-import com.SHARKY2023.EngineeringReimagined.blocks.battery.tile.AdvancedBatteryTile;
-import com.SHARKY2023.EngineeringReimagined.blocks.battery.tile.BasicBatteryTile;
-import com.SHARKY2023.EngineeringReimagined.blocks.battery.tile.UltimateBatteryTile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -26,14 +23,14 @@ import javax.annotation.Nullable;
 
 public class Battery extends Block {
 
-    private BatteryTier  tierBattery;
+    private BatteryTier levelBattery;
 
-    public Battery(BatteryTier tierBattery) {
+    public Battery(BatteryTier levelBattery) {
             super(Properties.of(Material.METAL)
             .sound(SoundType.METAL)
                 .strength(5.0f))
                 ;
-            this.tierBattery = tierBattery;
+            this.levelBattery = levelBattery;
     }
 
     @Override
@@ -42,17 +39,7 @@ public class Battery extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        switch (this.tierBattery)
-        {
-            case Basic:
-                return new BasicBatteryTile();
-            case Advanced:
-                return new AdvancedBatteryTile();
-            case Ultimate:
-                return new UltimateBatteryTile();
-            default:
-                return null;
-        }
+      return new BatteryTile(levelBattery);
     }
     @Nullable
     @Override
