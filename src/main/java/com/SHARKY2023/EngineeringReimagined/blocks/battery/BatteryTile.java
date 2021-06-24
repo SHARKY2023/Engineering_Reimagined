@@ -125,7 +125,7 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
     }
 
     public int getEnergy() {
-        return Energy;
+        return this.energy.getEnergyStored;
     }
 
     private int getMaxEnergy() {
