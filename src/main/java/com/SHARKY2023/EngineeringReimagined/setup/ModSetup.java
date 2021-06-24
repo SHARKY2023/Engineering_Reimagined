@@ -1,7 +1,7 @@
 package com.SHARKY2023.EngineeringReimagined.setup;
 
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
-//import com.SHARKY2023.EngineeringReimagined.network.Networking;
+import com.SHARKY2023.EngineeringReimagined.network.Networking;
 import com.SHARKY2023.EngineeringReimagined.registries.Registration;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -15,10 +15,8 @@ import static com.SHARKY2023.EngineeringReimagined.registries.Registration.SILVE
 public class ModSetup {
 
 
-
-
-   // public static void init(final FMLCommonSetupEvent event) {
-   //     Networking.registerMessages();
+    public static void init(final FMLCommonSetupEvent event) {
+        Networking.registerMessages();
     }
 /*
     @SubscribeEvent
@@ -31,4 +29,7 @@ public class ModSetup {
         ModDimensions.DIMENSION_TYPE = DimensionManager.registerOrGetDimension(ModDimensions.DIMENSION_ID, Registration.DIMENSION.get(), null, true);
     }
 
+
  */
+
+}

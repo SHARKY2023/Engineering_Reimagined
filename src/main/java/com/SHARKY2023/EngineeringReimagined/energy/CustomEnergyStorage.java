@@ -1,5 +1,6 @@
 package com.SHARKY2023.EngineeringReimagined.energy;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.energy.EnergyStorage;
@@ -16,19 +17,16 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
         super(maxTransferOut, maxTransferIn,capacity);
     }
 
-    protected void onEnergyChanged() { }
-
     public void setEnergy(int energy) {
         this.energy = energy;
-        onEnergyChanged();
+
     }
 
     public void generatePower(int energy) {
         this.energy += energy;
-        if (this.energy > getMaxEnergyStored()) {
-            this.energy = getEnergyStored();
+        if (this.energy > capacity) {
+            this.energy = capacity;
         }
-        onEnergyChanged();
     }
 
     public void consumePower(int energy) {
@@ -36,7 +34,7 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
         if (this.energy < 0) {
             this.energy = 0;
         }
-        onEnergyChanged();
+
     }
 
     @Override
@@ -45,10 +43,11 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
         return super.extractEnergy(maxExtract, simulate);
     }
 
-    @Override
-    public int getEnergyStored()
+    public int getEnergyStored(ItemStack container)
     {
-        return super.getEnergyStored();
+        if(container.getTag() == null)
+            return 0;
+        return container.getTag().getInt("energy");
     }
 
     @Override
@@ -56,6 +55,7 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
     {
         return super.getMaxEnergyStored();
     }
+
 
     @Override
     public boolean canExtract()
@@ -83,5 +83,9 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
         setEnergy(nbt.getInt("energy"));
-    }}
+    }
+
+
+
+}
 

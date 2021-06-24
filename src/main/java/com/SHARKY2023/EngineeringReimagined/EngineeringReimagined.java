@@ -35,7 +35,7 @@ public class EngineeringReimagined {
 
     public EngineeringReimagined() {
         Registration.init();
-      //  FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
         PacketHandler.init(); }
 }

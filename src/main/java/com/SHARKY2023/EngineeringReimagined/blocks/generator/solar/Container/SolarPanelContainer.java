@@ -1,8 +1,7 @@
 package com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container;
 
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelTile;
-import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
-import com.SHARKY2023.EngineeringReimagined.registries.Registration;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -32,9 +31,9 @@ public class SolarPanelContainer extends Container {
         return stillValid(IWorldPosCallable.create(tile.getLevel(), tile.getBlockPos()), player, tile.getBlockState().getBlock());
     }
 
-   // public int getEnergy() {
-   //     return tile.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
-   // }
+ public int getEnergy() {
+      return tile.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
+ }
 
 
 }

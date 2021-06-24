@@ -139,10 +139,7 @@ public class SterlingTile extends TileEntity implements ITickableTileEntity {
 
         private CustomEnergyStorage createEnergy() {
             return new CustomEnergyStorage(Config.STERLING_MAXPOWER.get(), 0) {
-                @Override
-                protected void onEnergyChanged() {
-                    setChanged();
-                }
+
             };
         }
 

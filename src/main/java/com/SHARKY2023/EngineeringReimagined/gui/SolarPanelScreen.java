@@ -38,13 +38,13 @@ public class SolarPanelScreen extends ContainerScreen<SolarPanelContainer> {
     @Override
     protected void renderLabels(MatrixStack mStack, int mouseX, int mouseY)
     {
-        String energy = new TranslationTextComponent("gui." + EngineeringReimagined.MOD_ID + ".stored_energy").append(" " + getEnergyFormatted(tile.energyClient)).getString();
+        String energy = "Stored energy: " + getEnergyFormatted(tile.energyClient);
         this.font.draw(mStack, energy, (imageWidth / 2 - font.width(energy) / 2) + 14, 20, 4210752);
 
-        String maxEnergy = new TranslationTextComponent("gui." + EngineeringReimagined.MOD_ID + ".max_capacity").append(" " + getEnergyFormatted(tile.maxEnergy)).getString();
+        String maxEnergy = "Max capacity: " + getEnergyFormatted(tile.maxEnergy);
         this.font.draw(mStack, maxEnergy, (imageWidth / 2 - font.width(maxEnergy) / 2) + 14, 30, 4210752);
 
-        String generation = new TranslationTextComponent("gui." + EngineeringReimagined.MOD_ID + ".generation").append(" " + tile.energyProductionClient + " FE/t").getString();
+        String generation = "Generation: " + tile.energyProductionClient + " FE/t";
         this.font.draw(mStack, generation, (imageWidth / 2 - font.width(generation) / 2) + 14, 40, 4210752);
     }
 

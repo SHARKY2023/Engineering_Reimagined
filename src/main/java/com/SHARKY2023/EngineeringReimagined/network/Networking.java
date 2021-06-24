@@ -8,7 +8,7 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import static com.SHARKY2023.EngineeringReimagined.EngineeringReimagined.MOD_ID;
-/*
+
 public class Networking {
 
     private static SimpleChannel INSTANCE;
@@ -48,4 +48,3 @@ public class Networking {
 }
 
 
- */

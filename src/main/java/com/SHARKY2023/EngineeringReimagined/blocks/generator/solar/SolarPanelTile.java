@@ -3,7 +3,6 @@ package com.SHARKY2023.EngineeringReimagined.blocks.generator.solar;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.AdvancedSolarPanelContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.BasicSolarPanelContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.Container.UltimateSolarPanelContainer;
-import com.SHARKY2023.EngineeringReimagined.config.Config;
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
 import com.SHARKY2023.EngineeringReimagined.network.PacketHandler;
 import com.SHARKY2023.EngineeringReimagined.network.packet.UpdateSolarPanel;
@@ -38,8 +37,8 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
     // Energy
     private LazyOptional<IEnergyStorage> energy = LazyOptional.of(this::createEnergy);
     private int energyGeneration, maxEnergyOutput;
-    public int maxEnergy, capacity;
-    private CustomEnergyStorage energyStorage = (CustomEnergyStorage) createEnergy();
+    public int maxEnergy;
+    private CustomEnergyStorage energyStorage;
 
     private SolarPanelTier tierSolarPanel;
     public int energyClient, energyProductionClient;
@@ -61,57 +60,49 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
     public void tick() {
         if (!level.isClientSide) {
 
-        energy.ifPresent(e -> ((CustomEnergyStorage) e).generatePower(currentAmountEnergyProduced()));
-        sendEnergy();
-        if (energyClient != getEnergy() || energyProductionClient != currentAmountEnergyProduced()) {
-            int energyProduced = (getEnergy() != getMaxEnergy()) ? currentAmountEnergyProduced() : 0;
-            PacketHandler.INSTANCE.send(PacketDistributor.ALL.noArg(), new UpdateSolarPanel(getBlockPos(), getEnergy(), energyProduced)); }
-            if ( energyClient >= maxEnergy ){
-                cullEnergyStored();}
-                }}
+            energy.ifPresent(e -> ((CustomEnergyStorage) e).generatePower(currentAmountEnergyProduced()));
+            sendEnergy();
+            if (energyClient != getEnergy() || energyProductionClient != currentAmountEnergyProduced()) {
+                int energyProduced = (getEnergy() != getMaxEnergy()) ? currentAmountEnergyProduced() : 0;
+                PacketHandler.INSTANCE.send(PacketDistributor.ALL.noArg(), new UpdateSolarPanel(getBlockPos(), getEnergy(), energyProduced));
+            }
+            else {currentAmountEnergyProduced() = 0}
+        }
+    }
 
-
-    private int getMaxEnergy()
-    {
+    private int getMaxEnergy() {
         return getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getMaxEnergyStored).orElse(0);
     }
 
-    private int getEnergy()
-    {
+    private int getEnergy() {
         return getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
     }
 
-    private int currentAmountEnergyProduced()
-    {
-        return (int) (energyGeneration * SolarProduction.computeSunIntensity(level, getBlockPos(), tierSolarPanel));
+    private int currentAmountEnergyProduced() {
+        return (int) (energyGeneration * SolarProduction.computeSunIntensity(level, worldPosition, tierSolarPanel));
     }
 
-   public void setEnergyStored(int energy) {
-         energyClient = Math.max(0, energy);
+    public void setEnergyStored(int energy) {
+        energyClient = Math.max(0, energy);
     }
 
-    public void cullEnergyStored() {
-       if (energyClient > maxEnergy) {
-           setEnergyStored(maxEnergy);
-       }}
+    // public void cullEnergyStored() {
+    //    if (energyClient > maxEnergy) {
+    //        setEnergyStored(maxEnergy);
+    //    }}
 
 
-    private void sendEnergy()
-    {
+    private void sendEnergy() {
         energy.ifPresent(energy -> {
             AtomicInteger capacity = new AtomicInteger(energy.getEnergyStored());
 
-            for(int i = 0; (i < Direction.values().length) && (capacity.get() > 0); i++)
-            {
+            for (int i = 0; (i < Direction.values().length) && (capacity.get() > 0); i++) {
                 Direction facing = Direction.values()[i];
-                if(facing != Direction.UP)
-                {
+                if (facing != Direction.UP) {
                     TileEntity tileEntity = level.getBlockEntity(worldPosition.relative(facing));
-                    if(tileEntity != null)
-                    {
+                    if (tileEntity != null) {
                         tileEntity.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).ifPresent(handler -> {
-                            if(handler.canReceive())
-                            {
+                            if (handler.canReceive()) {
                                 int received = handler.receiveEnergy(Math.min(capacity.get(), maxEnergyOutput), false);
                                 capacity.addAndGet(-received);
                                 ((CustomEnergyStorage) energy).consumePower(received);
@@ -122,40 +113,36 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
             }
         });
     }
+
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, Direction facing)
-    {
-        if(capability == CapabilityEnergy.ENERGY && facing != Direction.UP)
-        {
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, Direction facing) {
+        if (capability == CapabilityEnergy.ENERGY && facing != Direction.UP) {
             return energy.cast();
         }
         return super.getCapability(capability, facing);
     }
 
-        @SuppressWarnings("unchecked")
-        @Override
-        public void load(BlockState state, CompoundNBT compound)
-        {
-            CompoundNBT energyTag = compound.getCompound("energy");
-            energy.ifPresent(h -> ((INBTSerializable<CompoundNBT>) h).deserializeNBT(energyTag));
-            super.load(state, compound);
-        }
+    @SuppressWarnings("unchecked")
+    @Override
+    public void load(BlockState state, CompoundNBT compound) {
+        CompoundNBT energyTag = compound.getCompound("energy");
+        energy.ifPresent(h -> ((INBTSerializable<CompoundNBT>) h).deserializeNBT(energyTag));
+        super.load(state, compound);
+    }
 
-        @SuppressWarnings("unchecked")
-        @Override
-        public CompoundNBT save(CompoundNBT compound)
-        {
-            energy.ifPresent(h -> {
-                CompoundNBT tag = ((INBTSerializable<CompoundNBT>) h).serializeNBT();
-                compound.put("energy", tag);
-            });
-            return super.save(compound);
-        }
+    @SuppressWarnings("unchecked")
+    @Override
+    public CompoundNBT save(CompoundNBT compound) {
+        energy.ifPresent(h -> {
+            CompoundNBT tag = ((INBTSerializable<CompoundNBT>) h).serializeNBT();
+            compound.put("energy", tag);
+        });
+        return super.save(compound);
+    }
+
     @Nullable
-    public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity)
-    {
-        switch (tierSolarPanel)
-        {
+    public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        switch (tierSolarPanel) {
             case Basic:
                 return new BasicSolarPanelContainer(id, level, getBlockPos(), playerEntity);
             case Advanced:
@@ -166,14 +153,17 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
                 return null;
         }
     }
+
     @Override
-    public ITextComponent getDisplayName()
-    {
+    public ITextComponent getDisplayName() {
         return new TranslationTextComponent(this.getBlockState().getBlock().getDescriptionId());
     }
+
+
+    public int getMaxEnergyStored() {
+        return energyStorage.getMaxEnergyStored();
+    }
 }
-
-
 
 
 
