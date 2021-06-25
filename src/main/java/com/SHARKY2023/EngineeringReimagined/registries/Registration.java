@@ -85,7 +85,7 @@ public class Registration {
                     return null;
                 }
                 BatteryTile tile = (BatteryTile) te;
-                return new BatteryContainer(windowId, inv.player, tile, level);
+                return new BatteryContainer(windowId, inv.player, inv, tile, level);
             })));
 
 
