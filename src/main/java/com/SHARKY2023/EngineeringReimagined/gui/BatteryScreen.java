@@ -35,7 +35,7 @@ public class BatteryScreen extends ContainerScreen<BatteryContainer> {
     @Override
     protected void renderLabels(MatrixStack mStack, int mouseX, int mouseY)
     {
-        String energy = "Stored energy: " + getEnergyFormatted(tile.energyStored);
+        String energy = "Stored energy: " + getEnergyFormatted(menu.getEnergy());
         this.font.draw(mStack, energy, (imageWidth / 2 - font.width(energy) / 2) + 14, 20, 4210752);
 
         String maxEnergy = "Max capacity: " + getEnergyFormatted(tile.maxEnergy);

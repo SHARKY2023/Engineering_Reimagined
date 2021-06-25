@@ -1,5 +1,6 @@
 package com.SHARKY2023.EngineeringReimagined.blocks.battery;
 
+import com.SHARKY2023.EngineeringReimagined.config.Config;
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
 import com.SHARKY2023.EngineeringReimagined.registries.Registration;
 import net.minecraft.block.BlockState;
@@ -29,23 +30,27 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class BatteryTile extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class BatteryTile extends TileEntity implements ITickableTileEntity, INamedContainerProvider, IEnergyStorage {
 
+    public int capacity;
     public int maxEnergy;
     private int maxTransfer;
+    private int Energy;
     private int maxReceive;
 
-    private LazyOptional<IEnergyStorage> energy = LazyOptional.of(this::createEnergy);
-    private CustomEnergyStorage energyStorage = new CustomEnergyStorage(maxTransfer,maxReceive, maxEnergy);
+    private CustomEnergyStorage energyStorage = createEnergy();
 
-    private IEnergyStorage createEnergy() {
-        return new CustomEnergyStorage(maxTransfer, maxEnergy);
+  //  private LazyOptional<IEnergyStorage> energy = LazyOptional.of(this::createEnergy);
+    private LazyOptional<IEnergyStorage> energy = LazyOptional.of(() -> energyStorage);
+  //  private CustomEnergyStorage energyStorage = new CustomEnergyStorage(getMaxTransfer(),getMaxReceive(), getMaxEnergy());
+
+    private CustomEnergyStorage createEnergy() {
+        return new CustomEnergyStorage(maxTransfer, maxEnergy) {
+        };
     }
 
-    private int Energy;
 
-
-    public int energyStored, energyProductionClient;
+    public int energyStored;
     public int energyReceived;
 
     private BatteryTier levelBattery;
@@ -55,20 +60,39 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
         this.levelBattery = levelBattery;
         maxEnergy = (int) Math.pow(levelBattery.ordinal() + 2, levelBattery.ordinal() + 2) * 64000;
         maxTransfer = (int) Math.pow(8, levelBattery.ordinal()) + 1;
+       // energyStored = energyStoredClient =-1;
+        maxTransfer = maxReceive;
 
 
+
+
+    }
+
+
+    @Override
+    public int receiveEnergy(int maxReceive, boolean simulate) {
+        if (!canReceive())
+            return 0;
+
+        int energyReceived = Math.min(capacity - Energy, Math.min(this.maxReceive, maxReceive));
+        if (!simulate)
+            Energy += energyReceived;
+        return energyReceived;
     }
 
     @Override
     public void tick() {
-        if (!level.isClientSide)
+        if (!level.isClientSide) {
+//
+        //    if (canReceive() != true)
+          //  receiveEnergy(maxReceive, false);
+            //capacity = capacity + energyReceived;
+        }
+        sendEnergy();
 
-            sendEnergy();
     }
 
-   // private int recieveEnergy(int maxTransfer) {
-   //      return maxTransfer;
-   //  }
+
 
 
     private void sendEnergy() {
@@ -138,17 +162,60 @@ public class BatteryTile extends TileEntity implements ITickableTileEntity, INam
         return new TranslationTextComponent(this.getBlockState().getBlock().getDescriptionId());
     }
 
-
+/*
     private int getEnergy()
     {
         return getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
     }
     private int getMaxEnergy()
     {
+      //  return getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getMaxEnergyStored).orElse(0);
+    }
+    private int getMaxTransfer()
+    {
+        return maxTransfer;
+    }
+    private int getMaxReceive()
+    {
+        return  maxReceive;
+    }
+
+ */
+
+/*
+    @Override
+    public int receiveEnergy(int maxReceive, boolean simulate) {
+        return maxReceive;
+    }
+
+ */
+
+
+    @Override
+    public int extractEnergy(int maxExtract, boolean simulate) {
+        return maxExtract;
+    }
+
+    @Override
+    public int getEnergyStored() {
+        return getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
+
+    }
+
+    @Override
+    public int getMaxEnergyStored() {
         return getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getMaxEnergyStored).orElse(0);
     }
 
+    @Override
+    public boolean canExtract() {
+        return false;
+    }
 
+    @Override
+    public boolean canReceive() {
+        return true;
+    }
 
 }
 
