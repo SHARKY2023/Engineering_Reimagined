@@ -72,6 +72,8 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
                 PacketHandler.INSTANCE.send(PacketDistributor.ALL.noArg(), new UpdateSolarPanel(getBlockPos(), getEnergy(), energyProduced));
             }
         }
+
+        sendEnergy();
     }
 
     private int getMaxEnergy()

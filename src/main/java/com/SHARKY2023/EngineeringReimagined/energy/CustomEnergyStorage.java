@@ -11,7 +11,11 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
         super(energyCapacity, energyTransfer);
         this.maxReceive = 0;
     }
+    public CustomEnergyStorage(int energyTransfer,int energyReceive, int energyCapacity)
+    {
+        super(energyCapacity, energyReceive, energyTransfer);
 
+    }
     public void setEnergy(int energy)
     {
         this.energy = energy;
@@ -45,6 +49,19 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
         tag.putInt("value", getEnergyStored());
         return tag;
     }
+
+    @Override
+    public int extractEnergy(int maxExtract, boolean simulate)
+    {
+        return super.extractEnergy(maxExtract, simulate);
+    }
+
+
+
+
+
+
+
 
     @Override
     public void deserializeNBT(CompoundNBT nbt)
