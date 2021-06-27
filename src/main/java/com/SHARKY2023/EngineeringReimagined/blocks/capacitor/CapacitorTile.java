@@ -24,7 +24,7 @@ import static com.SHARKY2023.EngineeringReimagined.registries.Registration.CAPAC
 
 public class CapacitorTile extends TileEntity implements IEnergyStorage, ICapabilityProvider, ITickableTileEntity {
 
-  //  private int capacity;
+    public int capacity;
   //  private int extract;
   //  private int transfer;
 
@@ -32,8 +32,8 @@ public class CapacitorTile extends TileEntity implements IEnergyStorage, ICapabi
     public CapacitorTile() {
         super(CAPACITOR_TILE.get());
 
-
-        energyStorage = new CustomEnergyStorage(2000,2000,2000000);
+        capacity = 2000000;
+        energyStorage = new CustomEnergyStorage(2000,2000,capacity);
     }
 
     CustomEnergyStorage energyStorage;
