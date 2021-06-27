@@ -40,6 +40,14 @@ public class SterlingTile extends TileEntity implements ITickableTileEntity {
             super(STERLING_TILE.get());
     }
 
+
+    @Override
+    public void setRemoved() {
+        super.setRemoved();
+        handler.invalidate();
+        energy.invalidate();
+    }
+
     @Override
     public void tick() {
         if (level.isClientSide) { return;
@@ -47,7 +55,7 @@ public class SterlingTile extends TileEntity implements ITickableTileEntity {
             if (counter > 0) {
                 counter--;
                 if (counter > 0) {
-                    energyStorage.generatePower(Config.STERLING_GENERATE.get());
+                    energyStorage.generatePower(40);
                 }
                 setChanged();
             }
@@ -55,7 +63,7 @@ public class SterlingTile extends TileEntity implements ITickableTileEntity {
                 ItemStack stack = itemHandler.getStackInSlot(0);
                 if (stack.getItem() == Items.COAL) {
                     itemHandler.extractItem(0, 1, false);
-                    counter = Config.STERLING_TICKS.get();
+                    counter = 2000;
                     setChanged();
                 }
             }
@@ -138,8 +146,11 @@ public class SterlingTile extends TileEntity implements ITickableTileEntity {
         }
 
         private CustomEnergyStorage createEnergy() {
-            return new CustomEnergyStorage(Config.STERLING_MAXPOWER.get(), 0) {
-
+            return new CustomEnergyStorage(2000, 20000) {
+                @Override
+                protected void onEnergyChanged() {
+                    setChanged();
+                }
             };
         }
 

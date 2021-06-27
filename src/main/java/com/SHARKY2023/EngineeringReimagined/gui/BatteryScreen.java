@@ -6,16 +6,19 @@ import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryTile;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.energy.EnergyStorage;
 
 public class BatteryScreen extends ContainerScreen<BatteryContainer> {
 
     private static final ResourceLocation TEXTURES = new ResourceLocation(EngineeringReimagined.MOD_ID, "textures/gui/solar_panel.png");
     private final BatteryTile tile;
+    private EnergyStorage container;
 
     public BatteryScreen(BatteryContainer container, PlayerInventory inv, ITextComponent name)
     {
@@ -37,8 +40,10 @@ public class BatteryScreen extends ContainerScreen<BatteryContainer> {
     {
         String energy = "Stored energy: " + getEnergyFormatted(menu.getEnergy());
         this.font.draw(mStack, energy, (imageWidth / 2 - font.width(energy) / 2) + 14, 20, 4210752);
+       // drawString(mStack, Minecraft.getInstance().font, "Energy: " + getEnergyFormatted(menu.getEnergy()),14 , 20, 4210752);
 
-        String maxEnergy = "Max capacity: " + getEnergyFormatted(tile.maxEnergy);
+
+        String maxEnergy = "Max capacity: " + getEnergyFormatted(20000000);
         this.font.draw(mStack, maxEnergy, (imageWidth / 2 - font.width(maxEnergy) / 2) + 14, 30, 4210752);
 
     }

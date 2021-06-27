@@ -1,7 +1,8 @@
 package com.SHARKY2023.EngineeringReimagined.setup;
 
 import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryTier;
-import com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling.SterlingScreen;
+import com.SHARKY2023.EngineeringReimagined.gui.CapacitorScreen;
+import com.SHARKY2023.EngineeringReimagined.gui.SterlingScreen;
 import com.SHARKY2023.EngineeringReimagined.gui.BatteryScreen;
 import com.SHARKY2023.EngineeringReimagined.gui.SolarPanelScreen;
 import com.SHARKY2023.EngineeringReimagined.registries.Registration;
@@ -15,6 +16,8 @@ public class ClientSetup {
 
 
         ScreenManager.register(Registration.STERLING_CONTAINER.get(), SterlingScreen::new);
+
+        ScreenManager.register(Registration.CAPACITOR_CONTAINER.get(), CapacitorScreen::new);
 
 
         for (SolarPanelTier level : SolarPanelTier.values()) {

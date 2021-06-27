@@ -8,6 +8,9 @@ import com.SHARKY2023.EngineeringReimagined.blocks.battery.Battery;
 import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryTier;
 import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryTile;
 import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryContainer;
+import com.SHARKY2023.EngineeringReimagined.blocks.capacitor.Capacitor;
+import com.SHARKY2023.EngineeringReimagined.blocks.capacitor.CapacitorContainer;
+import com.SHARKY2023.EngineeringReimagined.blocks.capacitor.CapacitorTile;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanel;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelTile;
@@ -125,6 +128,7 @@ public class Registration {
     public static final RegistryObject<Block> ADV_MACHINE_CASING = BLOCKS.register("advanced_machine_casing", BlockMachine::new);
 
     public static final RegistryObject<Block> STERLING_GENERATOR = BLOCKS.register("sterling_generator", SterlingBlock::new);
+    public static final RegistryObject<Block> CAPACITOR = BLOCKS.register("capacitor", Capacitor::new);
     public static final RegistryObject<Battery> BASIC_BATTERY = BLOCKS.register("basic_battery", () -> new Battery(BatteryTier.Basic));
     public static final RegistryObject<Battery> ADVANCED_BATTERY = BLOCKS.register("advanced_battery", () -> new Battery(BatteryTier.Advanced));
     public static final RegistryObject<Battery> ULTIMATE_BATTERY = BLOCKS.register("ultimate_battery", () -> new Battery(BatteryTier.Ultimate));
@@ -155,9 +159,10 @@ public class Registration {
     public static final RegistryObject<Item> GRINDER_ITEM = ITEMS.register("grinder", () -> new BlockItem(GRINDER.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> SMELTER_ITEM = ITEMS.register("smelter", () -> new BlockItem(SMELTER.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> STERLING_GENERATOR_ITEM = ITEMS.register("sterling_generator", () -> new BlockItem(STERLING_GENERATOR.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
-
+    public static final RegistryObject<Item> CAPACITOR_ITEM = ITEMS.register("capacitor", () -> new BlockItem(CAPACITOR.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     //Tiles
     public static final RegistryObject<TileEntityType<SterlingTile>> STERLING_TILE = TILES.register("sterling_generator", () -> TileEntityType.Builder.of(SterlingTile::new, STERLING_GENERATOR.get()).build(null));
+    public static final RegistryObject<TileEntityType<CapacitorTile>> CAPACITOR_TILE = TILES.register("capacitor", () -> TileEntityType.Builder.of(CapacitorTile::new, CAPACITOR.get()).build(null));
 
 
 
@@ -166,6 +171,14 @@ public class Registration {
         BlockPos pos = data.readBlockPos();
         World world = inv.player.getCommandSenderWorld();
         return new SterlingContainer(windowId, world, pos, inv, inv.player);
+
+    }));
+
+
+    public static final RegistryObject<ContainerType<CapacitorContainer>> CAPACITOR_CONTAINER = CONTAINERS.register("capacitor", () -> IForgeContainerType.create((windowId, inv, data) -> {
+        BlockPos pos = data.readBlockPos();
+        World world = inv.player.getCommandSenderWorld();
+        return new CapacitorContainer(windowId, world, pos, inv, inv.player);
     }));
 
 
