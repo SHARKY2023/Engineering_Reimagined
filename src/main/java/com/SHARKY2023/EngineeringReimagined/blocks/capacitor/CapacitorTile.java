@@ -2,7 +2,6 @@ package com.SHARKY2023.EngineeringReimagined.blocks.capacitor;
 
 import com.SHARKY2023.EngineeringReimagined.config.Config;
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
-import com.google.common.collect.HashBasedTable;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
@@ -32,8 +31,8 @@ public class CapacitorTile extends TileEntity implements IEnergyStorage, ICapabi
     public CapacitorTile() {
         super(CAPACITOR_TILE.get());
 
-        capacity = 2000000;
-        energyStorage = new CustomEnergyStorage(2000,2000,capacity);
+        capacity = 20000000;
+        energyStorage = new CustomEnergyStorage(20000,20000,20000000);
     }
 
     CustomEnergyStorage energyStorage;

@@ -17,6 +17,8 @@ import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelTil
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling.SterlingBlock;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling.SterlingContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling.SterlingTile;
+import com.SHARKY2023.EngineeringReimagined.blocks.machine.crusher.Crusher;
+import com.SHARKY2023.EngineeringReimagined.blocks.machine.crusher.CrusherTile;
 import com.SHARKY2023.EngineeringReimagined.items.ItemBase;
 import com.SHARKY2023.EngineeringReimagined.util.SolarPanelTier;
 import net.minecraft.block.Block;
@@ -24,6 +26,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +37,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,11 +45,15 @@ import static com.SHARKY2023.EngineeringReimagined.EngineeringReimagined.MOD_ID;
 
 public class Registration {
 
+
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
     private static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, MOD_ID);
     private static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MOD_ID);
+    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MOD_ID);
     private static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MOD_ID);
+
+
 
     public static void init() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -55,6 +61,9 @@ public class Registration {
         TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
         CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+
 
         for(SolarPanelTier level : SolarPanelTier.values()) {
             SOLAR_PANEL_BLOCK.put(level, BLOCKS.register(level.getSolarPanelName(), () -> new SolarPanel(level)));
@@ -135,6 +144,7 @@ public class Registration {
 
     public static final RegistryObject<Block> METAL_FORMER = BLOCKS.register("metal_former", BlockMachine::new);
     public static final RegistryObject<Block> GRINDER = BLOCKS.register("grinder", BlockMachine::new);
+    public static final RegistryObject<Block> CRUSHER = BLOCKS.register("grinder", Crusher::new);
     public static final RegistryObject<Block> SMELTER= BLOCKS.register("smelter", BlockMachine::new);
 
     //ItemBlocks
@@ -163,6 +173,7 @@ public class Registration {
     //Tiles
     public static final RegistryObject<TileEntityType<SterlingTile>> STERLING_TILE = TILES.register("sterling_generator", () -> TileEntityType.Builder.of(SterlingTile::new, STERLING_GENERATOR.get()).build(null));
     public static final RegistryObject<TileEntityType<CapacitorTile>> CAPACITOR_TILE = TILES.register("capacitor", () -> TileEntityType.Builder.of(CapacitorTile::new, CAPACITOR.get()).build(null));
+    public static final RegistryObject<TileEntityType<CrusherTile>> CRUSHER_TILE = TILES.register("capacitor", () -> TileEntityType.Builder.of(CrusherTile::new, CRUSHER.get()).build(null));a
 
 
 
@@ -173,8 +184,6 @@ public class Registration {
         return new SterlingContainer(windowId, world, pos, inv, inv.player);
 
     }));
-
-
     public static final RegistryObject<ContainerType<CapacitorContainer>> CAPACITOR_CONTAINER = CONTAINERS.register("capacitor", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
         World world = inv.player.getCommandSenderWorld();
@@ -244,29 +253,3 @@ public class Registration {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

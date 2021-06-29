@@ -30,10 +30,16 @@ public class CapacitorScreen extends ContainerScreen<CapacitorContainer> {
         }
 
         @Override
-        protected void renderLabels(MatrixStack matrixStack, int mouseX, int mouseY) {
-            drawString(matrixStack, Minecraft.getInstance().font, "Energy: " + menu.getEnergy(), 10, 10, 0xffffff);
-        }
+        protected void renderLabels(MatrixStack mStack, int mouseX, int mouseY) {
+            String energy = "Stored energy: " + getEnergyFormatted(menu.getEnergy());
+            this.font.draw(mStack, energy, (imageWidth / 2 - font.width(energy) / 2) + 14, 20, 4210752);
+            // drawString(mStack, Minecraft.getInstance().font, "Energy: " + getEnergyFormatted(menu.getEnergy()),14 , 20, 4210752);
 
+
+            String maxEnergy = "Max capacity: " + getEnergyFormatted(20000000);
+            this.font.draw(mStack, maxEnergy, (imageWidth / 2 - font.width(maxEnergy) / 2) + 14, 30, 4210752);
+
+        }
     @Override
     protected void renderBg(MatrixStack mStack, float partialTicks, int mouseX, int mouseY)
     {
@@ -64,7 +70,7 @@ public class CapacitorScreen extends ContainerScreen<CapacitorContainer> {
     private int getPercent()
     {
         Long currentEnergy = new Long(menu.getEnergy());
-        int maxEnergy = 2000000;
+        int maxEnergy = 20000000;
 
         long result = currentEnergy * 100 / maxEnergy;
 
