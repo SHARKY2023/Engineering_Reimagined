@@ -7,7 +7,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
@@ -15,6 +14,7 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
@@ -30,11 +30,12 @@ import javax.annotation.Nullable;
 
 import static com.SHARKY2023.EngineeringReimagined.registries.Registration.CRUSHER_TILE;
 
-public class CrusherTile extends LockableLootTileEntity implements ISidedInventory, ITickableTileEntity {
+public class CrusherTile extends TileEntity implements ISidedInventory, ITickableTileEntity {
     static final int WORK_TIME = 2 * 20;
 
     private NonNullList<ItemStack> items;
     private final LazyOptional<? extends IItemHandler>[] handlers;
+
 
     private int progress = 0;
 
@@ -142,25 +143,22 @@ public class CrusherTile extends LockableLootTileEntity implements ISidedInvento
         this.removeItem(0, 1);
     }
 
-    @Override
+
     protected NonNullList<ItemStack> getItems() {
         return null;
     }
 
-    @Override
     protected void setItems(NonNullList<ItemStack> p_199721_1_) {
 
     }
 
-    @Override
+
     protected ITextComponent getDefaultName() {
         return new TranslationTextComponent("screen.er2023.crusher");
     }
 
-    @Override
-    protected Container createMenu(int id, PlayerInventory playerInventory) {
-        return new CrusherContainer(id, playerInventory, this,this.fields);
-    }
+
+
 
 
     @Override

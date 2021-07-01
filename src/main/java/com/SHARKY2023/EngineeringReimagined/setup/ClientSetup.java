@@ -1,10 +1,8 @@
 package com.SHARKY2023.EngineeringReimagined.setup;
 
 import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryTier;
-import com.SHARKY2023.EngineeringReimagined.gui.CapacitorScreen;
-import com.SHARKY2023.EngineeringReimagined.gui.SterlingScreen;
-import com.SHARKY2023.EngineeringReimagined.gui.BatteryScreen;
-import com.SHARKY2023.EngineeringReimagined.gui.SolarPanelScreen;
+import com.SHARKY2023.EngineeringReimagined.blocks.machine.crusher.CrusherContainer;
+import com.SHARKY2023.EngineeringReimagined.gui.*;
 import com.SHARKY2023.EngineeringReimagined.registries.Registration;
 import com.SHARKY2023.EngineeringReimagined.util.SolarPanelTier;
 import net.minecraft.client.gui.ScreenManager;
@@ -17,7 +15,10 @@ public class ClientSetup {
 
         ScreenManager.register(Registration.STERLING_CONTAINER.get(), SterlingScreen::new);
 
+
         ScreenManager.register(Registration.CAPACITOR_CONTAINER.get(), CapacitorScreen::new);
+
+        ScreenManager.register(Registration.CRUSHER_CONTAINER.get(), CrusherScreen::new);
 
 
         for (SolarPanelTier level : SolarPanelTier.values()) {

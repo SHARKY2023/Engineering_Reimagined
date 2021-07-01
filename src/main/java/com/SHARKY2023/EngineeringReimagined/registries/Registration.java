@@ -18,6 +18,7 @@ import com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling.SterlingBl
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling.SterlingContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling.SterlingTile;
 import com.SHARKY2023.EngineeringReimagined.blocks.machine.crusher.Crusher;
+import com.SHARKY2023.EngineeringReimagined.blocks.machine.crusher.CrusherContainer;
 import com.SHARKY2023.EngineeringReimagined.blocks.machine.crusher.CrusherTile;
 import com.SHARKY2023.EngineeringReimagined.items.ItemBase;
 import com.SHARKY2023.EngineeringReimagined.util.SolarPanelTier;
@@ -126,8 +127,6 @@ public class Registration {
     public static final RegistryObject<BlockResource> TIN_BLOCK = BLOCKS.register("block_tin", BlockResource::new);
     public static final RegistryObject<BlockResource> NICKEL_BLOCK = BLOCKS.register("block_nickel", BlockResource::new);
     public static final RegistryObject<BlockResource> LEAD_BLOCK = BLOCKS.register("block_lead", BlockResource::new);
-    public static final RegistryObject<BlockResource> ZINC_BLOCK = BLOCKS.register("block_zinc", BlockResource::new);
-    public static final RegistryObject<BlockResource> BRASS_BLOCK = BLOCKS.register("block_brass", BlockResource::new);
     public static final RegistryObject<BlockResource> URANIUM_BLOCK = BLOCKS.register("block_uranium", BlockResource::new);
     public static final RegistryObject<BlockResource> ELECTRUM_BLOCK = BLOCKS.register("block_electrum", BlockResource::new);
     public static final RegistryObject<BlockResource> PLATINUM_BLOCK = BLOCKS.register("block_platinum", BlockResource::new);
@@ -144,7 +143,7 @@ public class Registration {
 
     public static final RegistryObject<Block> METAL_FORMER = BLOCKS.register("metal_former", BlockMachine::new);
     public static final RegistryObject<Block> GRINDER = BLOCKS.register("grinder", BlockMachine::new);
-    public static final RegistryObject<Block> CRUSHER = BLOCKS.register("grinder", Crusher::new);
+    public static final RegistryObject<Block> CRUSHER = BLOCKS.register("crusher", Crusher::new);
     public static final RegistryObject<Block> SMELTER= BLOCKS.register("smelter", BlockMachine::new);
 
     //ItemBlocks
@@ -158,22 +157,20 @@ public class Registration {
     public static final RegistryObject<Item> TIN_BLOCK_ITEM = ITEMS.register("block_tin", () -> new BlockItem(TIN_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> NICKEL_BLOCK_ITEM = ITEMS.register("block_nickel", () -> new BlockItem(NICKEL_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> LEAD_BLOCK_ITEM = ITEMS.register("block_lead", () -> new BlockItem(LEAD_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> ZINC_BLOCK_ITEM = ITEMS.register("block_zinc", () -> new BlockItem(ZINC_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> BRASS_BLOCK_ITEM = ITEMS.register("block_brass", () -> new BlockItem(BRASS_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> URANIUM_BLOCK_ITEM = ITEMS.register("block_uranium",() -> new BlockItem(URANIUM_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> ELECTRUM_BLOCK_ITEM = ITEMS.register("block_electrum", () -> new BlockItem(ELECTRUM_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> PLATINUM_BLOCK_ITEM = ITEMS.register("block_platinum", () -> new BlockItem(PLATINUM_BLOCK.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> MACHINE_CASING_ITEM = ITEMS.register("machine_casing", () -> new BlockItem(MACHINE_CASING.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> ADV_MACHINE_CASING_ITEM = ITEMS.register("advanced_machine_casing", () -> new BlockItem(ADV_MACHINE_CASING.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> METAL_FORMER_ITEM = ITEMS.register("metal_former", () -> new BlockItem(METAL_FORMER.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
-    public static final RegistryObject<Item> GRINDER_ITEM = ITEMS.register("grinder", () -> new BlockItem(GRINDER.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
+    public static final RegistryObject<Item> CRUSHER_ITEM = ITEMS.register("crusher", () -> new BlockItem(CRUSHER.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> SMELTER_ITEM = ITEMS.register("smelter", () -> new BlockItem(SMELTER.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> STERLING_GENERATOR_ITEM = ITEMS.register("sterling_generator", () -> new BlockItem(STERLING_GENERATOR.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> CAPACITOR_ITEM = ITEMS.register("capacitor", () -> new BlockItem(CAPACITOR.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     //Tiles
     public static final RegistryObject<TileEntityType<SterlingTile>> STERLING_TILE = TILES.register("sterling_generator", () -> TileEntityType.Builder.of(SterlingTile::new, STERLING_GENERATOR.get()).build(null));
     public static final RegistryObject<TileEntityType<CapacitorTile>> CAPACITOR_TILE = TILES.register("capacitor", () -> TileEntityType.Builder.of(CapacitorTile::new, CAPACITOR.get()).build(null));
-    public static final RegistryObject<TileEntityType<CrusherTile>> CRUSHER_TILE = TILES.register("capacitor", () -> TileEntityType.Builder.of(CrusherTile::new, CRUSHER.get()).build(null));a
+    public static final RegistryObject<TileEntityType<CrusherTile>> CRUSHER_TILE = TILES.register("crusher", () -> TileEntityType.Builder.of(CrusherTile::new, CRUSHER.get()).build(null));
 
 
 
@@ -190,6 +187,12 @@ public class Registration {
         return new CapacitorContainer(windowId, world, pos, inv, inv.player);
     }));
 
+    public static final RegistryObject<ContainerType<CrusherContainer>> CRUSHER_CONTAINER = CONTAINERS.register("crusher", () -> IForgeContainerType.create((windowId, inv, data) -> {
+        BlockPos pos = data.readBlockPos();
+        World world = inv.player.getCommandSenderWorld();
+        return new CrusherContainer(windowId, world, pos, inv, inv.player);
+    }));
+
 
     //Items
     public static final RegistryObject<Item> RUBY = ITEMS.register("ruby", ItemBase::new);
@@ -201,8 +204,6 @@ public class Registration {
     public static final RegistryObject<Item> ALUMINUM_INGOT = ITEMS.register("aluminum_ingot", ItemBase::new);
     public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", ItemBase::new);
     public static final RegistryObject<Item> BRONZE_INGOT = ITEMS.register("bronze_ingot", ItemBase::new);
-    public static final RegistryObject<Item> ZINC_INGOT = ITEMS.register("zinc_ingot", ItemBase::new);
-    public static final RegistryObject<Item> BRASS_INGOT = ITEMS.register("brass_ingot", ItemBase::new);
     public static final RegistryObject<Item> PLATINUM_INGOT = ITEMS.register("platinum_ingot", ItemBase::new);
     public static final RegistryObject<Item> LEAD_INGOT = ITEMS.register("lead_ingot", ItemBase::new);
     public static final RegistryObject<Item> SILVER_INGOT = ITEMS.register("silver_ingot", ItemBase::new);
@@ -214,8 +215,6 @@ public class Registration {
     public static final RegistryObject<Item> TIN_GEAR = ITEMS.register("tin_gear", ItemBase::new);
     public static final RegistryObject<Item> STEEL_GEAR = ITEMS.register("steel_gear", ItemBase::new);
     public static final RegistryObject<Item> BRONZE_GEAR = ITEMS.register("bronze_gear", ItemBase::new);
-    public static final RegistryObject<Item> ZINC_GEAR = ITEMS.register("zinc_gear", ItemBase::new);
-    public static final RegistryObject<Item> BRASS_GEAR = ITEMS.register("brass_gear", ItemBase::new);
     public static final RegistryObject<Item> PLATINUM_GEAR = ITEMS.register("platinum_gear", ItemBase::new);
     public static final RegistryObject<Item> LEAD_GEAR = ITEMS.register("lead_gear", ItemBase::new);
     public static final RegistryObject<Item> SILVER_GEAR = ITEMS.register("silver_gear", ItemBase::new);
@@ -227,14 +226,24 @@ public class Registration {
     public static final RegistryObject<Item> TIN_PLATE = ITEMS.register("tin_plate", ItemBase::new);
     public static final RegistryObject<Item> STEEL_PLATE = ITEMS.register("steel_plate", ItemBase::new);
     public static final RegistryObject<Item> BRONZE_PLATE = ITEMS.register("bronze_plate", ItemBase::new);
-    public static final RegistryObject<Item> ZINC_PLATE = ITEMS.register("zinc_plate", ItemBase::new);
-    public static final RegistryObject<Item> BRASS_PLATE = ITEMS.register("brass_plate", ItemBase::new);
     public static final RegistryObject<Item> PLATINUM_PLATE = ITEMS.register("platinum_plate", ItemBase::new);
     public static final RegistryObject<Item> LEAD_PLATE = ITEMS.register("lead_plate", ItemBase::new);
     public static final RegistryObject<Item> SILVER_PLATE = ITEMS.register("silver_plate", ItemBase::new);
     public static final RegistryObject<Item> ELECTRUM_PLATE = ITEMS.register("electrum_plate", ItemBase::new);
     public static final RegistryObject<Item> NICKEL_PLATE = ITEMS.register("nickel_plate", ItemBase::new);
     public static final RegistryObject<Item> BASIC_CIRCUIT = ITEMS.register("basic_circuit", ItemBase::new);
+
+    //dust
+    public static final RegistryObject<Item> COPPER_DUST = ITEMS.register("copper_dust", ItemBase::new);
+    public static final RegistryObject<Item> TIN_DUST = ITEMS.register("tin_dust", ItemBase::new);
+    public static final RegistryObject<Item> STEEL_DUST = ITEMS.register("steel_dust", ItemBase::new);
+    public static final RegistryObject<Item> BRONZE_DUST = ITEMS.register("bronze_dust", ItemBase::new);
+    public static final RegistryObject<Item> PLATINUM_DUST = ITEMS.register("platinum_dust", ItemBase::new);
+    public static final RegistryObject<Item> LEAD_DUST = ITEMS.register("lead_dust", ItemBase::new);
+    public static final RegistryObject<Item> SILVER_DUST = ITEMS.register("silver_dust", ItemBase::new);
+    public static final RegistryObject<Item> ELECTRUM_DUST = ITEMS.register("electrum_dust", ItemBase::new);
+    public static final RegistryObject<Item> NICKEL_DUST = ITEMS.register("nickel_dust", ItemBase::new);
+
 
     //Crafting Items
     public static final RegistryObject<Item> RUBBER = ITEMS.register("rubber", ItemBase::new);

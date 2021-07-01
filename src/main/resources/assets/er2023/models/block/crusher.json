@@ -1,6 +1,11 @@
 {
-  "parent": "block/cube_all",
+  "parent": "block/cube",
   "textures": {
-    "all": "er2023:block/crusher"
+    "down": "er2023:block/machine_casing_advanced",
+    "up": "er2023:block/machine_casing_advanced",
+    "north": "er2023:block/crusher",
+    "east": "er2023:block/machine_casing_advanced",
+    "south": "er2023:block/machine_casing_advanced",
+    "west": "er2023:block/machine_casing_advanced"
   }
 }

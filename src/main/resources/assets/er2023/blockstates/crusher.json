@@ -1,0 +1,23 @@
+
+{
+  "variants": {
+    "facing=east": {
+      "model": "er2023:block/crusher",
+      "y": 90
+    },
+
+    "facing=north": {
+      "model": "er2023:block/crusher"
+    },
+
+    "facing=south": {
+      "model": "er2023:block/crusher",
+      "y": 180
+    },
+
+    "facing=west": {
+      "model": "er2023:block/crusher",
+      "y": 270
+
+    }
+}}
