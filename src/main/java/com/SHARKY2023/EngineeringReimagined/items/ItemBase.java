@@ -1,7 +1,7 @@
 package com.SHARKY2023.EngineeringReimagined.items;
 
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 
 public class ItemBase extends Item {

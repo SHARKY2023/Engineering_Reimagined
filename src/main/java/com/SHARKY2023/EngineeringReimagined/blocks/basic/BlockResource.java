@@ -3,9 +3,12 @@ package com.SHARKY2023.EngineeringReimagined.blocks.basic;
 import com.SHARKY2023.EngineeringReimagined.resources.BlockResourceInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+
 import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nonnull;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class BlockResource extends Block {
 

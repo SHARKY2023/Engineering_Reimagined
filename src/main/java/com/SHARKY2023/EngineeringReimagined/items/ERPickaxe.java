@@ -1,15 +1,17 @@
 package com.SHARKY2023.EngineeringReimagined.items;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ToolItem;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.DiggerItem;
 
 import java.util.Set;
 
-public class ERPickaxe extends ToolItem {
+import net.minecraft.world.item.Item.Properties;
+
+public class ERPickaxe extends DiggerItem {
 
 
-    protected ERPickaxe(float attackDamageIn, float attackSpeedIn, IItemTier tier, Set<Block> effectiveBlocksIn, Properties builder) {
+    protected ERPickaxe(float attackDamageIn, float attackSpeedIn, Tier tier, Set<Block> effectiveBlocksIn, Properties builder) {
         super(attackDamageIn, attackSpeedIn, tier, effectiveBlocksIn, builder);
     }
 }

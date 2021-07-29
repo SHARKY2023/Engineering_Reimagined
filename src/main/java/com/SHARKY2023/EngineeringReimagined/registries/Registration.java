@@ -24,14 +24,21 @@ import com.SHARKY2023.EngineeringReimagined.items.ItemBase;
 import com.SHARKY2023.EngineeringReimagined.util.SolarPanelTier;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
-import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -50,8 +57,8 @@ public class Registration {
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
     private static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, MOD_ID);
-    private static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MOD_ID);
-    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MOD_ID);
+    private static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MOD_ID);
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MOD_ID);
     private static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MOD_ID);
 
 
@@ -72,7 +79,7 @@ public class Registration {
             SOLAR_PANEL_TILE.put(level, TILES.register(level.getSolarPanelName(), () -> TileEntityType.Builder.of(() -> new SolarPanelTile(level), SOLAR_PANEL_BLOCK.get(level).get()).build(null)));
             SOLAR_PANEL_CONTAINER.put(level, CONTAINERS.register(level.getSolarPanelName(), () -> IForgeContainerType.create((windowId, inv, data) -> {
                 BlockPos pos = data.readBlockPos();
-                TileEntity te = inv.player.getCommandSenderWorld().getBlockEntity(pos);
+                BlockEntity te = inv.player.getCommandSenderWorld().getBlockEntity(pos);
                 if(!(te instanceof SolarPanelTile))
                 {
                     EngineeringReimagined.logger.error("Wrong type of tile entity (expected TileEntitySolarPanel)!");
@@ -107,13 +114,13 @@ public class Registration {
 
     public static final Map<SolarPanelTier, RegistryObject<SolarPanel>> SOLAR_PANEL_BLOCK = new HashMap<>();
     public static final Map<SolarPanelTier, RegistryObject<Item>> SOLAR_PANEL_ITEM = new HashMap<>();
-    public static final Map<SolarPanelTier, RegistryObject<TileEntityType<SolarPanelTile>>> SOLAR_PANEL_TILE = new HashMap<>();
-    public static final Map<SolarPanelTier, RegistryObject<ContainerType<SolarPanelContainer>>> SOLAR_PANEL_CONTAINER = new HashMap<>();
+    public static final Map<SolarPanelTier, RegistryObject<BlockEntityType<SolarPanelTile>>> SOLAR_PANEL_TILE = new HashMap<>();
+    public static final Map<SolarPanelTier, RegistryObject<MenuType<SolarPanelContainer>>> SOLAR_PANEL_CONTAINER = new HashMap<>();
 
     public static final Map<BatteryTier, RegistryObject<Battery>> BATTERY_BLOCK = new HashMap<>();
     public static final Map<BatteryTier, RegistryObject<Item>> BATTERY_ITEM = new HashMap<>();
-    public static final Map<BatteryTier, RegistryObject<TileEntityType<BatteryTile>>> BATTERY_TILE = new HashMap<>();
-    public static final Map<BatteryTier, RegistryObject<ContainerType<BatteryContainer>>> BATTERY_CONTAINER = new HashMap<>();
+    public static final Map<BatteryTier, RegistryObject<BlockEntityType<BatteryTile>>> BATTERY_TILE = new HashMap<>();
+    public static final Map<BatteryTier, RegistryObject<MenuType<BatteryContainer>>> BATTERY_CONTAINER = new HashMap<>();
 
 
     //Blocks
@@ -168,28 +175,28 @@ public class Registration {
     public static final RegistryObject<Item> STERLING_GENERATOR_ITEM = ITEMS.register("sterling_generator", () -> new BlockItem(STERLING_GENERATOR.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     public static final RegistryObject<Item> CAPACITOR_ITEM = ITEMS.register("capacitor", () -> new BlockItem(CAPACITOR.get(), new Item.Properties().tab(EngineeringReimagined.TabEnginneringReimagined)));
     //Tiles
-    public static final RegistryObject<TileEntityType<SterlingTile>> STERLING_TILE = TILES.register("sterling_generator", () -> TileEntityType.Builder.of(SterlingTile::new, STERLING_GENERATOR.get()).build(null));
-    public static final RegistryObject<TileEntityType<CapacitorTile>> CAPACITOR_TILE = TILES.register("capacitor", () -> TileEntityType.Builder.of(CapacitorTile::new, CAPACITOR.get()).build(null));
-    public static final RegistryObject<TileEntityType<CrusherTile>> CRUSHER_TILE = TILES.register("crusher", () -> TileEntityType.Builder.of(CrusherTile::new, CRUSHER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<SterlingTile>> STERLING_TILE = TILES.register("sterling_generator", () -> BlockEntityType.Builder.of(SterlingTile::new, STERLING_GENERATOR.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CapacitorTile>> CAPACITOR_TILE = TILES.register("capacitor", () -> BlockEntityType.Builder.of(CapacitorTile::new, CAPACITOR.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CrusherTile>> CRUSHER_TILE = TILES.register("crusher", () -> BlockEntityType.Builder.of(CrusherTile::new, CRUSHER.get()).build(null));
 
 
 
     //Containers
-    public static final RegistryObject<ContainerType<SterlingContainer>> STERLING_CONTAINER = CONTAINERS.register("sterling_generator", () -> IForgeContainerType.create((windowId, inv, data) -> {
+    public static final RegistryObject<MenuType<SterlingContainer>> STERLING_CONTAINER = CONTAINERS.register("sterling_generator", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
-        World world = inv.player.getCommandSenderWorld();
+        Level world = inv.player.getCommandSenderWorld();
         return new SterlingContainer(windowId, world, pos, inv, inv.player);
 
     }));
-    public static final RegistryObject<ContainerType<CapacitorContainer>> CAPACITOR_CONTAINER = CONTAINERS.register("capacitor", () -> IForgeContainerType.create((windowId, inv, data) -> {
+    public static final RegistryObject<MenuType<CapacitorContainer>> CAPACITOR_CONTAINER = CONTAINERS.register("capacitor", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
-        World world = inv.player.getCommandSenderWorld();
+        Level world = inv.player.getCommandSenderWorld();
         return new CapacitorContainer(windowId, world, pos, inv, inv.player);
     }));
 
-    public static final RegistryObject<ContainerType<CrusherContainer>> CRUSHER_CONTAINER = CONTAINERS.register("crusher", () -> IForgeContainerType.create((windowId, inv, data) -> {
+    public static final RegistryObject<MenuType<CrusherContainer>> CRUSHER_CONTAINER = CONTAINERS.register("crusher", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
-        World world = inv.player.getCommandSenderWorld();
+        Level world = inv.player.getCommandSenderWorld();
         return new CrusherContainer(windowId, world, pos, inv, inv.player);
     }));
 

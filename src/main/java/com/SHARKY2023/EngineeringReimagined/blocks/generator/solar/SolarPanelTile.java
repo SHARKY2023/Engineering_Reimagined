@@ -10,17 +10,17 @@ import com.SHARKY2023.EngineeringReimagined.registries.Registration;
 import com.SHARKY2023.EngineeringReimagined.util.ProductionSolarPanel;
 import com.SHARKY2023.EngineeringReimagined.util.SolarPanelTier;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
@@ -32,7 +32,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class SolarPanelTile extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class SolarPanelTile extends BlockEntity implements TickableBlockEntity, MenuProvider {
 
     // Energy
     private LazyOptional<IEnergyStorage> energy = LazyOptional.of(this::createEnergy);
@@ -101,7 +101,7 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
                 Direction facing = Direction.values()[i];
                 if(facing != Direction.UP)
                 {
-                    TileEntity tileEntity = level.getBlockEntity(worldPosition.relative(facing));
+                    BlockEntity tileEntity = level.getBlockEntity(worldPosition.relative(facing));
                     if(tileEntity != null)
                     {
                         tileEntity.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).ifPresent(handler -> {
@@ -130,33 +130,33 @@ public class SolarPanelTile extends TileEntity implements ITickableTileEntity, I
 
     @SuppressWarnings("unchecked")
     @Override
-    public void load(BlockState state, CompoundNBT compound)
+    public void load(BlockState state, CompoundTag compound)
     {
-        CompoundNBT energyTag = compound.getCompound("energy");
-        energy.ifPresent(h -> ((INBTSerializable<CompoundNBT>) h).deserializeNBT(energyTag));
+        CompoundTag energyTag = compound.getCompound("energy");
+        energy.ifPresent(h -> ((INBTSerializable<CompoundTag>) h).deserializeNBT(energyTag));
         super.load(state, compound);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public CompoundNBT save(CompoundNBT compound)
+    public CompoundTag save(CompoundTag compound)
     {
         energy.ifPresent(h -> {
-            CompoundNBT tag = ((INBTSerializable<CompoundNBT>) h).serializeNBT();
+            CompoundTag tag = ((INBTSerializable<CompoundTag>) h).serializeNBT();
             compound.put("energy", tag);
         });
         return super.save(compound);
     }
     @Nullable
-    public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+    public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player playerEntity) {
         {
             return new SolarPanelContainer(id, playerEntity, this, levelSolarPanel);
         }
     }
 
     @Override
-    public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(this.getBlockState().getBlock().getDescriptionId());
+    public Component getDisplayName() {
+        return new TranslatableComponent(this.getBlockState().getBlock().getDescriptionId());
     }
 
 }

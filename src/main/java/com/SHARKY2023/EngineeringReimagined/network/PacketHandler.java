@@ -3,12 +3,14 @@ package com.SHARKY2023.EngineeringReimagined.network;
 
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
 import com.SHARKY2023.EngineeringReimagined.network.packet.UpdateSolarPanel;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import java.util.Optional;
+
+import SimpleChannel;
 
 public class PacketHandler {
 

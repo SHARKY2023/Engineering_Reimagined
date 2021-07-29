@@ -1,11 +1,11 @@
 package com.SHARKY2023.EngineeringReimagined.energy;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.energy.EnergyStorage;
 
-public class CustomEnergyStorage extends EnergyStorage implements INBTSerializable<CompoundNBT> {
+public class CustomEnergyStorage extends EnergyStorage implements INBTSerializable<CompoundTag> {
 
     public CustomEnergyStorage(int energyTransfer, int energyCapacity)
     {
@@ -48,9 +48,9 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
     }
 
     @Override
-    public CompoundNBT serializeNBT()
+    public CompoundTag serializeNBT()
     {
-        CompoundNBT tag = new CompoundNBT();
+        CompoundTag tag = new CompoundTag();
         tag.putInt("energy", getEnergyStored());
         return tag;
     }
@@ -82,7 +82,7 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
 
 
     @Override
-    public void deserializeNBT(CompoundNBT nbt)
+    public void deserializeNBT(CompoundTag nbt)
     {
         setEnergy(nbt.getInt("energy"));
     }

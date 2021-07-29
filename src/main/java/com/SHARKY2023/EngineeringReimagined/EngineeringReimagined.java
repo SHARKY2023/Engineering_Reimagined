@@ -7,8 +7,8 @@ import com.SHARKY2023.EngineeringReimagined.setup.ModSetup;
 import com.SHARKY2023.EngineeringReimagined.setup.proxy.IProxy;
 import com.SHARKY2023.EngineeringReimagined.setup.proxy.Proxy;
 import com.SHARKY2023.EngineeringReimagined.setup.proxy.ProxyClient;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -26,7 +26,7 @@ public class EngineeringReimagined {
 
     public static final String MOD_ID = "er2023";
 
-    public static ItemGroup TabEnginneringReimagined = new ItemGroup(EngineeringReimagined.MOD_ID +"Tab") {
+    public static CreativeModeTab TabEnginneringReimagined = new CreativeModeTab(EngineeringReimagined.MOD_ID +"Tab") {
         @Override public ItemStack makeIcon() {
             return new ItemStack(SILVER_BLOCK.get());
         }};

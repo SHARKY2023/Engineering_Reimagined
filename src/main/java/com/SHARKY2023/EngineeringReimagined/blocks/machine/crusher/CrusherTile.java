@@ -3,23 +3,11 @@ package com.SHARKY2023.EngineeringReimagined.blocks.machine.crusher;
 import com.SHARKY2023.EngineeringReimagined.crafting.recipe.CrushingRecipe;
 import com.SHARKY2023.EngineeringReimagined.registries.ModRecipes;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.LockableLootTileEntity;
-
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -28,9 +16,11 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 import javax.annotation.Nullable;
 
+import java.awt.*;
+
 import static com.SHARKY2023.EngineeringReimagined.registries.Registration.CRUSHER_TILE;
 
-public class CrusherTile extends TileEntity implements ISidedInventory, ITickableTileEntity {
+public class CrusherTile extends TileEntity implements WorldlyContainer, ITickableTileEntity {
     static final int WORK_TIME = 2 * 20;
 
     private NonNullList<ItemStack> items;
@@ -39,7 +29,7 @@ public class CrusherTile extends TileEntity implements ISidedInventory, ITickabl
 
     private int progress = 0;
 
-    private final IIntArray fields = new IIntArray() {
+    private final ContainerData fields = new ContainerData() {
         @Override
         public int get(int index) {
             switch (index) {
@@ -68,11 +58,11 @@ public class CrusherTile extends TileEntity implements ISidedInventory, ITickabl
 
     public CrusherTile() {
         super(CRUSHER_TILE.get());
-        this.handlers = SidedInvWrapper.create(this,Direction.UP,Direction.DOWN,Direction.NORTH);
+        this.handlers = SidedInvWrapper.create(this, Direction.UP,Direction.DOWN,Direction.NORTH);
         this.items = NonNullList.withSize(2, ItemStack.EMPTY);
     }
 
-    void encodeExtraData(PacketBuffer buffer) {
+    void encodeExtraData(FriendlyByteBuf buffer) {
         buffer.writeByte(fields.getCount());
     }
 
@@ -153,8 +143,8 @@ public class CrusherTile extends TileEntity implements ISidedInventory, ITickabl
     }
 
 
-    protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent("screen.er2023.crusher");
+    protected Component getDefaultName() {
+        return new TranslatableComponent("screen.er2023.crusher");
     }
 
 
@@ -192,12 +182,12 @@ public class CrusherTile extends TileEntity implements ISidedInventory, ITickabl
 
     @Override
     public ItemStack removeItem(int index, int count) {
-        return ItemStackHelper.removeItem(items, index, count);
+        return ContainerHelper.removeItem(items, index, count);
     }
 
     @Override
     public ItemStack removeItemNoUpdate(int index) {
-        return ItemStackHelper.takeItem(items, index);
+        return ContainerHelper.takeItem(items, index);
     }
 
     @Override
@@ -206,7 +196,7 @@ public class CrusherTile extends TileEntity implements ISidedInventory, ITickabl
     }
 
     @Override
-    public boolean stillValid(PlayerEntity player) {
+    public boolean stillValid(Player player) {
         return this.level != null
                 && this.level.getBlockEntity(this.worldPosition) == this
                 && player.distanceToSqr(this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 0.5, this.worldPosition.getZ()) <= 64;
@@ -218,33 +208,33 @@ public class CrusherTile extends TileEntity implements ISidedInventory, ITickabl
     }
 
     @Override
-    public void load(BlockState state, CompoundNBT tags) {
+    public void load(BlockState state, CompoundTag tags) {
         super.load(state, tags);
         this.items = NonNullList.withSize(2, ItemStack.EMPTY);
-        ItemStackHelper.loadAllItems(tags, this.items);
+        ContainerHelper.loadAllItems(tags, this.items);
 
         this.progress = tags.getInt("Progress");
     }
 
     @Override
-    public CompoundNBT save(CompoundNBT tags) {
+    public CompoundTag save(CompoundTag tags) {
         super.save(tags);
-        ItemStackHelper.saveAllItems(tags, this.items);
+        ContainerHelper.saveAllItems(tags, this.items);
         tags.putInt("Progress", this.progress);
         return tags;
     }
 
     @Nullable
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT tags = this.getUpdateTag();
-        ItemStackHelper.saveAllItems(tags, this.items);
-        return new SUpdateTileEntityPacket(this.worldPosition, 1, tags);
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        CompoundTag tags = this.getUpdateTag();
+        ContainerHelper.saveAllItems(tags, this.items);
+        return new ClientboundBlockEntityDataPacket(this.worldPosition, 1, tags);
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        CompoundNBT tags = super.getUpdateTag();
+    public CompoundTag getUpdateTag() {
+        CompoundTag tags = super.getUpdateTag();
         tags.putInt("Progress", this.progress);
         return tags;
     }

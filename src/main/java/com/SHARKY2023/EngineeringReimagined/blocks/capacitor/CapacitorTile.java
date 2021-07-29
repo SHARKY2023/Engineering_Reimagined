@@ -3,10 +3,8 @@ package com.SHARKY2023.EngineeringReimagined.blocks.capacitor;
 import com.SHARKY2023.EngineeringReimagined.config.Config;
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
 import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -83,14 +81,14 @@ public class CapacitorTile extends TileEntity implements IEnergyStorage, ICapabi
 
 
     @Override
-    public void load(BlockState state, CompoundNBT tag) {
+    public void load(BlockState state, CompoundTag tag) {
         energyStorage.deserializeNBT(tag.getCompound("energy"));
 
         super.load(state, tag);
     }
 
     @Override
-    public CompoundNBT save(CompoundNBT tag) {
+    public CompoundTag save(CompoundTag tag) {
         tag.put("energy", energyStorage.serializeNBT());
 
         return super.save(tag);

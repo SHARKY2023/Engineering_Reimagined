@@ -1,12 +1,12 @@
 package com.SHARKY2023.EngineeringReimagined.util.providers;
 import com.SHARKY2023.EngineeringReimagined.util.providers.IBaseProvider;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public interface IItemProvider extends IBaseProvider, net.minecraft.util.IItemProvider {
+public interface IItemProvider extends IBaseProvider, net.minecraft.world.level.ItemLike {
 
     @Nonnull
     Item getItem();

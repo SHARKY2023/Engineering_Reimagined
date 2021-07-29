@@ -1,10 +1,10 @@
 package com.SHARKY2023.EngineeringReimagined.network;
 
-import net.minecraft.entity.EntityType;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
 //import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkEvent;
@@ -19,7 +19,7 @@ public class PacketSpawn {
   //  private final DimensionType type;
     private final BlockPos pos;
 
-    public PacketSpawn(PacketBuffer buf) {
+    public PacketSpawn(FriendlyByteBuf buf) {
         id = buf.readResourceLocation();
        // type = DimensionType.getById(buf.readInt());
         pos = buf.readBlockPos();
@@ -31,7 +31,7 @@ public class PacketSpawn {
         this.pos = pos;
     }
 
-    public void toBytes(PacketBuffer buf) {
+    public void toBytes(FriendlyByteBuf buf) {
         buf.writeResourceLocation(id);
     //    buf.writeInt(type.getId());
         buf.writeBlockPos(pos);

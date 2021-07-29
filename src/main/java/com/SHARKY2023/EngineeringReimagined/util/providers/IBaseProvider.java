@@ -2,7 +2,7 @@ package com.SHARKY2023.EngineeringReimagined.util.providers;
 
 
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public interface IBaseProvider {
 

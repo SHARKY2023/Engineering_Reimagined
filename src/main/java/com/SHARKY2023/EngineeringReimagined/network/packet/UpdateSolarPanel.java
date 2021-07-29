@@ -2,10 +2,10 @@ package com.SHARKY2023.EngineeringReimagined.network.packet;
 
 import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
 import com.SHARKY2023.EngineeringReimagined.blocks.generator.solar.SolarPanelTile;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -16,7 +16,7 @@ public class UpdateSolarPanel {
     private int currentEnergy;
     private int currentProduction;
 
-    public UpdateSolarPanel(PacketBuffer buf)
+    public UpdateSolarPanel(FriendlyByteBuf buf)
     {
         pos = buf.readBlockPos();
         currentEnergy = buf.readInt();
@@ -30,7 +30,7 @@ public class UpdateSolarPanel {
         this.currentProduction = currentProduction;
     }
 
-    public void toBytes(PacketBuffer buf)
+    public void toBytes(FriendlyByteBuf buf)
     {
         buf.writeBlockPos(pos);
         buf.writeInt(currentEnergy);
@@ -40,10 +40,10 @@ public class UpdateSolarPanel {
     public void handle(Supplier<NetworkEvent.Context> ctx)
     {
         ctx.get().enqueueWork(() -> {
-            World world = EngineeringReimagined.proxy.getClientWorld();
+            Level world = EngineeringReimagined.proxy.getClientWorld();
             if(world.isLoaded(pos))
             {
-                TileEntity te = world.getBlockEntity(pos);
+                BlockEntity te = world.getBlockEntity(pos);
                 if(te instanceof SolarPanelTile)
                 {
                     SolarPanelTile solar = (SolarPanelTile) te;

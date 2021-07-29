@@ -2,14 +2,14 @@ package com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling;
 
 import com.SHARKY2023.EngineeringReimagined.config.Config;
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.SHARKY2023.EngineeringReimagined.registries.Registration.STERLING_TILE;
 
-public class SterlingTile extends TileEntity implements ITickableTileEntity {
+public class SterlingTile extends BlockEntity implements TickableBlockEntity {
 
     private ItemStackHandler itemHandler = createHandler();
     private CustomEnergyStorage energyStorage = createEnergy();
@@ -79,7 +79,7 @@ public class SterlingTile extends TileEntity implements ITickableTileEntity {
             AtomicInteger capacity = new AtomicInteger(energyStorage.getEnergyStored());
             if (capacity.get() > 0) {
                 for (Direction direction : Direction.values()) {
-                    TileEntity te = level.getBlockEntity(worldPosition.relative(direction));
+                    BlockEntity te = level.getBlockEntity(worldPosition.relative(direction));
                     if (te != null) {
                         boolean doContinue = te.getCapability(CapabilityEnergy.ENERGY, direction).map(handler -> {
                                     if (handler.canReceive()) {
@@ -102,7 +102,7 @@ public class SterlingTile extends TileEntity implements ITickableTileEntity {
         }
 
         @Override
-        public void load(BlockState state, CompoundNBT tag) {
+        public void load(BlockState state, CompoundTag tag) {
             itemHandler.deserializeNBT(tag.getCompound("inv"));
             energyStorage.deserializeNBT(tag.getCompound("energy"));
 
@@ -111,7 +111,7 @@ public class SterlingTile extends TileEntity implements ITickableTileEntity {
         }
 
         @Override
-        public CompoundNBT save(CompoundNBT tag) {
+        public CompoundTag save(CompoundTag tag) {
             tag.put("inv", itemHandler.serializeNBT());
             tag.put("energy", energyStorage.serializeNBT());
 

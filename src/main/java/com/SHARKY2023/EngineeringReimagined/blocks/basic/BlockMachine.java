@@ -2,9 +2,9 @@ package com.SHARKY2023.EngineeringReimagined.blocks.basic;
 
 import com.SHARKY2023.EngineeringReimagined.config.Config;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -29,6 +29,8 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 import java.util.List;
+//
+//import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class BlockMachine extends Block {
 

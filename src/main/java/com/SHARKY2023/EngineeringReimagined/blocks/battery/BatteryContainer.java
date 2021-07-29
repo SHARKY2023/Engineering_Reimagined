@@ -3,12 +3,12 @@ package com.SHARKY2023.EngineeringReimagined.blocks.battery;
 
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
 import com.SHARKY2023.EngineeringReimagined.registries.Registration;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.IntReferenceHolder;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.DataSlot;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -16,15 +16,15 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class BatteryContainer extends Container {
+public class BatteryContainer extends AbstractContainerMenu {
 
 
         private IItemHandler playerInventory;
 
         public final BatteryTile tile;
-        private final PlayerEntity player;
+        private final Player player;
 
-        public BatteryContainer(int windowId, PlayerEntity player, PlayerInventory playerInventory, BatteryTile tile, BatteryTier level)
+        public BatteryContainer(int windowId, Player player, Inventory playerInventory, BatteryTile tile, BatteryTier level)
         {
             super(Registration.BATTERY_CONTAINER.get(level).get(), windowId);
             this.tile = tile;
@@ -43,7 +43,7 @@ public class BatteryContainer extends Container {
 
 
     private void trackPower() {
-        addDataSlot(new IntReferenceHolder() {
+        addDataSlot(new DataSlot() {
             @Override
             public int get() {
                 return getEnergy() & 0xffff;
@@ -57,7 +57,7 @@ public class BatteryContainer extends Container {
                 });
             }
         });
-        addDataSlot(new IntReferenceHolder() {
+        addDataSlot(new DataSlot() {
             @Override
             public int get() {
                 return (getEnergy() >> 16) & 0xffff;
@@ -78,9 +78,9 @@ public class BatteryContainer extends Container {
     }
 
     @Override
-        public boolean stillValid(PlayerEntity playerIn)
+        public boolean stillValid(Player playerIn)
         {
-            return stillValid(IWorldPosCallable.create(tile.getLevel(), tile.getBlockPos()), player, tile.getBlockState().getBlock());
+            return stillValid(ContainerLevelAccess.create(tile.getLevel(), tile.getBlockPos()), player, tile.getBlockState().getBlock());
         }
 
 

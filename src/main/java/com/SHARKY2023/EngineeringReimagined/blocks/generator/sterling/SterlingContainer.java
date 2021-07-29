@@ -2,17 +2,17 @@ package com.SHARKY2023.EngineeringReimagined.blocks.generator.sterling;
 
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
 import com.SHARKY2023.EngineeringReimagined.registries.Registration;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.IntReferenceHolder;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.DataSlot;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -20,15 +20,15 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class SterlingContainer extends Container {
+public class SterlingContainer extends AbstractContainerMenu {
 
 
     public SterlingTile tile;
-    private TileEntity tileEntity;
-    private PlayerEntity playerEntity;
+    private BlockEntity tileEntity;
+    private Player playerEntity;
     private IItemHandler playerInventory;
 
-    public SterlingContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
+    public SterlingContainer(int windowId, Level world, BlockPos pos, Inventory playerInventory, Player player) {
         super(Registration.STERLING_CONTAINER.get(), windowId);
         tileEntity = world.getBlockEntity(pos);
         this.playerEntity = player;
@@ -47,7 +47,7 @@ public class SterlingContainer extends Container {
     private void trackPower() {
         // Unfortunatelly on a dedicated server ints are actually truncated to short so we need
         // to split our integer here (split our 32 bit integer into two 16 bit integers)
-        addDataSlot(new IntReferenceHolder() {
+        addDataSlot(new DataSlot() {
             @Override
             public int get() {
                 return getEnergy() & 0xffff;
@@ -61,7 +61,7 @@ public class SterlingContainer extends Container {
                 });
             }
         });
-        addDataSlot(new IntReferenceHolder() {
+        addDataSlot(new DataSlot() {
             @Override
             public int get() {
                 return (getEnergy() >> 16) & 0xffff;
@@ -82,12 +82,12 @@ public class SterlingContainer extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity playerIn) {
-        return stillValid(IWorldPosCallable.create(tileEntity.getLevel(), tileEntity.getBlockPos()), playerEntity, Registration.STERLING_GENERATOR.get());
+    public boolean stillValid(Player playerIn) {
+        return stillValid(ContainerLevelAccess.create(tileEntity.getLevel(), tileEntity.getBlockPos()), playerEntity, Registration.STERLING_GENERATOR.get());
     }
 
     @Override
-    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {

@@ -4,39 +4,39 @@ import com.SHARKY2023.EngineeringReimagined.EngineeringReimagined;
 import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryContainer;
 
 import com.SHARKY2023.EngineeringReimagined.blocks.battery.BatteryTile;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.energy.EnergyStorage;
 
-public class BatteryScreen extends ContainerScreen<BatteryContainer> {
+public class BatteryScreen extends AbstractContainerScreen<BatteryContainer> {
 
     private static final ResourceLocation TEXTURES = new ResourceLocation(EngineeringReimagined.MOD_ID, "textures/gui/solar_panel.png");
     private final BatteryTile tile;
     private EnergyStorage container;
 
-    public BatteryScreen(BatteryContainer container, PlayerInventory inv, ITextComponent name)
+    public BatteryScreen(BatteryContainer container, Inventory inv, Component name)
     {
         super(container, inv, name);
         this.tile = container.tile;
     }
 
     @Override
-    public void render(MatrixStack mStack,int mouseX, int mouseY, float partialTicks)
+    public void render(PoseStack mStack,int mouseX, int mouseY, float partialTicks)
     { this.renderBackground(mStack);
         super.render(mStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(mStack, mouseX, mouseY);
         if(mouseX > leftPos + 7 && mouseX < leftPos + 29 && mouseY > topPos + 10 && mouseY < topPos + 77)
-            this.renderTooltip(mStack, new StringTextComponent("Energy: " + getPercent() + "%"), mouseX, mouseY);
+            this.renderTooltip(mStack, new TextComponent("Energy: " + getPercent() + "%"), mouseX, mouseY);
     }
 
     @Override
-    protected void renderLabels(MatrixStack mStack, int mouseX, int mouseY)
+    protected void renderLabels(PoseStack mStack, int mouseX, int mouseY)
     {
         String energy = "Stored energy: " + getEnergyFormatted(menu.getEnergy());
         this.font.draw(mStack, energy, (imageWidth / 2 - font.width(energy) / 2) + 14, 20, 4210752);
@@ -49,7 +49,7 @@ public class BatteryScreen extends ContainerScreen<BatteryContainer> {
     }
 
     @Override
-    protected void renderBg(MatrixStack mStack, float partialTicks, int mouseX, int mouseY)
+    protected void renderBg(PoseStack mStack, float partialTicks, int mouseX, int mouseY)
     {
         RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
         this.minecraft.getTextureManager().bind(TEXTURES);

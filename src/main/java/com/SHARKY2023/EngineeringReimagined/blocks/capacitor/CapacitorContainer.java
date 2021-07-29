@@ -3,14 +3,14 @@ package com.SHARKY2023.EngineeringReimagined.blocks.capacitor;
 
 import com.SHARKY2023.EngineeringReimagined.energy.CustomEnergyStorage;
 import com.SHARKY2023.EngineeringReimagined.registries.Registration;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.IntReferenceHolder;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.DataSlot;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
@@ -18,13 +18,13 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 
-public class CapacitorContainer extends Container {
+public class CapacitorContainer extends AbstractContainerMenu {
     public CapacitorTile tile;
-    private TileEntity tileEntity;
-    private PlayerEntity playerEntity;
+    private BlockEntity tileEntity;
+    private Player playerEntity;
     private IItemHandler playerInventory;
 
-    public CapacitorContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
+    public CapacitorContainer(int windowId, Level world, BlockPos pos, Inventory playerInventory, Player player) {
         super(Registration.CAPACITOR_CONTAINER.get(), windowId);
         tileEntity = world.getBlockEntity(pos);
         this.playerEntity = player;
@@ -40,7 +40,7 @@ public class CapacitorContainer extends Container {
     private void trackPower() {
         // Unfortunatelly on a dedicated server ints are actually truncated to short so we need
         // to split our integer here (split our 32 bit integer into two 16 bit integers)
-        addDataSlot(new IntReferenceHolder() {
+        addDataSlot(new DataSlot() {
             @Override
             public int get() {
                 return getEnergy() & 0xffff;
@@ -54,7 +54,7 @@ public class CapacitorContainer extends Container {
                 });
             }
         });
-        addDataSlot(new IntReferenceHolder() {
+        addDataSlot(new DataSlot() {
             @Override
             public int get() {
                 return (getEnergy() >> 16) & 0xffff;
@@ -75,8 +75,8 @@ public class CapacitorContainer extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity playerIn) {
-        return stillValid(IWorldPosCallable.create(tileEntity.getLevel(), tileEntity.getBlockPos()), playerEntity, Registration.CAPACITOR.get());
+    public boolean stillValid(Player playerIn) {
+        return stillValid(ContainerLevelAccess.create(tileEntity.getLevel(), tileEntity.getBlockPos()), playerEntity, Registration.CAPACITOR.get());
     }
 
 
